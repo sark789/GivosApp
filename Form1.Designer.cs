@@ -54,17 +54,20 @@
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.radioButton3 = new System.Windows.Forms.RadioButton();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.radioButton4 = new System.Windows.Forms.RadioButton();
             this.cenaPrevozaTb = new System.Windows.Forms.TextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.radioButton4 = new System.Windows.Forms.RadioButton();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.dodanoLb = new System.Windows.Forms.Label();
+            this.listBox2 = new System.Windows.Forms.ListBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
             this.SuspendLayout();
             // 
             // listBox1
@@ -80,12 +83,13 @@
             // dodajVKosaricoBtn
             // 
             this.dodajVKosaricoBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
-            this.dodajVKosaricoBtn.Location = new System.Drawing.Point(684, 565);
+            this.dodajVKosaricoBtn.Location = new System.Drawing.Point(684, 604);
             this.dodajVKosaricoBtn.Name = "dodajVKosaricoBtn";
             this.dodajVKosaricoBtn.Size = new System.Drawing.Size(186, 39);
             this.dodajVKosaricoBtn.TabIndex = 28;
             this.dodajVKosaricoBtn.Text = "Dodaj v košarico";
             this.dodajVKosaricoBtn.UseVisualStyleBackColor = true;
+            this.dodajVKosaricoBtn.Click += new System.EventHandler(this.dodajVKosaricoBtn_Click);
             // 
             // razmakSpodnjiTb
             // 
@@ -346,6 +350,19 @@
             this.groupBox2.TabIndex = 24;
             this.groupBox2.TabStop = false;
             // 
+            // radioButton4
+            // 
+            this.radioButton4.AutoSize = true;
+            this.radioButton4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
+            this.radioButton4.Location = new System.Drawing.Point(64, 13);
+            this.radioButton4.Name = "radioButton4";
+            this.radioButton4.Size = new System.Drawing.Size(122, 24);
+            this.radioButton4.TabIndex = 20;
+            this.radioButton4.TabStop = true;
+            this.radioButton4.Text = "radioButton4";
+            this.radioButton4.UseVisualStyleBackColor = true;
+            this.radioButton4.CheckedChanged += new System.EventHandler(this.radioButton4_CheckedChanged);
+            // 
             // cenaPrevozaTb
             // 
             this.cenaPrevozaTb.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
@@ -365,19 +382,6 @@
             this.pictureBox1.TabIndex = 27;
             this.pictureBox1.TabStop = false;
             // 
-            // radioButton4
-            // 
-            this.radioButton4.AutoSize = true;
-            this.radioButton4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
-            this.radioButton4.Location = new System.Drawing.Point(64, 13);
-            this.radioButton4.Name = "radioButton4";
-            this.radioButton4.Size = new System.Drawing.Size(122, 24);
-            this.radioButton4.TabIndex = 20;
-            this.radioButton4.TabStop = true;
-            this.radioButton4.Text = "radioButton4";
-            this.radioButton4.UseVisualStyleBackColor = true;
-            this.radioButton4.CheckedChanged += new System.EventHandler(this.radioButton4_CheckedChanged);
-            // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
@@ -386,11 +390,12 @@
             this.tabControl1.Location = new System.Drawing.Point(12, 12);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1501, 643);
+            this.tabControl1.Size = new System.Drawing.Size(1501, 692);
             this.tabControl1.TabIndex = 21;
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.dodanoLb);
             this.tabPage1.Controls.Add(this.listBox1);
             this.tabPage1.Controls.Add(this.dodajVKosaricoBtn);
             this.tabPage1.Controls.Add(this.profilCb);
@@ -417,26 +422,48 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 29);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1493, 610);
+            this.tabPage1.Size = new System.Drawing.Size(1493, 659);
             this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "tabPage1";
+            this.tabPage1.Text = "Ograje";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // tabPage2
             // 
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Controls.Add(this.listBox2);
+            this.tabPage2.Location = new System.Drawing.Point(4, 29);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(192, 74);
+            this.tabPage2.Size = new System.Drawing.Size(1493, 659);
             this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "tabPage2";
+            this.tabPage2.Text = "Košarica";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // dodanoLb
+            // 
+            this.dodanoLb.AutoSize = true;
+            this.dodanoLb.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
+            this.dodanoLb.ForeColor = System.Drawing.Color.Lime;
+            this.dodanoLb.Location = new System.Drawing.Point(680, 572);
+            this.dodanoLb.Name = "dodanoLb";
+            this.dodanoLb.Size = new System.Drawing.Size(198, 26);
+            this.dodanoLb.TabIndex = 29;
+            this.dodanoLb.Text = "Dodano v košarico!";
+            // 
+            // listBox2
+            // 
+            this.listBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
+            this.listBox2.FormattingEnabled = true;
+            this.listBox2.ItemHeight = 20;
+            this.listBox2.Location = new System.Drawing.Point(22, 15);
+            this.listBox2.Name = "listBox2";
+            this.listBox2.Size = new System.Drawing.Size(1452, 224);
+            this.listBox2.TabIndex = 15;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1525, 667);
+            this.ClientSize = new System.Drawing.Size(1525, 708);
             this.Controls.Add(this.tabControl1);
             this.Name = "Form1";
             this.Text = "Form1";
@@ -448,6 +475,7 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
+            this.tabPage2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -485,6 +513,8 @@
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.Label dodanoLb;
+        private System.Windows.Forms.ListBox listBox2;
     }
 }
 

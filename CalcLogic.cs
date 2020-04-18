@@ -14,10 +14,11 @@ namespace GivosCalc
         public float price;
         public float capPrice;
         public float width;
-        
 
 
-        public void Izracun(ProfiliCollection profili, string selectedProfil, float dolzina, float visina, float rspodnji, float rzgornji, ListBox listbox, (int,float) stebri)
+
+
+        public List<Item> Izracun(ProfiliCollection profili, string selectedProfil, float dolzina, float visina, float rspodnji, float rzgornji, ListBox listbox, (int,float, float) stebri)
         {
             float razmak, razmakGor, razmakDol;
             int pribGor, pribDol;
@@ -31,6 +32,7 @@ namespace GivosCalc
 
             JArray jsonCeneZaSteber = JArray.Parse(File.ReadAllText("CeneStebri.json"));
             List<float> temp = new List<float>();
+            List<Item> items = new List<Item>();
 
             foreach (JObject obj in jsonCeneZaSteber.Children<JObject>())
             {
@@ -72,8 +74,8 @@ namespace GivosCalc
                         pribDol -= 1;
                         razmakDol = (visina - pribDol * width) / pribDol;
                         cenaVijakov = pribDol * stebri.Item1 * 4 * cenaSrauba;
-                        razrez = cenaRazreza * ((stebri.Item1 + 1) + (stebri.Item1 * pribDol)) - lepilo * (stebri.Item1 + 1);
-                        cenaBrezMontaze = Math.Round((pribDol * obj._price * dolzina + cenaVijakov / 2 + stebri.Item2 + razrez), 2).ToString(".00");
+                        razrez = cenaRazreza * ((stebri.Item1 + 1) + (stebri.Item1 * pribDol));
+                        cenaBrezMontaze = Math.Round((pribDol * obj._price * dolzina + cenaVijakov / 2 + stebri.Item3 + razrez), 2).ToString(".00");
                         cenaZMontazo = Math.Round((pribDol * obj._price * dolzina + cenaVijakov + stebri.Item2 + cenaPrevoza + dolzina * montaza), 2).ToString(".00");
 
                         res = "razmak: " + (Math.Round(razmakDol * 100, 3)).ToString("00.000") + "cm      stevilo letvic: " + pribDol.ToString("00")  + "   cena letvic: " + (pribDol * obj._price * dolzina).ToString(".00") + " eur" +
@@ -81,13 +83,15 @@ namespace GivosCalc
                             + cenaBrezMontaze + " eur" + "    skupna cena z montažo: " + cenaZMontazo + " eur";
                         
                         list.Add(res);
+                        items.Add(new Item(selectedProfil, dolzina, Math.Round(razmakDol * 100, 3), res));
                     }
                     while ((rspodnji <= razmakDol * 100 && razmakDol * 100 <= rzgornji));
                     list.Reverse();
+                    items.Reverse();
 
                     cenaVijakov = prib * stebri.Item1 * 4 * cenaSrauba;
-                    razrez = cenaRazreza * ((stebri.Item1 + 1) + (stebri.Item1 * prib)) - lepilo * (stebri.Item1 + 1);
-                    cenaBrezMontaze = Math.Round((prib * obj._price * dolzina + cenaVijakov / 2 + stebri.Item2 + razrez), 2).ToString(".00");
+                    razrez = cenaRazreza * ((stebri.Item1 + 1) + (stebri.Item1 * prib));
+                    cenaBrezMontaze = Math.Round((prib * obj._price * dolzina + cenaVijakov / 2 + stebri.Item3 + razrez), 2).ToString(".00");
                     cenaZMontazo = Math.Round((prib * obj._price * dolzina + cenaVijakov + stebri.Item2 + cenaPrevoza+ dolzina * montaza), 2).ToString(".00");
 
                     res = "razmak: " + (Math.Round(razmak * 100, 3)).ToString("00.000") + "cm      stevilo letvic: " + prib.ToString("00") + "   cena letvic: " + (prib * obj._price * dolzina).ToString(".00") + " eur" +
@@ -95,22 +99,25 @@ namespace GivosCalc
                         " eur    skupna cena brez montaže: " + cenaBrezMontaze + " eur" + "    skupna cena z montažo: "+ cenaZMontazo + " eur";
 
                     list.Add(res);
+                    items.Add(new Item(selectedProfil, dolzina, Math.Round(razmak * 100, 3), res));
                     do
                     {
                         pribGor += 1;
                         razmakGor = (visina - pribGor * width) / pribGor;
                         cenaVijakov = pribGor * stebri.Item1 * 4 * cenaSrauba;
-                        razrez = cenaRazreza * ((stebri.Item1 + 1) + (stebri.Item1 * pribGor)) - lepilo * (stebri.Item1 + 1);
-                        cenaBrezMontaze = Math.Round((pribGor * obj._price * dolzina + cenaVijakov / 2 + stebri.Item2 + razrez), 2).ToString(".00");
+                        razrez = cenaRazreza * ((stebri.Item1 + 1) + (stebri.Item1 * pribGor));
+                        cenaBrezMontaze = Math.Round((pribGor * obj._price * dolzina + cenaVijakov / 2 + stebri.Item3 + razrez), 2).ToString(".00");
                         cenaZMontazo = Math.Round((pribGor * obj._price * dolzina + cenaVijakov + stebri.Item2 + cenaPrevoza + dolzina * montaza), 2).ToString(".00");
                         res = "razmak: " + (Math.Round(razmakGor * 100, 3)).ToString("00.000") + "cm      stevilo letvic: " + pribGor.ToString("00") + "   cena letvic: " + (pribGor * obj._price * dolzina).ToString(".00") + " eur" +
                             "    cena vijakov: " + cenaVijakov.ToString(".00") + " eur    cena stebrov: " + stebri.Item2.ToString(".00") + 
                             " eur    skupna cena brez montaže: " + cenaBrezMontaze + " eur" + "    skupna cena z montažo: " + cenaZMontazo + " eur";
                         list.Add(res);
+                        items.Add(new Item(selectedProfil, dolzina, Math.Round(razmakGor * 100, 3), res));
 
                     }
                     while ((rspodnji <= razmakGor * 100 && razmakGor * 100 <= rzgornji));
                     list.Reverse();
+                    items.Reverse();
                     foreach (var item in list)
                     {
                         listbox.DataSource = list;
@@ -119,9 +126,10 @@ namespace GivosCalc
 
                 }
             }
+            return items;
         }
 
-        public (int,float) racunStebrov(RadioButton radioButton1, RadioButton radioButton2, RadioButton radioButton3, RadioButton radioButton4)
+        public (int,float, float) racunStebrov(RadioButton radioButton1, RadioButton radioButton2, RadioButton radioButton3, RadioButton radioButton4)
         {
             TabControl tab = Application.OpenForms["Form1"].Controls["tabControl1"] as TabControl;
             var dolzinaTb = tab.SelectedTab.Controls["dolzinaTb"];
@@ -197,9 +205,10 @@ namespace GivosCalc
             Cene cene = new Cene(temp[0], temp[1], temp[2], temp[3], temp[4], temp[5], temp[8]);
             float visina = (float.Parse(visinaTb.Text));
             float kateriNosilec = (visina >= 1.5f) ? cene._dolgNosilec : cene._kratekNosilec;
-            float skupnaCenaNaVseStebre = koncnoStebrov * (kateriNosilec + (cene._cenaStebraNaMeter * visina) + cene._rozeta + + cene._pokrov + cene._lepilo + cene._montazaStebra);
+            float skupnaCenaNaVseStebreZmontaze = koncnoStebrov * (kateriNosilec + (cene._cenaStebraNaMeter * visina) + cene._rozeta  + cene._pokrov + cene._lepilo + cene._montazaStebra);
+            float skupnaCenaNaVseStebreBrezmontaze = koncnoStebrov * (kateriNosilec + (cene._cenaStebraNaMeter * visina) + cene._rozeta + cene._pokrov);
 
-            var res = (razmaki: koncnoStebrov - 1, cena: skupnaCenaNaVseStebre);
+            var res = (razmaki: koncnoStebrov - 1, cenaZmontazo: skupnaCenaNaVseStebreZmontaze, cenaBrezMontaze: skupnaCenaNaVseStebreBrezmontaze);
             return res;
 
         }

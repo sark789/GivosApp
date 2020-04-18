@@ -17,7 +17,9 @@ namespace GivosCalc
         public ProfiliCollection vodoravniProfili;
         private static Form1 form = null;
         int razmaki;
-        float cenaStebrov;
+        float cenaStebrovZMontazo;
+        float cenaStebrovBrezMontaze;
+        List<Item> _items = new List<Item>();
         public Form1()
         {
             InitializeComponent();
@@ -29,6 +31,8 @@ namespace GivosCalc
             radioButton2.Visible = false;
             radioButton3.Visible = false;
             radioButton4.Visible = false;
+            dodajVKosaricoBtn.Enabled = false;
+            dodanoLb.Visible = false;
 
 
             JArray jsonProfili = JArray.Parse(File.ReadAllText("profiliDb.json"));
@@ -88,11 +92,12 @@ namespace GivosCalc
         private void izracunajBtn_Click(object sender, EventArgs e)
         {
             CalcLogic calc = new CalcLogic();
-            calc.Izracun(vodoravniProfili ,profilCb.SelectedItem.ToString(), float.Parse(dolzinaTb.Text), 
+            _items = calc.Izracun(vodoravniProfili ,profilCb.SelectedItem.ToString(), float.Parse(dolzinaTb.Text), 
                 float.Parse(visinaTb.Text),
                 float.Parse(razmakSpodnjiTb.Text), 
                 float.Parse(razmakZgornjiTb.Text),
-                listBox1, (razmaki,cenaStebrov));
+                listBox1, (razmaki,cenaStebrovZMontazo, cenaStebrovBrezMontaze));
+                dodajVKosaricoBtn.Enabled = true;
         }
 
         private void radioButton5_CheckedChanged(object sender, EventArgs e)
@@ -105,7 +110,8 @@ namespace GivosCalc
             radioButton4.Visible = false;
 
             razmaki = 0;
-            cenaStebrov = 0;
+            cenaStebrovZMontazo = 0;
+            cenaStebrovBrezMontaze = 0;
         }
 
         private void radioButton6_CheckedChanged(object sender, EventArgs e)
@@ -122,7 +128,8 @@ namespace GivosCalc
             CalcLogic logic = new CalcLogic();
             var acc = logic.racunStebrov(radioButton1, radioButton2, radioButton3, radioButton4);
             razmaki = acc.Item1;
-            cenaStebrov = acc.Item2;
+            cenaStebrovZMontazo = acc.Item2;
+            cenaStebrovBrezMontaze = acc.Item3;
 
         }
 
@@ -132,7 +139,8 @@ namespace GivosCalc
             CalcLogic logic = new CalcLogic();
             var acc = logic.racunStebrov(radioButton1, radioButton2, radioButton3, radioButton4);
             razmaki = acc.Item1;
-            cenaStebrov = acc.Item2;
+            cenaStebrovZMontazo = acc.Item2;
+            cenaStebrovBrezMontaze = acc.Item3;
 
         }
 
@@ -141,7 +149,8 @@ namespace GivosCalc
             CalcLogic logic = new CalcLogic();
             var acc = logic.racunStebrov(radioButton1, radioButton2, radioButton3, radioButton4);
             razmaki = acc.Item1;
-            cenaStebrov = acc.Item2;
+            cenaStebrovZMontazo = acc.Item2;
+            cenaStebrovBrezMontaze = acc.Item3;
         }
 
         private void radioButton3_CheckedChanged(object sender, EventArgs e)
@@ -149,7 +158,8 @@ namespace GivosCalc
             CalcLogic logic = new CalcLogic();
             var acc = logic.racunStebrov(radioButton1, radioButton2, radioButton3, radioButton4);
             razmaki = acc.Item1;
-            cenaStebrov = acc.Item2;
+            cenaStebrovZMontazo = acc.Item2;
+            cenaStebrovBrezMontaze = acc.Item3;
         }
 
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
@@ -157,7 +167,8 @@ namespace GivosCalc
             CalcLogic logic = new CalcLogic();
             var acc = logic.racunStebrov(radioButton1, radioButton2, radioButton3, radioButton4);
             razmaki = acc.Item1;
-            cenaStebrov = acc.Item2;
+            cenaStebrovZMontazo = acc.Item2;
+            cenaStebrovBrezMontaze = acc.Item3;
         }
 
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
@@ -165,7 +176,8 @@ namespace GivosCalc
             CalcLogic logic = new CalcLogic();
             var acc = logic.racunStebrov(radioButton1, radioButton2, radioButton3, radioButton4);
             razmaki = acc.Item1;
-            cenaStebrov = acc.Item2;
+            cenaStebrovZMontazo = acc.Item2;
+            cenaStebrovBrezMontaze = acc.Item3;
         }
 
         private void dolzinaTb_TextChanged(object sender, EventArgs e)
@@ -173,7 +185,45 @@ namespace GivosCalc
             CalcLogic logic = new CalcLogic();
             var acc = logic.racunStebrov(radioButton1, radioButton2, radioButton3, radioButton4);
             razmaki = acc.Item1;
-            cenaStebrov = acc.Item2;
+            cenaStebrovZMontazo = acc.Item2;
+            cenaStebrovBrezMontaze = acc.Item3;
+        }
+
+        private void dodajVKosaricoBtn_Click(object sender, EventArgs e)
+        {
+            int selectedItem = listBox1.SelectedIndex;
+
+            if (selectedItem == -1)
+            {
+                dodanoLb.Visible = true;
+                dodanoLb.ForeColor = Color.Red;
+                dodanoLb.Text = "Napaka pri dodajanju v košarico!";             
+                var t = new Timer();
+                t.Interval = 2000; // it will Tick in 3 seconds
+                t.Tick += (s, g) =>
+                {
+                    dodanoLb.Visible = false;
+                    t.Stop();
+                };
+                t.Start();
+            }
+            else
+            {
+                Item item = _items[selectedItem];
+                dodanoLb.ForeColor = Color.LightGreen;
+                dodanoLb.Visible = true;
+
+                var t = new Timer();
+                t.Interval = 2000; 
+                t.Tick += (s, g) =>
+                {
+                    dodanoLb.Visible = false;
+                    t.Stop();
+                };
+                t.Start();
+
+                listBox2.Items.Add(item._itemNapis);
+            }
         }
     }
 }
