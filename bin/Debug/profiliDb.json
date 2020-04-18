@@ -1,0 +1,27 @@
+
+[
+{
+    "profilName": "SD-8006P",
+    "profilWidth": "0,14",
+    "profilPrice": "8,9",
+    "capPrice" : "0"
+},
+{
+    "profilName": "SD-8006A",
+    "profilWidth": "0,10",
+    "profilPrice": "7,2",
+    "capPrice" : "0"
+},
+{
+    "profilName": "SD-8006B",
+    "profilWidth": "0,15",
+    "profilPrice": "10,8",
+    "capPrice" : "0"
+},
+{
+    "profilName": "SD-7006",
+    "profilWidth": "0,014",
+    "profilPrice": "2,7",
+    "capPrice" : "0"
+}
+]
