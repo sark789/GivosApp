@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
@@ -20,6 +21,7 @@ namespace GivosCalc
         float cenaStebrovZMontazo;
         float cenaStebrovBrezMontaze;
         List<Item> _items = new List<Item>();
+        List<Item> _itemsOnSecondTab = new List<Item>();
         public Form1()
         {
             InitializeComponent();
@@ -33,6 +35,7 @@ namespace GivosCalc
             radioButton4.Visible = false;
             dodajVKosaricoBtn.Enabled = false;
             dodanoLb.Visible = false;
+            zbrisiVnosBtn.Enabled = false;
 
 
             JArray jsonProfili = JArray.Parse(File.ReadAllText("profiliDb.json"));
@@ -195,35 +198,78 @@ namespace GivosCalc
 
             if (selectedItem == -1)
             {
-                dodanoLb.Visible = true;
-                dodanoLb.ForeColor = Color.Red;
-                dodanoLb.Text = "Napaka pri dodajanju v košarico!";             
-                var t = new Timer();
-                t.Interval = 2000; // it will Tick in 3 seconds
-                t.Tick += (s, g) =>
-                {
-                    dodanoLb.Visible = false;
-                    t.Stop();
-                };
-                t.Start();
+                btnOnClickTekst(dodanoLb, "Napaka pri dodajanju v košarico!", Color.Red);
             }
             else
             {
                 Item item = _items[selectedItem];
-                dodanoLb.ForeColor = Color.LightGreen;
-                dodanoLb.Visible = true;
-
-                var t = new Timer();
-                t.Interval = 2000; 
-                t.Tick += (s, g) =>
-                {
-                    dodanoLb.Visible = false;
-                    t.Stop();
-                };
-                t.Start();
+                btnOnClickTekst(dodanoLb, "Dodano v košarico!", Color.LightGreen);
 
                 listBox2.Items.Add(item._itemNapis);
+                _itemsOnSecondTab.Add(item);
             }
+        }
+
+        public void btnOnClickTekst(Label label, string text, Color color)
+        {
+            label.Visible = true;
+            label.ForeColor = color;
+            label.Text = text;
+            var t = new Timer();
+            t.Interval = 2000; 
+            t.Tick += (s, g) =>
+            {
+                dodanoLb.Visible = false;
+                t.Stop();
+            };
+            t.Start();
+        }
+
+        private void visinaTb_TextChanged(object sender, EventArgs e)
+        {
+            CalcLogic logic = new CalcLogic();
+            var acc = logic.racunStebrov(radioButton1, radioButton2, radioButton3, radioButton4);
+            razmaki = acc.Item1;
+            cenaStebrovZMontazo = acc.Item2;
+            cenaStebrovBrezMontaze = acc.Item3;
+        }
+
+        private void zbrisiVnosBtn_Click(object sender, EventArgs e)
+        {
+            int selectedItem = listBox2.SelectedIndex;
+        
+            Item item = _itemsOnSecondTab[selectedItem];
+
+            listBox2.Items.RemoveAt(selectedItem);
+            _itemsOnSecondTab.RemoveAt(selectedItem);
+
+            zbrisiVnosBtn.Enabled = false;
+        }
+
+        private void listBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int selectedItem = listBox2.SelectedIndex;
+            if (listBox2.Items.Count > 0 && selectedItem != -1)
+            {
+                zbrisiVnosBtn.Enabled = true;
+            }
+            else
+            {
+                zbrisiVnosBtn.Enabled = false;
+            }
+        }
+
+        private void zbrisiVseVnoseBtn_Click(object sender, EventArgs e)
+        {
+            CustomMessageForm messageBox = new CustomMessageForm();
+            messageBox.ShowDialog();
+            if(messageBox.isBtnYesClickedMethod() == true)
+            {
+                zbrisiVnosBtn.Enabled = false;
+                listBox2.Items.Clear();
+                _itemsOnSecondTab.Clear();
+            }
+                
         }
     }
 }

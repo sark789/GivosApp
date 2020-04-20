@@ -60,7 +60,7 @@ namespace GivosCalc
                     width = obj._width;
 
                     int prib = (int)(visina / (width + ((rspodnji + rzgornji) / 2) * 0.01f));
-                    razmak = (visina - prib * width) / prib;
+                    razmak = (visina - 0.04f - prib * width) / prib;
 
                     float cenaVijakov; 
                     string cenaBrezMontaze, cenaZMontazo;
@@ -72,7 +72,7 @@ namespace GivosCalc
                     do
                     {
                         pribDol -= 1;
-                        razmakDol = (visina - pribDol * width) / pribDol;
+                        razmakDol = (visina - 0.04f - pribDol * width) / pribDol;
                         cenaVijakov = pribDol * stebri.Item1 * 4 * cenaSrauba;
                         razrez = cenaRazreza * ((stebri.Item1 + 1) + (stebri.Item1 * pribDol));
                         cenaBrezMontaze = Math.Round((pribDol * obj._price * dolzina + cenaVijakov / 2 + stebri.Item3 + razrez), 2).ToString(".00");
@@ -103,7 +103,7 @@ namespace GivosCalc
                     do
                     {
                         pribGor += 1;
-                        razmakGor = (visina - pribGor * width) / pribGor;
+                        razmakGor = (visina - 0.04f - pribGor * width) / pribGor;
                         cenaVijakov = pribGor * stebri.Item1 * 4 * cenaSrauba;
                         razrez = cenaRazreza * ((stebri.Item1 + 1) + (stebri.Item1 * pribGor));
                         cenaBrezMontaze = Math.Round((pribGor * obj._price * dolzina + cenaVijakov / 2 + stebri.Item3 + razrez), 2).ToString(".00");
@@ -138,22 +138,20 @@ namespace GivosCalc
    
             int koncnoStebrov;
             float dolzina;
+            float razmak;
+            float visina;
             try {
                 dolzina = float.Parse(dolzinaTb.Text);
+                razmak = float.Parse(razmakStebriTb.Text);
+                visina = (float.Parse(visinaTb.Text));
             }
             catch
             {
                 dolzina = 0f;
-            }
-            float razmak = 145f;
-            try
-            {
-                razmak = float.Parse(razmakStebriTb.Text);
-            }
-            catch
-            {
                 razmak = 145f;
+                visina = 0f;
             }
+
             float enSteberMn, enSteberVec, dvaStebraVec;
             int pribStRaz = (int)(dolzina / (razmak / 100));
 
@@ -203,7 +201,6 @@ namespace GivosCalc
             }
 
             Cene cene = new Cene(temp[0], temp[1], temp[2], temp[3], temp[4], temp[5], temp[8]);
-            float visina = (float.Parse(visinaTb.Text));
             float kateriNosilec = (visina >= 1.5f) ? cene._dolgNosilec : cene._kratekNosilec;
             float skupnaCenaNaVseStebreZmontaze = koncnoStebrov * (kateriNosilec + (cene._cenaStebraNaMeter * visina) + cene._rozeta  + cene._pokrov + cene._lepilo + cene._montazaStebra);
             float skupnaCenaNaVseStebreBrezmontaze = koncnoStebrov * (kateriNosilec + (cene._cenaStebraNaMeter * visina) + cene._rozeta + cene._pokrov);

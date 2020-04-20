@@ -10,3 +10,4 @@ C:\Users\timpo\OneDrive\Namizje\GivosApp\GivosCalc\obj\Debug\GivosCalc.csproj.Ge
 C:\Users\timpo\OneDrive\Namizje\GivosApp\GivosCalc\obj\Debug\GivosCalc.csproj.CopyComplete
 C:\Users\timpo\OneDrive\Namizje\GivosApp\GivosCalc\obj\Debug\GivosCalc.exe
 C:\Users\timpo\OneDrive\Namizje\GivosApp\GivosCalc\obj\Debug\GivosCalc.pdb
+C:\Users\timpo\OneDrive\Namizje\GivosApp\GivosCalc\obj\Debug\GivosCalc.CustomMessageForm.resources
