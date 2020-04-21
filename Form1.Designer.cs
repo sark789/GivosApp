@@ -61,13 +61,15 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.dodanoLb = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.zbrisiVseVnoseBtn = new System.Windows.Forms.Button();
-            this.zbrisiVnosBtn = new System.Windows.Forms.Button();
-            this.listBox2 = new System.Windows.Forms.ListBox();
-            this.label11 = new System.Windows.Forms.Label();
-            this.cenaLetvicLb = new System.Windows.Forms.Label();
-            this.vijakiBrezLb = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.stebriBrezLb = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
+            this.SkupnaBrezLb = new System.Windows.Forms.Label();
+            this.label22 = new System.Windows.Forms.Label();
+            this.PrevozBrezLb = new System.Windows.Forms.Label();
+            this.label31 = new System.Windows.Forms.Label();
+            this.label28 = new System.Windows.Forms.Label();
+            this.StebriZLb = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.SkupnaZLb = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
@@ -77,15 +79,13 @@
             this.label25 = new System.Windows.Forms.Label();
             this.CenaLetvic2Lb = new System.Windows.Forms.Label();
             this.label27 = new System.Windows.Forms.Label();
-            this.label28 = new System.Windows.Forms.Label();
-            this.StebriZLb = new System.Windows.Forms.Label();
-            this.label18 = new System.Windows.Forms.Label();
-            this.stebriBrezLb = new System.Windows.Forms.Label();
-            this.label20 = new System.Windows.Forms.Label();
-            this.SkupnaBrezLb = new System.Windows.Forms.Label();
-            this.label22 = new System.Windows.Forms.Label();
-            this.PrevozBrezLb = new System.Windows.Forms.Label();
-            this.label31 = new System.Windows.Forms.Label();
+            this.vijakiBrezLb = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.cenaLetvicLb = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.zbrisiVseVnoseBtn = new System.Windows.Forms.Button();
+            this.zbrisiVnosBtn = new System.Windows.Forms.Button();
+            this.listBox2 = new System.Windows.Forms.ListBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -96,12 +96,13 @@
             // 
             // listBox1
             // 
-            this.listBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
+            this.listBox1.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 20;
+            this.listBox1.HorizontalScrollbar = true;
+            this.listBox1.ItemHeight = 19;
             this.listBox1.Location = new System.Drawing.Point(23, 336);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(1452, 224);
+            this.listBox1.Size = new System.Drawing.Size(1452, 213);
             this.listBox1.TabIndex = 14;
             // 
             // dodajVKosaricoBtn
@@ -498,204 +499,6 @@
             this.tabPage2.Text = "Košarica";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // zbrisiVseVnoseBtn
-            // 
-            this.zbrisiVseVnoseBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
-            this.zbrisiVseVnoseBtn.Location = new System.Drawing.Point(671, 290);
-            this.zbrisiVseVnoseBtn.Name = "zbrisiVseVnoseBtn";
-            this.zbrisiVseVnoseBtn.Size = new System.Drawing.Size(186, 39);
-            this.zbrisiVseVnoseBtn.TabIndex = 17;
-            this.zbrisiVseVnoseBtn.Text = "Zbriši vse vnose";
-            this.zbrisiVseVnoseBtn.UseVisualStyleBackColor = true;
-            this.zbrisiVseVnoseBtn.Click += new System.EventHandler(this.zbrisiVseVnoseBtn_Click);
-            // 
-            // zbrisiVnosBtn
-            // 
-            this.zbrisiVnosBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
-            this.zbrisiVnosBtn.Location = new System.Drawing.Point(671, 245);
-            this.zbrisiVnosBtn.Name = "zbrisiVnosBtn";
-            this.zbrisiVnosBtn.Size = new System.Drawing.Size(186, 39);
-            this.zbrisiVnosBtn.TabIndex = 16;
-            this.zbrisiVnosBtn.Text = "Zbriši vnos";
-            this.zbrisiVnosBtn.UseVisualStyleBackColor = true;
-            this.zbrisiVnosBtn.Click += new System.EventHandler(this.zbrisiVnosBtn_Click);
-            // 
-            // listBox2
-            // 
-            this.listBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
-            this.listBox2.FormattingEnabled = true;
-            this.listBox2.ItemHeight = 20;
-            this.listBox2.Location = new System.Drawing.Point(22, 15);
-            this.listBox2.Name = "listBox2";
-            this.listBox2.Size = new System.Drawing.Size(1452, 224);
-            this.listBox2.TabIndex = 15;
-            this.listBox2.SelectedIndexChanged += new System.EventHandler(this.listBox2_SelectedIndexChanged);
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
-            this.label11.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.label11.Location = new System.Drawing.Point(133, 348);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(126, 26);
-            this.label11.TabIndex = 18;
-            this.label11.Text = "Cena letvic:";
-            // 
-            // cenaLetvicLb
-            // 
-            this.cenaLetvicLb.AutoSize = true;
-            this.cenaLetvicLb.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
-            this.cenaLetvicLb.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.cenaLetvicLb.Location = new System.Drawing.Point(428, 348);
-            this.cenaLetvicLb.Name = "cenaLetvicLb";
-            this.cenaLetvicLb.Size = new System.Drawing.Size(24, 26);
-            this.cenaLetvicLb.TabIndex = 19;
-            this.cenaLetvicLb.Text = "0";
-            // 
-            // vijakiBrezLb
-            // 
-            this.vijakiBrezLb.AutoSize = true;
-            this.vijakiBrezLb.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
-            this.vijakiBrezLb.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.vijakiBrezLb.Location = new System.Drawing.Point(428, 383);
-            this.vijakiBrezLb.Name = "vijakiBrezLb";
-            this.vijakiBrezLb.Size = new System.Drawing.Size(24, 26);
-            this.vijakiBrezLb.TabIndex = 21;
-            this.vijakiBrezLb.Text = "0";
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
-            this.label13.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.label13.Location = new System.Drawing.Point(133, 383);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(281, 26);
-            this.label13.TabIndex = 20;
-            this.label13.Text = "Cena vijakov brez montaže:";
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
-            this.label14.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.label14.Location = new System.Drawing.Point(1053, 502);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(252, 26);
-            this.label14.TabIndex = 39;
-            this.label14.Text = "Skupna cena z montažo:";
-            // 
-            // SkupnaZLb
-            // 
-            this.SkupnaZLb.AutoSize = true;
-            this.SkupnaZLb.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
-            this.SkupnaZLb.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.SkupnaZLb.Location = new System.Drawing.Point(1313, 502);
-            this.SkupnaZLb.Name = "SkupnaZLb";
-            this.SkupnaZLb.Size = new System.Drawing.Size(24, 26);
-            this.SkupnaZLb.TabIndex = 38;
-            this.SkupnaZLb.Text = "0";
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
-            this.label16.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.label16.Location = new System.Drawing.Point(1053, 455);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(86, 26);
-            this.label16.TabIndex = 37;
-            this.label16.Text = "Prevoz:";
-            // 
-            // PrevozZLb
-            // 
-            this.PrevozZLb.AutoSize = true;
-            this.PrevozZLb.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
-            this.PrevozZLb.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.PrevozZLb.Location = new System.Drawing.Point(1313, 455);
-            this.PrevozZLb.Name = "PrevozZLb";
-            this.PrevozZLb.Size = new System.Drawing.Size(24, 26);
-            this.PrevozZLb.TabIndex = 36;
-            this.PrevozZLb.Text = "0";
-            // 
-            // label23
-            // 
-            this.label23.AutoSize = true;
-            this.label23.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
-            this.label23.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.label23.Location = new System.Drawing.Point(990, 469);
-            this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(492, 26);
-            this.label23.TabIndex = 35;
-            this.label23.Text = "________________________________________";
-            // 
-            // VijakiZLb
-            // 
-            this.VijakiZLb.AutoSize = true;
-            this.VijakiZLb.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
-            this.VijakiZLb.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.VijakiZLb.Location = new System.Drawing.Point(1313, 383);
-            this.VijakiZLb.Name = "VijakiZLb";
-            this.VijakiZLb.Size = new System.Drawing.Size(24, 26);
-            this.VijakiZLb.TabIndex = 34;
-            this.VijakiZLb.Text = "0";
-            // 
-            // label25
-            // 
-            this.label25.AutoSize = true;
-            this.label25.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
-            this.label25.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.label25.Location = new System.Drawing.Point(1053, 383);
-            this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(250, 26);
-            this.label25.TabIndex = 33;
-            this.label25.Text = "Cena vijakov z montažo:";
-            // 
-            // CenaLetvic2Lb
-            // 
-            this.CenaLetvic2Lb.AutoSize = true;
-            this.CenaLetvic2Lb.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
-            this.CenaLetvic2Lb.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.CenaLetvic2Lb.Location = new System.Drawing.Point(1313, 348);
-            this.CenaLetvic2Lb.Name = "CenaLetvic2Lb";
-            this.CenaLetvic2Lb.Size = new System.Drawing.Size(24, 26);
-            this.CenaLetvic2Lb.TabIndex = 32;
-            this.CenaLetvic2Lb.Text = "0";
-            // 
-            // label27
-            // 
-            this.label27.AutoSize = true;
-            this.label27.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
-            this.label27.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.label27.Location = new System.Drawing.Point(1053, 348);
-            this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(126, 26);
-            this.label27.TabIndex = 31;
-            this.label27.Text = "Cena letvic:";
-            // 
-            // label28
-            // 
-            this.label28.AutoSize = true;
-            this.label28.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
-            this.label28.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.label28.Location = new System.Drawing.Point(1053, 420);
-            this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(254, 26);
-            this.label28.TabIndex = 41;
-            this.label28.Text = "Cena stebrov z montažo:";
-            // 
-            // StebriZLb
-            // 
-            this.StebriZLb.AutoSize = true;
-            this.StebriZLb.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
-            this.StebriZLb.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.StebriZLb.Location = new System.Drawing.Point(1313, 420);
-            this.StebriZLb.Name = "StebriZLb";
-            this.StebriZLb.Size = new System.Drawing.Size(24, 26);
-            this.StebriZLb.TabIndex = 40;
-            this.StebriZLb.Text = "0";
-            // 
             // label18
             // 
             this.label18.AutoSize = true;
@@ -714,9 +517,9 @@
             this.stebriBrezLb.ForeColor = System.Drawing.SystemColors.ControlDark;
             this.stebriBrezLb.Location = new System.Drawing.Point(428, 420);
             this.stebriBrezLb.Name = "stebriBrezLb";
-            this.stebriBrezLb.Size = new System.Drawing.Size(24, 26);
+            this.stebriBrezLb.Size = new System.Drawing.Size(42, 26);
             this.stebriBrezLb.TabIndex = 47;
-            this.stebriBrezLb.Text = "0";
+            this.stebriBrezLb.Text = "0 €";
             // 
             // label20
             // 
@@ -736,9 +539,9 @@
             this.SkupnaBrezLb.ForeColor = System.Drawing.SystemColors.ControlDark;
             this.SkupnaBrezLb.Location = new System.Drawing.Point(428, 495);
             this.SkupnaBrezLb.Name = "SkupnaBrezLb";
-            this.SkupnaBrezLb.Size = new System.Drawing.Size(24, 26);
+            this.SkupnaBrezLb.Size = new System.Drawing.Size(42, 26);
             this.SkupnaBrezLb.TabIndex = 45;
-            this.SkupnaBrezLb.Text = "0";
+            this.SkupnaBrezLb.Text = "0 €";
             // 
             // label22
             // 
@@ -772,6 +575,205 @@
             this.label31.Size = new System.Drawing.Size(492, 26);
             this.label31.TabIndex = 42;
             this.label31.Text = "________________________________________";
+            // 
+            // label28
+            // 
+            this.label28.AutoSize = true;
+            this.label28.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
+            this.label28.ForeColor = System.Drawing.SystemColors.ControlDark;
+            this.label28.Location = new System.Drawing.Point(1053, 420);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(254, 26);
+            this.label28.TabIndex = 41;
+            this.label28.Text = "Cena stebrov z montažo:";
+            // 
+            // StebriZLb
+            // 
+            this.StebriZLb.AutoSize = true;
+            this.StebriZLb.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
+            this.StebriZLb.ForeColor = System.Drawing.SystemColors.ControlDark;
+            this.StebriZLb.Location = new System.Drawing.Point(1313, 420);
+            this.StebriZLb.Name = "StebriZLb";
+            this.StebriZLb.Size = new System.Drawing.Size(42, 26);
+            this.StebriZLb.TabIndex = 40;
+            this.StebriZLb.Text = "0 €";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
+            this.label14.ForeColor = System.Drawing.SystemColors.ControlDark;
+            this.label14.Location = new System.Drawing.Point(1053, 502);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(252, 26);
+            this.label14.TabIndex = 39;
+            this.label14.Text = "Skupna cena z montažo:";
+            // 
+            // SkupnaZLb
+            // 
+            this.SkupnaZLb.AutoSize = true;
+            this.SkupnaZLb.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
+            this.SkupnaZLb.ForeColor = System.Drawing.SystemColors.ControlDark;
+            this.SkupnaZLb.Location = new System.Drawing.Point(1313, 502);
+            this.SkupnaZLb.Name = "SkupnaZLb";
+            this.SkupnaZLb.Size = new System.Drawing.Size(42, 26);
+            this.SkupnaZLb.TabIndex = 38;
+            this.SkupnaZLb.Text = "0 €";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
+            this.label16.ForeColor = System.Drawing.SystemColors.ControlDark;
+            this.label16.Location = new System.Drawing.Point(1053, 455);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(86, 26);
+            this.label16.TabIndex = 37;
+            this.label16.Text = "Prevoz:";
+            // 
+            // PrevozZLb
+            // 
+            this.PrevozZLb.AutoSize = true;
+            this.PrevozZLb.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
+            this.PrevozZLb.ForeColor = System.Drawing.SystemColors.ControlDark;
+            this.PrevozZLb.Location = new System.Drawing.Point(1313, 455);
+            this.PrevozZLb.Name = "PrevozZLb";
+            this.PrevozZLb.Size = new System.Drawing.Size(42, 26);
+            this.PrevozZLb.TabIndex = 36;
+            this.PrevozZLb.Text = "0 €";
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
+            this.label23.ForeColor = System.Drawing.SystemColors.ControlDark;
+            this.label23.Location = new System.Drawing.Point(990, 469);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(492, 26);
+            this.label23.TabIndex = 35;
+            this.label23.Text = "________________________________________";
+            // 
+            // VijakiZLb
+            // 
+            this.VijakiZLb.AutoSize = true;
+            this.VijakiZLb.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
+            this.VijakiZLb.ForeColor = System.Drawing.SystemColors.ControlDark;
+            this.VijakiZLb.Location = new System.Drawing.Point(1313, 383);
+            this.VijakiZLb.Name = "VijakiZLb";
+            this.VijakiZLb.Size = new System.Drawing.Size(42, 26);
+            this.VijakiZLb.TabIndex = 34;
+            this.VijakiZLb.Text = "0 €";
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
+            this.label25.ForeColor = System.Drawing.SystemColors.ControlDark;
+            this.label25.Location = new System.Drawing.Point(1053, 383);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(250, 26);
+            this.label25.TabIndex = 33;
+            this.label25.Text = "Cena vijakov z montažo:";
+            // 
+            // CenaLetvic2Lb
+            // 
+            this.CenaLetvic2Lb.AutoSize = true;
+            this.CenaLetvic2Lb.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
+            this.CenaLetvic2Lb.ForeColor = System.Drawing.SystemColors.ControlDark;
+            this.CenaLetvic2Lb.Location = new System.Drawing.Point(1313, 348);
+            this.CenaLetvic2Lb.Name = "CenaLetvic2Lb";
+            this.CenaLetvic2Lb.Size = new System.Drawing.Size(42, 26);
+            this.CenaLetvic2Lb.TabIndex = 32;
+            this.CenaLetvic2Lb.Text = "0 €";
+            // 
+            // label27
+            // 
+            this.label27.AutoSize = true;
+            this.label27.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
+            this.label27.ForeColor = System.Drawing.SystemColors.ControlDark;
+            this.label27.Location = new System.Drawing.Point(1053, 348);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(126, 26);
+            this.label27.TabIndex = 31;
+            this.label27.Text = "Cena letvic:";
+            // 
+            // vijakiBrezLb
+            // 
+            this.vijakiBrezLb.AutoSize = true;
+            this.vijakiBrezLb.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
+            this.vijakiBrezLb.ForeColor = System.Drawing.SystemColors.ControlDark;
+            this.vijakiBrezLb.Location = new System.Drawing.Point(428, 383);
+            this.vijakiBrezLb.Name = "vijakiBrezLb";
+            this.vijakiBrezLb.Size = new System.Drawing.Size(42, 26);
+            this.vijakiBrezLb.TabIndex = 21;
+            this.vijakiBrezLb.Text = "0 €";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
+            this.label13.ForeColor = System.Drawing.SystemColors.ControlDark;
+            this.label13.Location = new System.Drawing.Point(133, 383);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(281, 26);
+            this.label13.TabIndex = 20;
+            this.label13.Text = "Cena vijakov brez montaže:";
+            // 
+            // cenaLetvicLb
+            // 
+            this.cenaLetvicLb.AutoSize = true;
+            this.cenaLetvicLb.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
+            this.cenaLetvicLb.ForeColor = System.Drawing.SystemColors.ControlDark;
+            this.cenaLetvicLb.Location = new System.Drawing.Point(428, 348);
+            this.cenaLetvicLb.Name = "cenaLetvicLb";
+            this.cenaLetvicLb.Size = new System.Drawing.Size(42, 26);
+            this.cenaLetvicLb.TabIndex = 19;
+            this.cenaLetvicLb.Text = "0 €";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
+            this.label11.ForeColor = System.Drawing.SystemColors.ControlDark;
+            this.label11.Location = new System.Drawing.Point(133, 348);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(126, 26);
+            this.label11.TabIndex = 18;
+            this.label11.Text = "Cena letvic:";
+            // 
+            // zbrisiVseVnoseBtn
+            // 
+            this.zbrisiVseVnoseBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
+            this.zbrisiVseVnoseBtn.Location = new System.Drawing.Point(671, 290);
+            this.zbrisiVseVnoseBtn.Name = "zbrisiVseVnoseBtn";
+            this.zbrisiVseVnoseBtn.Size = new System.Drawing.Size(186, 39);
+            this.zbrisiVseVnoseBtn.TabIndex = 17;
+            this.zbrisiVseVnoseBtn.Text = "Zbriši vse vnose";
+            this.zbrisiVseVnoseBtn.UseVisualStyleBackColor = true;
+            this.zbrisiVseVnoseBtn.Click += new System.EventHandler(this.zbrisiVseVnoseBtn_Click);
+            // 
+            // zbrisiVnosBtn
+            // 
+            this.zbrisiVnosBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
+            this.zbrisiVnosBtn.Location = new System.Drawing.Point(671, 245);
+            this.zbrisiVnosBtn.Name = "zbrisiVnosBtn";
+            this.zbrisiVnosBtn.Size = new System.Drawing.Size(186, 39);
+            this.zbrisiVnosBtn.TabIndex = 16;
+            this.zbrisiVnosBtn.Text = "Zbriši vnos";
+            this.zbrisiVnosBtn.UseVisualStyleBackColor = true;
+            this.zbrisiVnosBtn.Click += new System.EventHandler(this.zbrisiVnosBtn_Click);
+            // 
+            // listBox2
+            // 
+            this.listBox2.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.listBox2.FormattingEnabled = true;
+            this.listBox2.HorizontalScrollbar = true;
+            this.listBox2.ItemHeight = 19;
+            this.listBox2.Location = new System.Drawing.Point(22, 15);
+            this.listBox2.Name = "listBox2";
+            this.listBox2.Size = new System.Drawing.Size(1452, 213);
+            this.listBox2.TabIndex = 15;
+            this.listBox2.SelectedIndexChanged += new System.EventHandler(this.listBox2_SelectedIndexChanged);
             // 
             // Form1
             // 
