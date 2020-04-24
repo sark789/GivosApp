@@ -20,6 +20,7 @@ namespace GivosCalc
         int razmaki;
         float cenaStebrovZMontazo;
         float cenaStebrovBrezMontaze;
+        bool isDolgiNosilec;
         List<Item> _items = new List<Item>();
         List<Item> _itemsOnSecondTab = new List<Item>();
         List<string> _stringToWriteOnSecondTab = new List<string>();
@@ -102,7 +103,7 @@ namespace GivosCalc
                 float.Parse(visinaTb.Text),
                 float.Parse(razmakSpodnjiTb.Text), 
                 float.Parse(razmakZgornjiTb.Text),
-                listBox1, (razmaki,cenaStebrovZMontazo, cenaStebrovBrezMontaze));
+                listBox1, (razmaki,cenaStebrovZMontazo, cenaStebrovBrezMontaze, isDolgiNosilec));
                 dodajVKosaricoBtn.Enabled = true;
             _items = result.Item1;
             _stringToWriteOnSecondTab = result.Item2;
@@ -347,5 +348,19 @@ namespace GivosCalc
             
         }
 
+        private void shraniBtn_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+            saveFileDialog1.Filter = "Excel |*.xlsx";
+            saveFileDialog1.Title = "Shrani Excel datoteko";
+
+                string path;
+                if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+                {
+                        path = Path.GetFullPath(saveFileDialog1.FileName);
+                        ExcelHandler handler = new ExcelHandler();
+                        handler.SaveAndOpenExcel("TemplateVodoravne.xlsx", path, _itemsOnSecondTab);
+                }                              
+            }                              
     }
 }

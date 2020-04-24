@@ -19,8 +19,14 @@ namespace GivosCalc
         public float _cenaSkupajBrezMontaze;
         public float _cenaStebrovZMontazo; 
         public float _cenaSkupajZMontazo;
+        public bool _isDolgNosilec;
+        public float _stStebrov;
+        public float _celotnaDolzinaProfilov;
+        public float _stVijakovPriMontazi;
+        public float _visina;
       public Item(string profilName, float dolzinaProfilov, double razmakMedProfili, string itemNapis, float cenaLetvic, float cenaVijakov,
-          float cenaPrevoza, float cenaStebrovBrezMontaze, float cenaSkupajBrezMontaze, float cenaStebrovZMontazo, float cenaSkupajZMontazo)
+          float cenaPrevoza, float cenaStebrovBrezMontaze, float cenaSkupajBrezMontaze, float cenaStebrovZMontazo, float cenaSkupajZMontazo, 
+          bool isDolgNosilec, float stStebrov, float celotnaDolzinaProfilov, float stVijakovPriMontazi, float visina)
         {
             this._profilName = profilName;
             this._dolzinaProfilov = dolzinaProfilov;
@@ -33,6 +39,11 @@ namespace GivosCalc
             this._cenaSkupajBrezMontaze = cenaSkupajBrezMontaze;
             this._cenaStebrovZMontazo = cenaStebrovZMontazo;
             this._cenaSkupajZMontazo = cenaSkupajZMontazo;
+            this._isDolgNosilec = isDolgNosilec;
+            this._stStebrov = stStebrov;
+            this._celotnaDolzinaProfilov = celotnaDolzinaProfilov;
+            this._stVijakovPriMontazi = stVijakovPriMontazi;
+            this._visina = visina;
         }
     }
 }

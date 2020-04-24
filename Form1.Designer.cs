@@ -61,6 +61,7 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.dodanoLb = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.shraniExcelBtn = new System.Windows.Forms.Button();
             this.label18 = new System.Windows.Forms.Label();
             this.stebriBrezLb = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
@@ -466,6 +467,7 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.shraniExcelBtn);
             this.tabPage2.Controls.Add(this.label18);
             this.tabPage2.Controls.Add(this.stebriBrezLb);
             this.tabPage2.Controls.Add(this.label20);
@@ -498,6 +500,17 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Košarica";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // shraniExcelBtn
+            // 
+            this.shraniExcelBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
+            this.shraniExcelBtn.Location = new System.Drawing.Point(671, 567);
+            this.shraniExcelBtn.Name = "shraniExcelBtn";
+            this.shraniExcelBtn.Size = new System.Drawing.Size(186, 39);
+            this.shraniExcelBtn.TabIndex = 50;
+            this.shraniExcelBtn.Text = "Shrani Excel";
+            this.shraniExcelBtn.UseVisualStyleBackColor = true;
+            this.shraniExcelBtn.Click += new System.EventHandler(this.shraniBtn_Click);
             // 
             // label18
             // 
@@ -858,6 +871,7 @@
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.Label PrevozBrezLb;
         private System.Windows.Forms.Label label31;
+        private System.Windows.Forms.Button shraniExcelBtn;
     }
 }
 
