@@ -21,6 +21,8 @@ namespace GivosCalc
         float cenaStebrovZMontazo;
         float cenaStebrovBrezMontaze;
         bool isDolgiNosilec;
+        float _skupnaBrez;
+        float _skupnaZ;
         List<Item> _items = new List<Item>();
         List<Item> _itemsOnSecondTab = new List<Item>();
         List<string> _stringToWriteOnSecondTab = new List<string>();
@@ -103,7 +105,7 @@ namespace GivosCalc
                 float.Parse(visinaTb.Text),
                 float.Parse(razmakSpodnjiTb.Text), 
                 float.Parse(razmakZgornjiTb.Text),
-                listBox1, (razmaki,cenaStebrovZMontazo, cenaStebrovBrezMontaze, isDolgiNosilec));
+                listBox1, (razmaki,cenaStebrovZMontazo, cenaStebrovBrezMontaze));
                 dodajVKosaricoBtn.Enabled = true;
             _items = result.Item1;
             _stringToWriteOnSecondTab = result.Item2;
@@ -300,9 +302,25 @@ namespace GivosCalc
         private void SetFinalPrices()
         {
 
-            Dictionary<Label, Label> dict = new Dictionary<Label, Label> { { cenaLetvicLb, label11}, { CenaLetvic2Lb, label27 }, { vijakiBrezLb, label13 }, { VijakiZLb, label25 },
-                                                                            { stebriBrezLb, label18}, { StebriZLb, label28 }, { PrevozZLb, label16 }, { SkupnaBrezLb, label20 }, { SkupnaZLb, label14 }};
+            Dictionary<dynamic, Label> dict = new Dictionary<dynamic, Label> { { cenaLetvicLb, label11}, { CenaLetvic2Lb, label27 }, { vijakiBrezLb, label13 }, { VijakiZLb, label25 },
+                                                                           { stebriBrezLb, label18}, { StebriZLb, label28 }, { PrevozZLb, label16 }, { SkupnaBrezLb, label20 }, { SkupnaZLb, label14 },
+                                                                           { razrezLb, label24 }, { montazaLb, label26}};
 
+            JArray jsonCeneZaSteber = JArray.Parse(File.ReadAllText("CeneStebri.json"));
+            List<float> temp = new List<float>();
+
+            foreach (JObject obj in jsonCeneZaSteber.Children<JObject>())
+            {
+                foreach (JProperty singleProp in obj.Properties())
+                {
+                    float value = float.Parse(singleProp.Value.ToString());
+                    temp.Add(value);
+                }
+            }
+
+            Cene cene1 = new Cene(temp[6], temp[7], temp[9]);
+            float cenaMontaze = cene1._montaza;
+            float cenaRazreza = cene1._razrez;
 
             float cenaLetvic = 0;
             float cenaVijakov = 0;
@@ -311,6 +329,8 @@ namespace GivosCalc
             float prevoz = 0;
             float skupnaBrez = 0;
             float skupnaZ = 0;
+            float montaza = 0;
+            float razrez = 0;
             int i = 0;
           
 
@@ -330,10 +350,12 @@ namespace GivosCalc
                     prevoz += item._cenaPrevoza;
                     skupnaBrez += item._cenaSkupajBrezMontaze;
                     skupnaZ += item._cenaSkupajZMontazo;
+                    montaza += item._dolzinaProfilov * cenaMontaze;
+                    razrez += item._kolikoProfilovVVisino * item._stStebrov * cenaRazreza;
 
                 }
                 List<float> cene = new List<float> { cenaLetvic, cenaLetvic, cenaVijakov / 2, cenaVijakov, stebriBrez, StebriZ ,
-                                                     prevoz, skupnaBrez, skupnaZ};
+                                                     prevoz, skupnaBrez, skupnaZ, razrez, montaza};
 
                 foreach(var item in dict)
                 {
@@ -342,9 +364,37 @@ namespace GivosCalc
                         item.Key.Text = Math.Round(cene[i], 2).ToString() + " €";
                         item.Key.ForeColor = SystemColors.ControlText;
                         item.Value.ForeColor = SystemColors.ControlText;
-                }
+                    }
                     i++;
                 }
+
+            if(listBox2.Items.Count > 0)
+            {
+                numericUpDown1.ForeColor = SystemColors.ControlText;
+                numericUpDown1.Enabled = true;
+                label29.ForeColor = SystemColors.ControlText;
+                SkupnaBrezLb.Text = Math.Round(((100 - (float)numericUpDown1.Value) * 0.01f) * skupnaBrez, 2).ToString() + " €";
+                numericUpDown2.ForeColor = SystemColors.ControlText;
+                numericUpDown2.Enabled = true;
+                label30.ForeColor = SystemColors.ControlText;
+                SkupnaZLb.Text = Math.Round(((100 - (float)numericUpDown2.Value) * 0.01f) * skupnaZ, 2).ToString() + " €";
+            }
+            else
+            {
+                numericUpDown1.ForeColor = SystemColors.ControlDark;
+                numericUpDown1.Enabled = false;
+                numericUpDown1.Value = 0;
+                label29.ForeColor = SystemColors.ControlDark;
+                SkupnaBrezLb.Text = Math.Round(skupnaBrez, 2).ToString() + " €";
+                numericUpDown2.ForeColor = SystemColors.ControlDark;
+                numericUpDown2.Enabled = false;
+                numericUpDown2.Value = 0;
+                label30.ForeColor = SystemColors.ControlDark;
+                SkupnaZLb.Text = Math.Round(skupnaZ, 2).ToString() + " €";
+            }
+
+            _skupnaBrez = skupnaBrez;
+            _skupnaZ = skupnaZ;
             
         }
 
@@ -361,6 +411,44 @@ namespace GivosCalc
                         ExcelHandler handler = new ExcelHandler();
                         handler.SaveAndOpenExcel("TemplateVodoravne.xlsx", path, _itemsOnSecondTab);
                 }                              
-            }                              
+            }
+
+        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
+        {           
+            if (listBox2.Items.Count > 0)
+            {
+                numericUpDown1.ForeColor = SystemColors.ControlText;
+                numericUpDown1.Enabled = true;
+                label29.ForeColor = SystemColors.ControlText;
+                SkupnaBrezLb.Text = Math.Round(((100 - (float)numericUpDown1.Value) * 0.01f) * _skupnaBrez, 2).ToString() + " €";
+            }
+            else
+            {
+                numericUpDown1.ForeColor = SystemColors.ControlDark;
+                numericUpDown1.Enabled = false;
+                numericUpDown1.Value = 0;
+                label29.ForeColor = SystemColors.ControlDark;
+                SkupnaBrezLb.Text = Math.Round(_skupnaBrez, 2).ToString() + " €";
+            }
+        }
+
+        private void numericUpDown2_ValueChanged(object sender, EventArgs e)
+        {
+            if (listBox2.Items.Count > 0)
+            {
+                numericUpDown2.ForeColor = SystemColors.ControlText;
+                numericUpDown2.Enabled = true;
+                label30.ForeColor = SystemColors.ControlText;
+                SkupnaZLb.Text = Math.Round(((100 - (float)numericUpDown2.Value) * 0.01f) * _skupnaZ, 2).ToString() + " €";
+            }
+            else
+            {
+                numericUpDown2.ForeColor = SystemColors.ControlDark;
+                numericUpDown2.Enabled = false;
+                numericUpDown2.Value = 0;
+                label30.ForeColor = SystemColors.ControlDark;
+                SkupnaZLb.Text = Math.Round(_skupnaZ, 2).ToString() + " €";
+            }
+        }
     }
 }
