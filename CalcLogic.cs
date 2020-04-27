@@ -49,10 +49,11 @@ namespace GivosCalc
             float cenaRazreza = cene._razrez;
             Cene lepiu =  new Cene(temp[5]);
             float lepilo = lepiu._lepilo;
+          
 
 
 
-            foreach(var obj in profili._profili)
+            foreach (var obj in profili._profili)
             {
                 if(obj._name == selectedProfil)
                 {
@@ -61,139 +62,142 @@ namespace GivosCalc
                     width = obj._width;
 
                     int prib = (int)(visina / (width + ((rspodnji + rzgornji) / 2) * 0.01f));
-                    razmak = (visina - 0.04f - prib * width) / prib;
+                    //razmak = (visina - 0.04f - prib * width) / prib;
 
-                    float cenaVijakov; 
-                    double cenaBrezMontaze, cenaZMontazo;
-                    float razrez;
-                    float cenaLetvic;
-                    double pisiRazmak;
-                    float stVijakov;
-                    int stStebrov = stebri.Item1 + 1;
+                    //float cenaVijakov; 
+                    //double cenaBrezMontaze, cenaZMontazo;
+                    //float razrez;
+                    //float cenaLetvic;
+                    //double pisiRazmak;
+                    //float stVijakov;
+                    //int stStebrov = stebri.Item1 + 1;
 
-                    if(stStebrov <= 1)
-                    {
-                        stStebrov = 0;
-                    }
+                    //if(stStebrov <= 1)
+                    //{
+                    //    stStebrov = 0;
+                    //}
 
 
                     //racunanje letvic za razmak, dolzino, visino in končni izpis
                     pribDol = prib;
                     pribGor = prib;
-                    string predznak = "";
+                    //string predznak = "";
                     do
                     {
                         pribDol -= 1;
-                        razmakDol = (visina - 0.04f - pribDol * width) / pribDol;
-                        stVijakov = pribDol * stebri.Item1 * 4;
-                        cenaVijakov = stVijakov * cenaSrauba;
-                        if (cenaVijakov < 0)
-                        {
-                            cenaVijakov = 0;
-                            stVijakov = 0;
-                        }
-                        cenaLetvic = (pribDol * obj._price * dolzina);
-                        razrez = cenaRazreza * ((stStebrov) + (stebri.Item1 * pribDol));
-                        if (stStebrov <= 1)
-                        {
-                            razrez = 0;
-                        }
-                        cenaBrezMontaze = Math.Round((pribDol * obj._price * dolzina + cenaVijakov / 2 + stebri.Item3 + razrez), 2);
-                        cenaZMontazo = Math.Round((pribDol * obj._price * dolzina + cenaVijakov + stebri.Item2 + cenaPrevoza + dolzina * montaza), 2);
-                        pisiRazmak  = (Math.Round(razmakDol * 100, 3));
-                        predznak = "";
-                        if (pisiRazmak >= 0)
-                        {
-                            predznak = "+";
-                        }
-                        else{
-                            pisiRazmak *= -1;
-                            predznak = "‒";
-                        }
-                        res = "razmak: " + predznak + pisiRazmak.ToString("00.000") + "cm   stevilo letvic: " + pribDol.ToString("0")  + "   cena letvic: " + cenaLetvic.ToString("0.00") + " eur" +
-                           "   cena stebrov brez montaže: " + stebri.Item3.ToString("0.00") + " eur   cena stebrov z montažo: " + stebri.Item2.ToString("0.00") +
-                        " eur   skupna cena brez montaže: " + cenaBrezMontaze.ToString("0.00") + " eur" + "   skupna cena z montažo: " + cenaZMontazo.ToString("0.00") + " eur";
+                        //razmakDol = (visina - 0.04f - pribDol * width) / pribDol;
+                        //stVijakov = pribDol * stebri.Item1 * 4;
+                        //cenaVijakov = stVijakov * cenaSrauba;
+                        //if (cenaVijakov < 0)
+                        //{
+                        //    cenaVijakov = 0;
+                        //    stVijakov = 0;
+                        //}
+                        //cenaLetvic = (pribDol * obj._price * dolzina);
+                        //razrez = cenaRazreza * ((stStebrov) + (stebri.Item1 * pribDol));
+                        //if (stStebrov <= 1)
+                        //{
+                        //    razrez = 0;
+                        //}
+                        //cenaBrezMontaze = Math.Round((pribDol * obj._price * dolzina + cenaVijakov / 2 + stebri.Item3 + razrez), 2);
+                        //cenaZMontazo = Math.Round((pribDol * obj._price * dolzina + cenaVijakov + stebri.Item2 + cenaPrevoza + dolzina * montaza), 2);
+                        //pisiRazmak  = (Math.Round(razmakDol * 100, 3));
+                        //predznak = "";
+                        //if (pisiRazmak >= 0)
+                        //{
+                        //    predznak = "+";
+                        //}
+                        //else{
+                        //    pisiRazmak *= -1;
+                        //    predznak = "‒";
+                        //}
+                        //res = "razmak: " + predznak + pisiRazmak.ToString("00.000") + "cm   stevilo letvic: " + pribDol.ToString("0")  + "   cena letvic: " + cenaLetvic.ToString("0.00") + " eur" +
+                        //   "   cena stebrov brez montaže: " + stebri.Item3.ToString("0.00") + " eur   cena stebrov z montažo: " + stebri.Item2.ToString("0.00") +
+                        //" eur   skupna cena brez montaže: " + cenaBrezMontaze.ToString("0.00") + " eur" + "   skupna cena z montažo: " + cenaZMontazo.ToString("0.00") + " eur";
 
-                        list.Add(res);
-                        items.Add(new Item(selectedProfil, dolzina, Math.Round(razmakDol * 100, 3), res, cenaLetvic, cenaVijakov, cenaPrevoza,
-                            stebri.Item3, (float)cenaBrezMontaze, stebri.Item2, (float)cenaZMontazo, stStebrov, dolzina * pribDol,
-                            stVijakov, visina, pribDol));
+                        //list.Add(res);
+                        //items.Add(new Item(selectedProfil, dolzina, Math.Round(razmakDol * 100, 3), res, cenaLetvic, cenaVijakov, cenaPrevoza,
+                        //    stebri.Item3, (float)cenaBrezMontaze, stebri.Item2, (float)cenaZMontazo, stStebrov, dolzina * pribDol,
+                        //    stVijakov, visina, pribDol));
+                        razmakDol =  Izpis(obj, selectedProfil, visina, dolzina, pribDol, stebri, list, items, cenaSrauba, cenaRazreza, montaza, cenaPrevoza);
                     }
                     while ((rspodnji <= razmakDol * 100 && razmakDol * 100 <= rzgornji));
                     list.Reverse();
                     items.Reverse();
 
-                    stVijakov = prib * stebri.Item1 * 4;
-                    cenaVijakov = stVijakov * cenaSrauba;
-                    if (cenaVijakov < 0)
-                    {
-                        cenaVijakov = 0;
-                        stVijakov = 0;
-                    }
-                    razrez = cenaRazreza * ((stStebrov) + (stebri.Item1 * prib));
-                    if (stStebrov <= 1)
-                    {
-                        razrez = 0;
-                    }
-                    cenaLetvic = (prib * obj._price * dolzina);
-                    cenaBrezMontaze = Math.Round((prib * obj._price * dolzina + cenaVijakov / 2 + stebri.Item3 + razrez), 2);
-                    cenaZMontazo = Math.Round((prib * obj._price * dolzina + cenaVijakov + stebri.Item2 + cenaPrevoza+ dolzina * montaza), 2);
-                    pisiRazmak = (Math.Round(razmak * 100, 3));
-                    predznak = "";
-                    if (pisiRazmak >= 0)
-                    {
-                        predznak = "+";
-                    }
-                    else
-                    {
-                        pisiRazmak *= -1;
-                        predznak = "‒";
-                    }
+                    //stVijakov = prib * stebri.Item1 * 4;
+                    //cenaVijakov = stVijakov * cenaSrauba;
+                    //if (cenaVijakov < 0)
+                    //{
+                    //    cenaVijakov = 0;
+                    //    stVijakov = 0;
+                    //}
+                    //razrez = cenaRazreza * ((stStebrov) + (stebri.Item1 * prib));
+                    //if (stStebrov <= 1)
+                    //{
+                    //    razrez = 0;
+                    //}
+                    //cenaLetvic = (prib * obj._price * dolzina);
+                    //cenaBrezMontaze = Math.Round((prib * obj._price * dolzina + cenaVijakov / 2 + stebri.Item3 + razrez), 2);
+                    //cenaZMontazo = Math.Round((prib * obj._price * dolzina + cenaVijakov + stebri.Item2 + cenaPrevoza+ dolzina * montaza), 2);
+                    //pisiRazmak = (Math.Round(razmak * 100, 3));
+                    //predznak = "";
+                    //if (pisiRazmak >= 0)
+                    //{
+                    //    predznak = "+";
+                    //}
+                    //else
+                    //{
+                    //    pisiRazmak *= -1;
+                    //    predznak = "‒";
+                    //}
 
-                    res = "razmak: " + predznak + pisiRazmak.ToString("00.000") + "cm   stevilo letvic: " + prib.ToString("0") + "   cena letvic: " + cenaLetvic.ToString("0.00") + " eur" +
-                       "   cena stebrov brez montaže: " + stebri.Item3.ToString("0.00") + " eur   cena stebrov z montažo: " + stebri.Item2.ToString("0.00") +
-                        " eur   skupna cena brez montaže: " + cenaBrezMontaze.ToString("0.00") + " eur" + "   skupna cena z montažo: " + cenaZMontazo.ToString("0.00") + " eur";
-                    list.Add(res);
-                    items.Add(new Item(selectedProfil, dolzina, Math.Round(razmak * 100, 3), res, cenaLetvic, cenaVijakov, cenaPrevoza,
-                            stebri.Item3, (float)cenaBrezMontaze, stebri.Item2, (float)cenaZMontazo, stStebrov, dolzina * prib, 
-                            stVijakov, visina, prib));
+                    //res = "razmak: " + predznak + pisiRazmak.ToString("00.000") + "cm   stevilo letvic: " + prib.ToString("0") + "   cena letvic: " + cenaLetvic.ToString("0.00") + " eur" +
+                    //   "   cena stebrov brez montaže: " + stebri.Item3.ToString("0.00") + " eur   cena stebrov z montažo: " + stebri.Item2.ToString("0.00") +
+                    //    " eur   skupna cena brez montaže: " + cenaBrezMontaze.ToString("0.00") + " eur" + "   skupna cena z montažo: " + cenaZMontazo.ToString("0.00") + " eur";
+                    //list.Add(res);
+                    //items.Add(new Item(selectedProfil, dolzina, Math.Round(razmak * 100, 3), res, cenaLetvic, cenaVijakov, cenaPrevoza,
+                    //        stebri.Item3, (float)cenaBrezMontaze, stebri.Item2, (float)cenaZMontazo, stStebrov, dolzina * prib, 
+                    //        stVijakov, visina, prib));
+                    razmak = razmakDol = Izpis(obj, selectedProfil, visina, dolzina, prib, stebri, list, items, cenaSrauba, cenaRazreza, montaza, cenaPrevoza);
                     do
                     {
                         pribGor += 1;
-                        razmakGor = (visina - 0.04f - pribGor * width) / pribGor;
-                        stVijakov = pribGor * stebri.Item1 * 4;
-                        cenaVijakov = stVijakov * cenaSrauba;
-                        if (cenaVijakov < 0)
-                        {
-                            cenaVijakov = 0;
-                            stVijakov = 0;
-                        }
-                        cenaLetvic = (pribGor * obj._price * dolzina);
-                        razrez = cenaRazreza * ((stStebrov) + (stebri.Item1 * pribGor));
-                        if (stStebrov <= 1)
-                        {
-                            razrez = 0;
-                        }
-                        cenaBrezMontaze = Math.Round((pribGor * obj._price * dolzina + cenaVijakov / 2 + stebri.Item3 + razrez), 2);
-                        cenaZMontazo = Math.Round((pribGor * obj._price * dolzina + cenaVijakov + stebri.Item2 + cenaPrevoza + dolzina * montaza), 2);
-                        pisiRazmak = (Math.Round(razmakGor * 100, 3));
-                        predznak = "";
-                        if (pisiRazmak >= 0)
-                        {
-                            predznak = "+";
-                        }
-                        else
-                        {
-                            pisiRazmak *= -1;
-                            predznak = "‒";
-                        }
-                        res = "razmak: " + predznak + pisiRazmak.ToString("00.000") + "cm   stevilo letvic: " + pribGor.ToString("0") + "   cena letvic: " + cenaLetvic.ToString("0.00") + " eur" +
-                            "   cena stebrov brez montaže: " + stebri.Item3.ToString("0.00") + " eur   cena stebrov z montažo: " + stebri.Item2.ToString("0.00") +
-                        " eur   skupna cena brez montaže: " + cenaBrezMontaze.ToString("0.00") + " eur" + "   skupna cena z montažo: " + cenaZMontazo.ToString("0.00") + " eur";
-                        list.Add(res);
-                        items.Add(new Item(selectedProfil, dolzina, Math.Round(razmakGor * 100, 3), res, cenaLetvic, cenaVijakov, cenaPrevoza,
-                            stebri.Item3, (float)cenaBrezMontaze, stebri.Item2, (float)cenaZMontazo, stStebrov, dolzina * pribGor, 
-                            stVijakov, visina, pribGor));
+                        //razmakGor = (visina - 0.04f - pribGor * width) / pribGor;
+                        //stVijakov = pribGor * stebri.Item1 * 4;
+                        //cenaVijakov = stVijakov * cenaSrauba;
+                        //if (cenaVijakov < 0)
+                        //{
+                        //    cenaVijakov = 0;
+                        //    stVijakov = 0;
+                        //}
+                        //cenaLetvic = (pribGor * obj._price * dolzina);
+                        //razrez = cenaRazreza * ((stStebrov) + (stebri.Item1 * pribGor));
+                        //if (stStebrov <= 1)
+                        //{
+                        //    razrez = 0;
+                        //}
+                        //cenaBrezMontaze = Math.Round((pribGor * obj._price * dolzina + cenaVijakov / 2 + stebri.Item3 + razrez), 2);
+                        //cenaZMontazo = Math.Round((pribGor * obj._price * dolzina + cenaVijakov + stebri.Item2 + cenaPrevoza + dolzina * montaza), 2);
+                        //pisiRazmak = (Math.Round(razmakGor * 100, 3));
+                        //predznak = "";
+                        //if (pisiRazmak >= 0)
+                        //{
+                        //    predznak = "+";
+                        //}
+                        //else
+                        //{
+                        //    pisiRazmak *= -1;
+                        //    predznak = "‒";
+                        //}
+                        //res = "razmak: " + predznak + pisiRazmak.ToString("00.000") + "cm   stevilo letvic: " + pribGor.ToString("0") + "   cena letvic: " + cenaLetvic.ToString("0.00") + " eur" +
+                        //    "   cena stebrov brez montaže: " + stebri.Item3.ToString("0.00") + " eur   cena stebrov z montažo: " + stebri.Item2.ToString("0.00") +
+                        //" eur   skupna cena brez montaže: " + cenaBrezMontaze.ToString("0.00") + " eur" + "   skupna cena z montažo: " + cenaZMontazo.ToString("0.00") + " eur";
+                        //list.Add(res);
+                        //items.Add(new Item(selectedProfil, dolzina, Math.Round(razmakGor * 100, 3), res, cenaLetvic, cenaVijakov, cenaPrevoza,
+                        //    stebri.Item3, (float)cenaBrezMontaze, stebri.Item2, (float)cenaZMontazo, stStebrov, dolzina * pribGor, 
+                        //    stVijakov, visina, pribGor));
+                        razmakGor = Izpis(obj, selectedProfil, visina, dolzina, pribGor, stebri, list, items, cenaSrauba, cenaRazreza, montaza, cenaPrevoza);
 
                     }
                     while ((rspodnji <= razmakGor * 100 && razmakGor * 100 <= rzgornji));
@@ -208,6 +212,63 @@ namespace GivosCalc
                 }
             }
             return (items,resList);
+        }
+
+        private float Izpis(Profil obj, string selectedProfil, float visina, float dolzina, int prib, (int, float, float) stebri,
+            List<string> list, List<Item> items, float cenaSrauba, float cenaRazreza, float montaza, float cenaPrevoza)
+        {
+
+            price = obj._price;
+            capPrice = obj._capPrice;
+            width = obj._width;
+            
+            float razmak = (visina - 0.04f - prib * width) / prib;
+
+            float cenaVijakov;
+            double cenaBrezMontaze, cenaZMontazo;
+            float razrez;
+            float cenaLetvic;
+            double pisiRazmak;
+            float stVijakov;
+            int stStebrov = stebri.Item1 + 1;
+
+            razmak = (visina - 0.04f - prib * width) / prib;
+            stVijakov = prib * stebri.Item1 * 4;
+            cenaVijakov = stVijakov * cenaSrauba;
+            if (cenaVijakov < 0)
+            {
+                cenaVijakov = 0;
+                stVijakov = 0;
+            }
+            cenaLetvic = (prib * obj._price * dolzina);
+            razrez = cenaRazreza * ((stStebrov) + (stebri.Item1 * prib));
+            if (stStebrov <= 1)
+            {
+                razrez = 0;
+            }
+            cenaBrezMontaze = Math.Round((prib * obj._price * dolzina + cenaVijakov / 2 + stebri.Item3 + razrez), 2);
+            cenaZMontazo = Math.Round((prib * obj._price * dolzina + cenaVijakov + stebri.Item2 + cenaPrevoza + dolzina * montaza), 2);
+            pisiRazmak = (Math.Round(razmak * 100, 3));
+            string predznak = "";
+            if (pisiRazmak >= 0)
+            {
+                predznak = "+";
+            }
+            else
+            {
+                pisiRazmak *= -1;
+                predznak = "‒";
+            }
+            string res = "razmak: " + predznak + pisiRazmak.ToString("00.000") + "cm   stevilo letvic: " + prib.ToString("0") + "   cena letvic: " + cenaLetvic.ToString("0.00") + " eur" +
+               "   cena stebrov brez montaže: " + stebri.Item3.ToString("0.00") + " eur   cena stebrov z montažo: " + stebri.Item2.ToString("0.00") +
+            " eur   skupna cena brez montaže: " + cenaBrezMontaze.ToString("0.00") + " eur" + "   skupna cena z montažo: " + cenaZMontazo.ToString("0.00") + " eur";
+
+            list.Add(res);
+            items.Add(new Item(selectedProfil, dolzina, Math.Round(razmak * 100, 3), res, cenaLetvic, cenaVijakov, cenaPrevoza,
+                    stebri.Item3, (float)cenaBrezMontaze, stebri.Item2, (float)cenaZMontazo, stStebrov, dolzina * prib,
+                    stVijakov, visina, prib));
+            return razmak;
+ 
         }
 
         public List<string> FancierString(List<string> input)

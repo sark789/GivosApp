@@ -108,7 +108,7 @@ namespace GivosCalc
                 listBox1, (razmaki,cenaStebrovZMontazo, cenaStebrovBrezMontaze));
                 dodajVKosaricoBtn.Enabled = true;
             _items = result.Item1;
-            _stringToWriteOnSecondTab = result.Item2;
+            _stringToWriteOnSecondTab = result.Item2;           
         }
 
         private void radioButton5_CheckedChanged(object sender, EventArgs e)
@@ -222,6 +222,7 @@ namespace GivosCalc
                 _itemsOnSecondTab.Add(item);
             }
             SetFinalPrices();
+            shraniExcelBtn.Enabled = true;
         }
 
         public void btnOnClickTekst(Label label, string text, Color color)
@@ -265,6 +266,10 @@ namespace GivosCalc
             {
                 zbrisiVnosBtn.Enabled = false;
             }
+            if(listBox2.Items.Count == 0)
+            {
+                shraniExcelBtn.Enabled = false;
+            }
             listBox2.SelectedIndex = selectedItem-1;
             SetFinalPrices();
         }
@@ -295,6 +300,7 @@ namespace GivosCalc
                 _finalStringOnSecondTab.Clear();
                 listBox2.DataSource = _finalStringOnSecondTab;
                 listBox2.Update();
+                shraniExcelBtn.Enabled = false;
             }
             SetFinalPrices();
         }
@@ -368,7 +374,7 @@ namespace GivosCalc
                     i++;
                 }
 
-            if(listBox2.Items.Count > 0)
+            if(listBox2.Items.Count > 0 && SkupnaZLb.Text != "0 €")
             {
                 numericUpDown1.ForeColor = SystemColors.ControlText;
                 numericUpDown1.Enabled = true;

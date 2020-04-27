@@ -61,6 +61,10 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.dodanoLb = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
+            this.label30 = new System.Windows.Forms.Label();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.label29 = new System.Windows.Forms.Label();
             this.label26 = new System.Windows.Forms.Label();
             this.montazaLb = new System.Windows.Forms.Label();
             this.label24 = new System.Windows.Forms.Label();
@@ -99,18 +103,14 @@
             this.zbrisiVseVnoseBtn = new System.Windows.Forms.Button();
             this.zbrisiVnosBtn = new System.Windows.Forms.Button();
             this.listBox2 = new System.Windows.Forms.ListBox();
-            this.label29 = new System.Windows.Forms.Label();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
-            this.label30 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
             // 
             // listBox1
@@ -535,12 +535,56 @@
             this.tabPage2.Text = "Košarica";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // numericUpDown2
+            // 
+            this.numericUpDown2.Enabled = false;
+            this.numericUpDown2.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
+            this.numericUpDown2.ForeColor = System.Drawing.SystemColors.ControlDark;
+            this.numericUpDown2.Location = new System.Drawing.Point(423, 431);
+            this.numericUpDown2.Name = "numericUpDown2";
+            this.numericUpDown2.Size = new System.Drawing.Size(60, 32);
+            this.numericUpDown2.TabIndex = 66;
+            this.numericUpDown2.ValueChanged += new System.EventHandler(this.numericUpDown2_ValueChanged);
+            // 
+            // label30
+            // 
+            this.label30.AutoSize = true;
+            this.label30.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
+            this.label30.ForeColor = System.Drawing.SystemColors.ControlDark;
+            this.label30.Location = new System.Drawing.Point(159, 437);
+            this.label30.Name = "label30";
+            this.label30.Size = new System.Drawing.Size(124, 26);
+            this.label30.TabIndex = 65;
+            this.label30.Text = "Popust [%]:";
+            // 
+            // numericUpDown1
+            // 
+            this.numericUpDown1.Enabled = false;
+            this.numericUpDown1.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
+            this.numericUpDown1.ForeColor = System.Drawing.SystemColors.ControlDark;
+            this.numericUpDown1.Location = new System.Drawing.Point(1344, 431);
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.Size = new System.Drawing.Size(60, 32);
+            this.numericUpDown1.TabIndex = 64;
+            this.numericUpDown1.ValueChanged += new System.EventHandler(this.numericUpDown1_ValueChanged);
+            // 
+            // label29
+            // 
+            this.label29.AutoSize = true;
+            this.label29.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
+            this.label29.ForeColor = System.Drawing.SystemColors.ControlDark;
+            this.label29.Location = new System.Drawing.Point(1044, 437);
+            this.label29.Name = "label29";
+            this.label29.Size = new System.Drawing.Size(124, 26);
+            this.label29.TabIndex = 63;
+            this.label29.Text = "Popust [%]:";
+            // 
             // label26
             // 
             this.label26.AutoSize = true;
             this.label26.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
             this.label26.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.label26.Location = new System.Drawing.Point(1041, 293);
+            this.label26.Location = new System.Drawing.Point(159, 293);
             this.label26.Name = "label26";
             this.label26.Size = new System.Drawing.Size(157, 26);
             this.label26.TabIndex = 62;
@@ -551,7 +595,7 @@
             this.montazaLb.AutoSize = true;
             this.montazaLb.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
             this.montazaLb.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.montazaLb.Location = new System.Drawing.Point(1301, 293);
+            this.montazaLb.Location = new System.Drawing.Point(419, 293);
             this.montazaLb.Name = "montazaLb";
             this.montazaLb.Size = new System.Drawing.Size(42, 26);
             this.montazaLb.TabIndex = 61;
@@ -562,7 +606,7 @@
             this.label24.AutoSize = true;
             this.label24.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
             this.label24.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.label24.Location = new System.Drawing.Point(131, 293);
+            this.label24.Location = new System.Drawing.Point(1044, 293);
             this.label24.Name = "label24";
             this.label24.Size = new System.Drawing.Size(143, 26);
             this.label24.TabIndex = 60;
@@ -573,7 +617,7 @@
             this.razrezLb.AutoSize = true;
             this.razrezLb.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
             this.razrezLb.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.razrezLb.Location = new System.Drawing.Point(426, 293);
+            this.razrezLb.Location = new System.Drawing.Point(1339, 293);
             this.razrezLb.Name = "razrezLb";
             this.razrezLb.Size = new System.Drawing.Size(42, 26);
             this.razrezLb.TabIndex = 59;
@@ -656,6 +700,7 @@
             // 
             // shraniExcelBtn
             // 
+            this.shraniExcelBtn.Enabled = false;
             this.shraniExcelBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
             this.shraniExcelBtn.Location = new System.Drawing.Point(671, 752);
             this.shraniExcelBtn.Name = "shraniExcelBtn";
@@ -670,7 +715,7 @@
             this.label18.AutoSize = true;
             this.label18.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
             this.label18.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.label18.Location = new System.Drawing.Point(131, 367);
+            this.label18.Location = new System.Drawing.Point(1044, 367);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(285, 26);
             this.label18.TabIndex = 48;
@@ -681,7 +726,7 @@
             this.stebriBrezLb.AutoSize = true;
             this.stebriBrezLb.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
             this.stebriBrezLb.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.stebriBrezLb.Location = new System.Drawing.Point(426, 367);
+            this.stebriBrezLb.Location = new System.Drawing.Point(1339, 367);
             this.stebriBrezLb.Name = "stebriBrezLb";
             this.stebriBrezLb.Size = new System.Drawing.Size(42, 26);
             this.stebriBrezLb.TabIndex = 47;
@@ -692,7 +737,7 @@
             this.label20.AutoSize = true;
             this.label20.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
             this.label20.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.label20.Location = new System.Drawing.Point(131, 476);
+            this.label20.Location = new System.Drawing.Point(1044, 476);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(283, 26);
             this.label20.TabIndex = 46;
@@ -703,7 +748,7 @@
             this.SkupnaBrezLb.AutoSize = true;
             this.SkupnaBrezLb.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
             this.SkupnaBrezLb.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.SkupnaBrezLb.Location = new System.Drawing.Point(426, 476);
+            this.SkupnaBrezLb.Location = new System.Drawing.Point(1339, 476);
             this.SkupnaBrezLb.Name = "SkupnaBrezLb";
             this.SkupnaBrezLb.Size = new System.Drawing.Size(42, 26);
             this.SkupnaBrezLb.TabIndex = 45;
@@ -714,7 +759,7 @@
             this.label22.AutoSize = true;
             this.label22.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
             this.label22.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.label22.Location = new System.Drawing.Point(132, 402);
+            this.label22.Location = new System.Drawing.Point(1045, 402);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(86, 26);
             this.label22.TabIndex = 44;
@@ -725,7 +770,7 @@
             this.PrevozBrezLb.AutoSize = true;
             this.PrevozBrezLb.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
             this.PrevozBrezLb.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.PrevozBrezLb.Location = new System.Drawing.Point(427, 402);
+            this.PrevozBrezLb.Location = new System.Drawing.Point(1340, 402);
             this.PrevozBrezLb.Name = "PrevozBrezLb";
             this.PrevozBrezLb.Size = new System.Drawing.Size(18, 26);
             this.PrevozBrezLb.TabIndex = 43;
@@ -736,7 +781,7 @@
             this.label31.AutoSize = true;
             this.label31.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
             this.label31.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.label31.Location = new System.Drawing.Point(56, 450);
+            this.label31.Location = new System.Drawing.Point(969, 450);
             this.label31.Name = "label31";
             this.label31.Size = new System.Drawing.Size(492, 26);
             this.label31.TabIndex = 42;
@@ -747,7 +792,7 @@
             this.label28.AutoSize = true;
             this.label28.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
             this.label28.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.label28.Location = new System.Drawing.Point(1041, 367);
+            this.label28.Location = new System.Drawing.Point(159, 367);
             this.label28.Name = "label28";
             this.label28.Size = new System.Drawing.Size(254, 26);
             this.label28.TabIndex = 41;
@@ -758,7 +803,7 @@
             this.StebriZLb.AutoSize = true;
             this.StebriZLb.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
             this.StebriZLb.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.StebriZLb.Location = new System.Drawing.Point(1301, 367);
+            this.StebriZLb.Location = new System.Drawing.Point(419, 367);
             this.StebriZLb.Name = "StebriZLb";
             this.StebriZLb.Size = new System.Drawing.Size(42, 26);
             this.StebriZLb.TabIndex = 40;
@@ -769,7 +814,7 @@
             this.label14.AutoSize = true;
             this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
             this.label14.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.label14.Location = new System.Drawing.Point(1040, 476);
+            this.label14.Location = new System.Drawing.Point(158, 476);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(252, 26);
             this.label14.TabIndex = 39;
@@ -780,7 +825,7 @@
             this.SkupnaZLb.AutoSize = true;
             this.SkupnaZLb.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
             this.SkupnaZLb.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.SkupnaZLb.Location = new System.Drawing.Point(1300, 476);
+            this.SkupnaZLb.Location = new System.Drawing.Point(418, 476);
             this.SkupnaZLb.Name = "SkupnaZLb";
             this.SkupnaZLb.Size = new System.Drawing.Size(42, 26);
             this.SkupnaZLb.TabIndex = 38;
@@ -791,7 +836,7 @@
             this.label16.AutoSize = true;
             this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
             this.label16.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.label16.Location = new System.Drawing.Point(1041, 402);
+            this.label16.Location = new System.Drawing.Point(159, 402);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(86, 26);
             this.label16.TabIndex = 37;
@@ -802,7 +847,7 @@
             this.PrevozZLb.AutoSize = true;
             this.PrevozZLb.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
             this.PrevozZLb.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.PrevozZLb.Location = new System.Drawing.Point(1301, 402);
+            this.PrevozZLb.Location = new System.Drawing.Point(419, 402);
             this.PrevozZLb.Name = "PrevozZLb";
             this.PrevozZLb.Size = new System.Drawing.Size(42, 26);
             this.PrevozZLb.TabIndex = 36;
@@ -813,18 +858,18 @@
             this.label23.AutoSize = true;
             this.label23.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
             this.label23.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.label23.Location = new System.Drawing.Point(977, 450);
+            this.label23.Location = new System.Drawing.Point(79, 450);
             this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(492, 26);
+            this.label23.Size = new System.Drawing.Size(468, 26);
             this.label23.TabIndex = 35;
-            this.label23.Text = "________________________________________";
+            this.label23.Text = "______________________________________";
             // 
             // VijakiZLb
             // 
             this.VijakiZLb.AutoSize = true;
             this.VijakiZLb.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
             this.VijakiZLb.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.VijakiZLb.Location = new System.Drawing.Point(1301, 330);
+            this.VijakiZLb.Location = new System.Drawing.Point(419, 330);
             this.VijakiZLb.Name = "VijakiZLb";
             this.VijakiZLb.Size = new System.Drawing.Size(42, 26);
             this.VijakiZLb.TabIndex = 34;
@@ -835,7 +880,7 @@
             this.label25.AutoSize = true;
             this.label25.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
             this.label25.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.label25.Location = new System.Drawing.Point(1041, 330);
+            this.label25.Location = new System.Drawing.Point(159, 330);
             this.label25.Name = "label25";
             this.label25.Size = new System.Drawing.Size(250, 26);
             this.label25.TabIndex = 33;
@@ -846,7 +891,7 @@
             this.CenaLetvic2Lb.AutoSize = true;
             this.CenaLetvic2Lb.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
             this.CenaLetvic2Lb.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.CenaLetvic2Lb.Location = new System.Drawing.Point(1301, 258);
+            this.CenaLetvic2Lb.Location = new System.Drawing.Point(419, 258);
             this.CenaLetvic2Lb.Name = "CenaLetvic2Lb";
             this.CenaLetvic2Lb.Size = new System.Drawing.Size(42, 26);
             this.CenaLetvic2Lb.TabIndex = 32;
@@ -857,7 +902,7 @@
             this.label27.AutoSize = true;
             this.label27.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
             this.label27.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.label27.Location = new System.Drawing.Point(1041, 258);
+            this.label27.Location = new System.Drawing.Point(159, 258);
             this.label27.Name = "label27";
             this.label27.Size = new System.Drawing.Size(126, 26);
             this.label27.TabIndex = 31;
@@ -868,7 +913,7 @@
             this.vijakiBrezLb.AutoSize = true;
             this.vijakiBrezLb.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
             this.vijakiBrezLb.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.vijakiBrezLb.Location = new System.Drawing.Point(426, 330);
+            this.vijakiBrezLb.Location = new System.Drawing.Point(1339, 330);
             this.vijakiBrezLb.Name = "vijakiBrezLb";
             this.vijakiBrezLb.Size = new System.Drawing.Size(42, 26);
             this.vijakiBrezLb.TabIndex = 21;
@@ -879,7 +924,7 @@
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
             this.label13.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.label13.Location = new System.Drawing.Point(131, 330);
+            this.label13.Location = new System.Drawing.Point(1044, 330);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(281, 26);
             this.label13.TabIndex = 20;
@@ -890,7 +935,7 @@
             this.cenaLetvicLb.AutoSize = true;
             this.cenaLetvicLb.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
             this.cenaLetvicLb.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.cenaLetvicLb.Location = new System.Drawing.Point(426, 258);
+            this.cenaLetvicLb.Location = new System.Drawing.Point(1339, 258);
             this.cenaLetvicLb.Name = "cenaLetvicLb";
             this.cenaLetvicLb.Size = new System.Drawing.Size(42, 26);
             this.cenaLetvicLb.TabIndex = 19;
@@ -901,7 +946,7 @@
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
             this.label11.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.label11.Location = new System.Drawing.Point(131, 258);
+            this.label11.Location = new System.Drawing.Point(1044, 258);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(126, 26);
             this.label11.TabIndex = 18;
@@ -941,50 +986,6 @@
             this.listBox2.TabIndex = 15;
             this.listBox2.SelectedIndexChanged += new System.EventHandler(this.listBox2_SelectedIndexChanged);
             // 
-            // label29
-            // 
-            this.label29.AutoSize = true;
-            this.label29.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
-            this.label29.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.label29.Location = new System.Drawing.Point(131, 437);
-            this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(124, 26);
-            this.label29.TabIndex = 63;
-            this.label29.Text = "Popust [%]:";
-            // 
-            // numericUpDown1
-            // 
-            this.numericUpDown1.Enabled = false;
-            this.numericUpDown1.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
-            this.numericUpDown1.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.numericUpDown1.Location = new System.Drawing.Point(431, 431);
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(60, 32);
-            this.numericUpDown1.TabIndex = 64;
-            this.numericUpDown1.ValueChanged += new System.EventHandler(this.numericUpDown1_ValueChanged);
-            // 
-            // numericUpDown2
-            // 
-            this.numericUpDown2.Enabled = false;
-            this.numericUpDown2.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
-            this.numericUpDown2.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.numericUpDown2.Location = new System.Drawing.Point(1306, 431);
-            this.numericUpDown2.Name = "numericUpDown2";
-            this.numericUpDown2.Size = new System.Drawing.Size(60, 32);
-            this.numericUpDown2.TabIndex = 66;
-            this.numericUpDown2.ValueChanged += new System.EventHandler(this.numericUpDown2_ValueChanged);
-            // 
-            // label30
-            // 
-            this.label30.AutoSize = true;
-            this.label30.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
-            this.label30.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.label30.Location = new System.Drawing.Point(1041, 437);
-            this.label30.Name = "label30";
-            this.label30.Size = new System.Drawing.Size(124, 26);
-            this.label30.TabIndex = 65;
-            this.label30.Text = "Popust [%]:";
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1005,8 +1006,8 @@
             this.tabPage1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.ResumeLayout(false);
 
         }

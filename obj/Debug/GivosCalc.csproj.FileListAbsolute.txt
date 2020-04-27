@@ -3,7 +3,6 @@ C:\Users\timpo\OneDrive\Namizje\GivosApp\GivosCalc\bin\Debug\GivosCalc.exe
 C:\Users\timpo\OneDrive\Namizje\GivosApp\GivosCalc\bin\Debug\GivosCalc.pdb
 C:\Users\timpo\OneDrive\Namizje\GivosApp\GivosCalc\bin\Debug\Newtonsoft.Json.dll
 C:\Users\timpo\OneDrive\Namizje\GivosApp\GivosCalc\bin\Debug\Newtonsoft.Json.xml
-C:\Users\timpo\OneDrive\Namizje\GivosApp\GivosCalc\obj\Debug\GivosCalc.csprojAssemblyReference.cache
 C:\Users\timpo\OneDrive\Namizje\GivosApp\GivosCalc\obj\Debug\GivosCalc.Form1.resources
 C:\Users\timpo\OneDrive\Namizje\GivosApp\GivosCalc\obj\Debug\GivosCalc.Properties.Resources.resources
 C:\Users\timpo\OneDrive\Namizje\GivosApp\GivosCalc\obj\Debug\GivosCalc.csproj.GenerateResource.cache
@@ -11,3 +10,4 @@ C:\Users\timpo\OneDrive\Namizje\GivosApp\GivosCalc\obj\Debug\GivosCalc.csproj.Co
 C:\Users\timpo\OneDrive\Namizje\GivosApp\GivosCalc\obj\Debug\GivosCalc.exe
 C:\Users\timpo\OneDrive\Namizje\GivosApp\GivosCalc\obj\Debug\GivosCalc.pdb
 C:\Users\timpo\OneDrive\Namizje\GivosApp\GivosCalc\obj\Debug\GivosCalc.CustomMessageForm.resources
+C:\Users\timpo\OneDrive\Namizje\GivosApp\GivosCalc\obj\Debug\GivosCalc.csprojAssemblyReference.cache
