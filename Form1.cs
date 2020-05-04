@@ -407,7 +407,7 @@ namespace GivosCalc
         private void shraniBtn_Click(object sender, EventArgs e)
         {
             SaveFileDialog saveFileDialog1 = new SaveFileDialog();
-            saveFileDialog1.Filter = "Excel |*.xlsx";
+            saveFileDialog1.Filter = "Excel file |*.xlsx";
             saveFileDialog1.Title = "Shrani Excel datoteko";
 
                 string path;
@@ -454,6 +454,21 @@ namespace GivosCalc
                 numericUpDown2.Value = 0;
                 label30.ForeColor = SystemColors.ControlDark;
                 SkupnaZLb.Text = Math.Round(_skupnaZ, 2).ToString() + " €";
+            }
+        }
+
+        private void shraniWordBtn_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+            saveFileDialog1.Filter = "Word file |*.doc";
+            saveFileDialog1.Title = "Shrani Word datoteko";
+
+            string path;
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                path = Path.GetFullPath(saveFileDialog1.FileName);
+                WordHandler handler = new WordHandler();
+                handler.SaveAndOpenWord("wordTemplate.doc", path, _itemsOnSecondTab, vodoravniProfili);
             }
         }
     }

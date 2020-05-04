@@ -22,7 +22,7 @@ namespace GivosCalc
             excel.Visible = true;
             Workbook workingWb = excel.Workbooks.Open(outputPath);
 
-            //z montažo sheet
+            //z montažo in brez montaže sheet
             Worksheet sheet1 = workingWb.Worksheets["Z montažo"];
             Worksheet sheet2 = workingWb.Worksheets["Brez montaže"];
             Range colRange1 = sheet1.Range["A1:A60"];

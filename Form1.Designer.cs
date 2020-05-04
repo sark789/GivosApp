@@ -103,6 +103,9 @@
             this.zbrisiVseVnoseBtn = new System.Windows.Forms.Button();
             this.zbrisiVnosBtn = new System.Windows.Forms.Button();
             this.listBox2 = new System.Windows.Forms.ListBox();
+            this.shraniWordBtn = new System.Windows.Forms.Button();
+            this.stPonudbeTb = new System.Windows.Forms.TextBox();
+            this.label32 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -485,6 +488,9 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.stPonudbeTb);
+            this.tabPage2.Controls.Add(this.label32);
+            this.tabPage2.Controls.Add(this.shraniWordBtn);
             this.tabPage2.Controls.Add(this.numericUpDown2);
             this.tabPage2.Controls.Add(this.label30);
             this.tabPage2.Controls.Add(this.numericUpDown1);
@@ -626,7 +632,7 @@
             // telefonTb
             // 
             this.telefonTb.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
-            this.telefonTb.Location = new System.Drawing.Point(1189, 680);
+            this.telefonTb.Location = new System.Drawing.Point(1189, 654);
             this.telefonTb.Name = "telefonTb";
             this.telefonTb.Size = new System.Drawing.Size(280, 32);
             this.telefonTb.TabIndex = 58;
@@ -635,7 +641,7 @@
             // 
             this.label21.AutoSize = true;
             this.label21.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
-            this.label21.Location = new System.Drawing.Point(1094, 683);
+            this.label21.Location = new System.Drawing.Point(1094, 657);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(89, 26);
             this.label21.TabIndex = 57;
@@ -644,7 +650,7 @@
             // naslovTb
             // 
             this.naslovTb.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
-            this.naslovTb.Location = new System.Drawing.Point(652, 680);
+            this.naslovTb.Location = new System.Drawing.Point(652, 654);
             this.naslovTb.Name = "naslovTb";
             this.naslovTb.Size = new System.Drawing.Size(354, 32);
             this.naslovTb.TabIndex = 56;
@@ -653,7 +659,7 @@
             // 
             this.label19.AutoSize = true;
             this.label19.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
-            this.label19.Location = new System.Drawing.Point(561, 683);
+            this.label19.Location = new System.Drawing.Point(561, 657);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(85, 26);
             this.label19.TabIndex = 55;
@@ -683,7 +689,7 @@
             // imeInPriimekTb
             // 
             this.imeInPriimekTb.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
-            this.imeInPriimekTb.Location = new System.Drawing.Point(190, 680);
+            this.imeInPriimekTb.Location = new System.Drawing.Point(190, 654);
             this.imeInPriimekTb.Name = "imeInPriimekTb";
             this.imeInPriimekTb.Size = new System.Drawing.Size(280, 32);
             this.imeInPriimekTb.TabIndex = 52;
@@ -692,7 +698,7 @@
             // 
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
-            this.label12.Location = new System.Drawing.Point(29, 683);
+            this.label12.Location = new System.Drawing.Point(29, 657);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(155, 26);
             this.label12.TabIndex = 51;
@@ -986,6 +992,35 @@
             this.listBox2.TabIndex = 15;
             this.listBox2.SelectedIndexChanged += new System.EventHandler(this.listBox2_SelectedIndexChanged);
             // 
+            // shraniWordBtn
+            // 
+            this.shraniWordBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
+            this.shraniWordBtn.Location = new System.Drawing.Point(671, 707);
+            this.shraniWordBtn.Name = "shraniWordBtn";
+            this.shraniWordBtn.Size = new System.Drawing.Size(186, 39);
+            this.shraniWordBtn.TabIndex = 67;
+            this.shraniWordBtn.Text = "Shrani Word";
+            this.shraniWordBtn.UseVisualStyleBackColor = true;
+            this.shraniWordBtn.Click += new System.EventHandler(this.shraniWordBtn_Click);
+            // 
+            // stPonudbeTb
+            // 
+            this.stPonudbeTb.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
+            this.stPonudbeTb.Location = new System.Drawing.Point(190, 704);
+            this.stPonudbeTb.Name = "stPonudbeTb";
+            this.stPonudbeTb.Size = new System.Drawing.Size(93, 32);
+            this.stPonudbeTb.TabIndex = 69;
+            // 
+            // label32
+            // 
+            this.label32.AutoSize = true;
+            this.label32.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
+            this.label32.Location = new System.Drawing.Point(29, 707);
+            this.label32.Name = "label32";
+            this.label32.Size = new System.Drawing.Size(135, 26);
+            this.label32.TabIndex = 68;
+            this.label32.Text = "Št. ponudbe:";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1088,6 +1123,9 @@
         private System.Windows.Forms.Label label29;
         private System.Windows.Forms.NumericUpDown numericUpDown2;
         private System.Windows.Forms.Label label30;
+        private System.Windows.Forms.Button shraniWordBtn;
+        private System.Windows.Forms.TextBox stPonudbeTb;
+        private System.Windows.Forms.Label label32;
     }
 }
 
