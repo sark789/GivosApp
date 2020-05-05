@@ -1,0 +1,4 @@
+Zaradi značilne oblike vodoravno nameščenih ALU ograjnih profilov  omogoča prehod oz. kroženje zraka skozi ograjno polje – ograjo.  
+Pomembna značilnost omenjenega ograjnega modela je ta, da se skozi ograjo ne vidi – čeprav je ograja še vedno zračna.  
+Vizualno je ograja enaka iz obeh strani.  
+Poleg tega je ograja tudi varna, saj otroci ne morejo plezati po ograji  ( ne morejo vtakniti noge med vodoravne profile ).

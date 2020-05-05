@@ -61,6 +61,9 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.dodanoLb = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.stPonudbeTb = new System.Windows.Forms.TextBox();
+            this.label32 = new System.Windows.Forms.Label();
+            this.shraniWordBtn = new System.Windows.Forms.Button();
             this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
             this.label30 = new System.Windows.Forms.Label();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
@@ -103,9 +106,6 @@
             this.zbrisiVseVnoseBtn = new System.Windows.Forms.Button();
             this.zbrisiVnosBtn = new System.Windows.Forms.Button();
             this.listBox2 = new System.Windows.Forms.ListBox();
-            this.shraniWordBtn = new System.Windows.Forms.Button();
-            this.stPonudbeTb = new System.Windows.Forms.TextBox();
-            this.label32 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -540,6 +540,36 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Košarica";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // stPonudbeTb
+            // 
+            this.stPonudbeTb.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
+            this.stPonudbeTb.Location = new System.Drawing.Point(190, 704);
+            this.stPonudbeTb.Name = "stPonudbeTb";
+            this.stPonudbeTb.Size = new System.Drawing.Size(93, 32);
+            this.stPonudbeTb.TabIndex = 69;
+            // 
+            // label32
+            // 
+            this.label32.AutoSize = true;
+            this.label32.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
+            this.label32.Location = new System.Drawing.Point(29, 707);
+            this.label32.Name = "label32";
+            this.label32.Size = new System.Drawing.Size(135, 26);
+            this.label32.TabIndex = 68;
+            this.label32.Text = "Št. ponudbe:";
+            // 
+            // shraniWordBtn
+            // 
+            this.shraniWordBtn.Enabled = false;
+            this.shraniWordBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
+            this.shraniWordBtn.Location = new System.Drawing.Point(671, 707);
+            this.shraniWordBtn.Name = "shraniWordBtn";
+            this.shraniWordBtn.Size = new System.Drawing.Size(186, 39);
+            this.shraniWordBtn.TabIndex = 67;
+            this.shraniWordBtn.Text = "Shrani Word";
+            this.shraniWordBtn.UseVisualStyleBackColor = true;
+            this.shraniWordBtn.Click += new System.EventHandler(this.shraniWordBtn_Click);
             // 
             // numericUpDown2
             // 
@@ -991,35 +1021,6 @@
             this.listBox2.Size = new System.Drawing.Size(1452, 213);
             this.listBox2.TabIndex = 15;
             this.listBox2.SelectedIndexChanged += new System.EventHandler(this.listBox2_SelectedIndexChanged);
-            // 
-            // shraniWordBtn
-            // 
-            this.shraniWordBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
-            this.shraniWordBtn.Location = new System.Drawing.Point(671, 707);
-            this.shraniWordBtn.Name = "shraniWordBtn";
-            this.shraniWordBtn.Size = new System.Drawing.Size(186, 39);
-            this.shraniWordBtn.TabIndex = 67;
-            this.shraniWordBtn.Text = "Shrani Word";
-            this.shraniWordBtn.UseVisualStyleBackColor = true;
-            this.shraniWordBtn.Click += new System.EventHandler(this.shraniWordBtn_Click);
-            // 
-            // stPonudbeTb
-            // 
-            this.stPonudbeTb.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
-            this.stPonudbeTb.Location = new System.Drawing.Point(190, 704);
-            this.stPonudbeTb.Name = "stPonudbeTb";
-            this.stPonudbeTb.Size = new System.Drawing.Size(93, 32);
-            this.stPonudbeTb.TabIndex = 69;
-            // 
-            // label32
-            // 
-            this.label32.AutoSize = true;
-            this.label32.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
-            this.label32.Location = new System.Drawing.Point(29, 707);
-            this.label32.Name = "label32";
-            this.label32.Size = new System.Drawing.Size(135, 26);
-            this.label32.TabIndex = 68;
-            this.label32.Text = "Št. ponudbe:";
             // 
             // Form1
             // 

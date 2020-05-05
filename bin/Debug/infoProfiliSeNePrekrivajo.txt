@@ -1,0 +1,2 @@
+       •     <st_prof> – ih vodoravnih pozicijah z razmaki cca <razmak>cm na skupni dolžini L = <posamezna_dolzina>m. Višina 
+             ograje ( merjeno od vrha betonske škarpe in do vrha ALU ograje )  je  V = cca  <visina>cm.

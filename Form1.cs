@@ -223,6 +223,7 @@ namespace GivosCalc
             }
             SetFinalPrices();
             shraniExcelBtn.Enabled = true;
+            shraniWordBtn.Enabled = true;
         }
 
         public void btnOnClickTekst(Label label, string text, Color color)
@@ -269,6 +270,7 @@ namespace GivosCalc
             if(listBox2.Items.Count == 0)
             {
                 shraniExcelBtn.Enabled = false;
+                shraniWordBtn.Enabled = false;
             }
             listBox2.SelectedIndex = selectedItem-1;
             SetFinalPrices();
@@ -301,6 +303,7 @@ namespace GivosCalc
                 listBox2.DataSource = _finalStringOnSecondTab;
                 listBox2.Update();
                 shraniExcelBtn.Enabled = false;
+                shraniWordBtn.Enabled = false;
             }
             SetFinalPrices();
         }

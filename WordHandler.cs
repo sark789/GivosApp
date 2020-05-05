@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.Office.Interop.Word;
+using Newtonsoft.Json.Linq;
 
 namespace GivosCalc
 {
@@ -19,15 +21,22 @@ namespace GivosCalc
 
             word.Visible = true;
             Document workDocument = word.Documents.Open(outputPath);
-            WriteValuesInWord(_itemsOnSecondTab, word, vodoravniProfili);
+            WriteValuesInWord(_itemsOnSecondTab, word, vodoravniProfili, workDocument);
             workDocument.Save();
         }
 
-        public void WriteValuesInWord(List<Item> _itemsOnSecondTab, Microsoft.Office.Interop.Word.Application word, ProfiliCollection vodoravniProfili) 
+        public void WriteValuesInWord(List<Item> _itemsOnSecondTab, Microsoft.Office.Interop.Word.Application word, ProfiliCollection vodoravniProfili, Document workDocument) 
         {
             TabControl tab = System.Windows.Forms.Application.OpenForms["Form1"].Controls["tabControl1"] as TabControl;
             var imeInPriimekTb = tab.SelectedTab.Controls["imeInPriimekTb"];
-            var naslovTb = tab.SelectedTab.Controls["naslovTb"];
+            string naslovTb = tab.SelectedTab.Controls["naslovTb"].Text;
+            string naslov = "";
+            try
+            {
+                string cleanedNaslov = System.Text.RegularExpressions.Regex.Replace(naslovTb, @"\s+", " ");
+                naslov = cleanedNaslov.Replace(", ", "^l").Trim();              
+            }
+            catch (Exception e) { naslov = naslovTb; }
             var stPonudbeTb = tab.SelectedTab.Controls["stPonudbeTb"];
             var numericUpDown1 = tab.SelectedTab.Controls["numericUpDown1"];
 
@@ -37,45 +46,163 @@ namespace GivosCalc
             float cena_z = 0;
             float dim = 0;
             float cena_brez = 0;
+            float st_stebrov = 0;
+            float visina = 0;
+            var str = "";
+            var info = "";
+            string stebri = "";
+            List<string> temp_list = new List<string>();
+            List<string> model_ograj = new List<string>();
+            List<string> allInfoText = new List<string>();
+            Dictionary<string, string> mainBody = new Dictionary<string, string>();
+            
 
-            foreach(var item in vodoravniProfili._profili)
+            foreach (var item in _itemsOnSecondTab)
             {
-                if(_itemsOnSecondTab[0]._profilName == item._name)
+                temp_list.Add(item._profilName);
+            }
+            model_ograj = temp_list.Distinct().ToList();
+            string modeli_ograj = string.Join(" + ", model_ograj.ToArray());
+           
+            
+            foreach (var item in model_ograj)
+            {
+                foreach (var i in vodoravniProfili._profili)
                 {
-                    dim = item._width;
+                    if (item == i._name)
+                    {
+                        dim = i._width;
+                    }
                 }
+
+                string predInfo = File.ReadAllText(System.AppDomain.CurrentDomain.BaseDirectory + "predInfo.txt");
+                predInfo = predInfo.Replace("<model_ograje>", item);
+                predInfo = predInfo.Replace("<dim>", (dim * 1000).ToString());
+                mainBody.Add(item, predInfo + "\n\n");
             }
 
-            foreach(var item in _itemsOnSecondTab)
+
+            foreach (var item in _itemsOnSecondTab)
             {
                 dolzina += item._dolzinaProfilov;
                 cena_z += item._cenaSkupajZMontazo;
                 cena_brez += item._cenaSkupajBrezMontaze;
+                stebri += item._stStebrov + " kos  x  V = " + (item._visina * 100).ToString("0.00") + "cm" + "  +  ";
+                visina += item._stStebrov * item._visina;
+                
+                info = (item._razmakMedProfili < 0) ? File.ReadAllText(System.AppDomain.CurrentDomain.BaseDirectory + "infoProfiliSePrekrivajo.txt") :
+                File.ReadAllText(System.AppDomain.CurrentDomain.BaseDirectory + "infoProfiliSeNePrekrivajo.txt");
+                if (mainBody.ContainsKey(item._profilName))
+                {
+                    try
+                    {
+                        info = info.Replace("<st_prof>", item._kolikoProfilovVVisino.ToString());
+                        info = info.Replace("<posamezna_dolzina>", item._dolzinaProfilov.ToString("0.00"));
+                        info = info.Replace("<visina>", (item._visina * 100).ToString("0.00"));
+                        info = info.Replace("<razmak>", item._razmakMedProfili.ToString("0.00"));
+                    }
+                    catch (Exception e) { }
+                    //allInfoText.Add(info);
+                    mainBody[item._profilName] += info + "\n\n";
+
+                }
             }
 
-            float cena_brez_in_popust = cena_brez * ((100 - int.Parse(numericUpDown1.Text)) * 0.01f);
+            stebri = stebri.Remove(stebri.Length - 5);
+            visina = visina / st_stebrov;
+            
 
-            Dictionary<string, string> dict = new Dictionary<string, string> {  {"<ime>", imeInPriimekTb.Text},
-                                                                                {"<naslov>",  naslovTb.Text},
+            //reference slik
+            JArray jsonReferenc = JArray.Parse(File.ReadAllText("referenceSlikString.json"));
+            List<string> temp = new List<string>();
+            foreach (JObject obj in jsonReferenc.Children<JObject>())
+            {
+                foreach (JProperty singleProp in obj.Properties())
+                {
+                    string value = singleProp.Value.ToString();
+                    temp.Add(value);
+                }
+            }
+
+            //reference za SD-8006P = temp[0];
+            //reference za ostale = temp[1];
+
+            string ref_slik = "";
+            if (model_ograj.Contains("SD-8006P")) {
+                if(model_ograj.Contains("SD-8006A") || model_ograj.Contains("SD-8006B") || model_ograj.Contains("SD-7006"))
+                {
+                    ref_slik = temp[0] + "  ter  " + temp[1];
+                }
+                else
+                {
+                    ref_slik = temp[0];
+                }             
+            }
+            else
+            {
+                ref_slik = temp[1];
+            }
+
+            //open text file and read it
+            str = (model_ograj.Contains("SD-8006P")) ? File.ReadAllText(System.AppDomain.CurrentDomain.BaseDirectory + "SD-8006PinfoTemplate.txt") :
+                File.ReadAllText(System.AppDomain.CurrentDomain.BaseDirectory + "OtherProfilesinfoTemplate.txt");
+
+            float cena_brez_in_popust = cena_brez * ((100 - int.Parse(numericUpDown1.Text)) * 0.01f);
+            string kolPopustString = "";
+            int kol_popust = 0;
+            switch (dolzina)
+            {
+                case var expression when dolzina < 20:
+                    kol_popust = 0;
+                    break;
+                case var expression when (dolzina >= 20 && dolzina < 30):
+                    kol_popust = 2;
+                    break;
+                case var expression when (dolzina >= 30 && dolzina < 40):
+                    kol_popust = 3;
+                    break;
+                case var expression when (dolzina >= 40 && dolzina < 50):
+                    kol_popust = 4;
+                    break;
+
+                default:
+                    kol_popust = 5;
+                    break;
+            }
+            if(kol_popust == 0)
+            {
+                kolPopustString = "";
+            }
+            else
+            {
+                kolPopustString = "Glede na količino  ( L = " + dolzina + "m ), vam na omenjeni znesek nudimo dodatno še " + kol_popust + "% popusta  ( količisnki popust ).";
+            }
+            
+
+            Dictionary<string, string> dict = new Dictionary<string, string> {  {"<opis>", str },
+                                                                                {"<kol_popust>", kolPopustString },
+                                                                                {"<info>",   string.Join("\n", mainBody.Values.ToArray())},
+                                                                                {"<ime>", imeInPriimekTb.Text},
+                                                                                {"<naslov>",  naslov},
                                                                                 {"<st.ponudbe>", stPonudbeTb.Text },
                                                                                 {"<datum>", date },
-                                                                                {"<model_ograje>", _itemsOnSecondTab[0]._profilName},
-                                                                                {"<st_prof>", _itemsOnSecondTab[0]._kolikoProfilovVVisino.ToString() },
                                                                                 {"<dolzina>",  dolzina.ToString(".00")},
-                                                                                {"<visina>", (_itemsOnSecondTab[0]._visina * 100).ToString(".00") },
+                                                                                {"<visina>", (visina * 100).ToString(".00") },
                                                                                 {"<cena_z>", cena_z.ToString(".00") },
-                                                                                {"<dim>", (dim * 1000).ToString() },
                                                                                 {"<cena_brez>", cena_brez.ToString(".00") },
                                                                                 {"<popust_brez>", numericUpDown1.Text},
-                                                                                {"<cena_brez_in_popust>",  cena_brez_in_popust.ToString(".00")} };
+                                                                                {"<cena_brez_in_popust>",  cena_brez_in_popust.ToString(".00")},
+                                                                                {"<stebri>", stebri},
+                                                                                {"<ref_slik>", ref_slik },
+                                                                                {"<mozni_modeli>", modeli_ograj } };
 
             foreach (var item in dict)
             {
-                FindAndReplace(word, item.Key,item.Value);
+                FindAndReplace(word, item.Key,item.Value, workDocument);
             }
 
         }
-        private void FindAndReplace(Microsoft.Office.Interop.Word.Application doc, object findText, object replaceWithText)
+        private void FindAndReplace(Microsoft.Office.Interop.Word.Application doc, object findText, object replaceWithText, Document workDocument)
         {
             //options
             object matchCase = false;
@@ -94,9 +221,20 @@ namespace GivosCalc
             object replace = 2;
             object wrap = 1;
             //execute find and replace
-            doc.Selection.Find.Execute(ref findText, ref matchCase, ref matchWholeWord,
-                ref matchWildCards, ref matchSoundsLike, ref matchAllWordForms, ref forward, ref wrap, ref format, ref replaceWithText, ref replace,
-                ref matchKashida, ref matchDiacritics, ref matchAlefHamza, ref matchControl);
+
+            try
+            {
+                doc.Selection.Find.Execute(ref findText, ref matchCase, ref matchWholeWord,
+                    ref matchWildCards, ref matchSoundsLike, ref matchAllWordForms, ref forward, ref wrap, ref format, ref replaceWithText, ref replace,
+                    ref matchKashida, ref matchDiacritics, ref matchAlefHamza, ref matchControl);
+            }
+            catch(Exception e)
+            {
+                Range range = workDocument.Content;
+                range.Find.Execute(findText);
+                range.Text = replaceWithText.ToString();
+            }
+
         }
     }
 }

@@ -1,0 +1,3 @@
+       •     <st_prof> – ih vodoravnih pozicijah brez vmesnih razmakov na skupni dolžini L = <posamezna_dolzina>m in tvorijo
+             zaprto ograjno polje ( se ne vidi skozi - ALU profili se med seboj prekrivajo ). Višina ograje
+             ( merjeno od vrha betonske škarpe in do vrha ALU ograje )  je  V = cca  <visina>cm.

@@ -1,0 +1,1 @@
+ALU  ograjni profili  z oznako <model_ograje> kateri so v prerezu dim. <dim>x14mm. Omenjeni profili se med ALU stebre ( v utore stebrov ) vstavljajo v :
