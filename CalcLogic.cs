@@ -113,6 +113,44 @@ namespace GivosCalc
             float stVijakov;
             int stStebrov = stebri.Item1 + 1;
 
+
+            JArray jsonCeneZaSteber = JArray.Parse(File.ReadAllText("CeneStebri.json"));
+            List<float> temp = new List<float>();
+            foreach (JObject itm in jsonCeneZaSteber.Children<JObject>())
+            {
+                foreach (JProperty singleProp in itm.Properties())
+                {
+                    float value = float.Parse(singleProp.Value.ToString());
+                    temp.Add(value);
+                }
+            }
+
+            Cene cene = new Cene(temp[10], temp[11]);
+            float cenaPokrovaZaRocaj = cene._pokrovZaRocaj;
+            float rocaj = cene._rocaj;
+
+
+            //vrsta ograje
+            TabControl tab = Application.OpenForms["Form1"].Controls["tabControl1"] as TabControl;
+            var naBok = tab.SelectedTab.Controls["groupBox3"];
+            RadioButton isNaVrh = (RadioButton)naBok.Controls["naVrhRb"];
+            RadioButton isNaBok = (RadioButton)naBok.Controls["naBokRb"];
+            RadioButton isVrtna = (RadioButton)naBok.Controls["vrtnaRb"];
+            string vrstaOgraje = "";
+            if (isVrtna.Checked) { vrstaOgraje = isVrtna.Text; }
+            if (isNaBok.Checked) { vrstaOgraje = isNaBok.Text; }
+            if (isNaVrh.Checked) { vrstaOgraje = isNaVrh.Text; }
+
+            //st pokrovov pri rocaju
+            NumericUpDown pokrovi = (NumericUpDown)tab.SelectedTab.Controls["pokrovUpDown"];
+            float stRocajPokrovov = (float)pokrovi.Value;
+            float cenaRocaja;
+            if (isNaBok.Checked || isNaVrh.Checked)
+            {
+                 cenaRocaja = cenaPokrovaZaRocaj * stRocajPokrovov + dolzina * rocaj;
+            }
+            else { cenaRocaja = 0; }         
+
             razmak = (visina - 0.04f - prib * width) / prib;
             stVijakov = prib * stebri.Item1 * 4;
             cenaVijakov = stVijakov * cenaSrauba;
@@ -127,8 +165,8 @@ namespace GivosCalc
             {
                 razrez = 0;
             }
-            cenaBrezMontaze = Math.Round((prib * obj._price * dolzina + cenaVijakov / 2 + stebri.Item3 + razrez), 2);
-            cenaZMontazo = Math.Round((prib * obj._price * dolzina + cenaVijakov + stebri.Item2 + cenaPrevoza + dolzina * montaza), 2);
+            cenaBrezMontaze = Math.Round((prib * obj._price * dolzina + cenaVijakov / 2 + stebri.Item3 + razrez + cenaRocaja), 2);
+            cenaZMontazo = Math.Round((prib * obj._price * dolzina + cenaVijakov + stebri.Item2 + cenaPrevoza + dolzina * montaza + cenaRocaja), 2);
             pisiRazmak = (Math.Round(razmak * 100, 3));
             string predznak = "";
             if (pisiRazmak >= 0)
@@ -147,7 +185,7 @@ namespace GivosCalc
             list.Add(res);
             items.Add(new Item(selectedProfil, dolzina, Math.Round(razmak * 100, 3), res, cenaLetvic, cenaVijakov, cenaPrevoza,
                     stebri.Item3, (float)cenaBrezMontaze, stebri.Item2, (float)cenaZMontazo, stStebrov, dolzina * prib,
-                    stVijakov, visina, prib));
+                    stVijakov, visina, prib, vrstaOgraje, stRocajPokrovov));
             return razmak;
  
         }
@@ -217,6 +255,11 @@ namespace GivosCalc
             var dolzinaTb = tab.SelectedTab.Controls["dolzinaTb"];
             var razmakStebriTb = tab.SelectedTab.Controls["razmakStebriTb"];
             var visinaTb = tab.SelectedTab.Controls["visinaTb"];
+            var naBok = tab.SelectedTab.Controls["groupBox3"];
+            RadioButton isNaVrh = (RadioButton)naBok.Controls["naVrhRb"];
+            RadioButton isNaBok = (RadioButton)naBok.Controls["naBokRb"];
+            
+            
    
             int koncnoStebrov;
             float dolzina;
@@ -286,6 +329,17 @@ namespace GivosCalc
             float kateriNosilec = (visina >= 1.5f) ? cene._dolgNosilec : cene._kratekNosilec;
             float skupnaCenaNaVseStebreZmontaze = koncnoStebrov * (kateriNosilec + (cene._cenaStebraNaMeter * visina) + cene._rozeta  + cene._pokrov + cene._lepilo + cene._montazaStebra);
             float skupnaCenaNaVseStebreBrezmontaze = koncnoStebrov * (kateriNosilec + (cene._cenaStebraNaMeter * visina) + cene._rozeta + cene._pokrov);
+
+               if (isNaBok.Checked) 
+            {
+                skupnaCenaNaVseStebreZmontaze = koncnoStebrov * (kateriNosilec + (cene._cenaStebraNaMeter * visina) + cene._pokrov + cene._lepilo + cene._montazaStebra);
+                skupnaCenaNaVseStebreBrezmontaze = koncnoStebrov * (kateriNosilec + (cene._cenaStebraNaMeter * visina) + cene._pokrov);
+            }
+            if (isNaVrh.Checked)
+            {
+                skupnaCenaNaVseStebreZmontaze = koncnoStebrov * (kateriNosilec + (cene._cenaStebraNaMeter * visina) + cene._lepilo + cene._rozeta + cene._montazaStebra);
+                skupnaCenaNaVseStebreBrezmontaze = koncnoStebrov * (kateriNosilec + (cene._cenaStebraNaMeter * visina)+ cene._rozeta);
+            }
 
             var res = (razmaki: koncnoStebrov - 1, cenaZmontazo: skupnaCenaNaVseStebreZmontaze, cenaBrezMontaze: skupnaCenaNaVseStebreBrezmontaze);
             return res;

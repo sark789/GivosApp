@@ -97,9 +97,29 @@ namespace GivosCalc
             }
 
         }
+        private void dolzinaTbNoMinus_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) &&
+                (e.KeyChar != ','))
+            {
+                e.Handled = true;
+            }
+
+            // only allow one decimal point
+            if ((e.KeyChar == ',') && ((sender as TextBox).Text.IndexOf(',') > -1))
+            {
+                e.Handled = true;
+            }
+        }
+
+
         private void izracunajBtn_Click(object sender, EventArgs e)
         {
             CalcLogic calc = new CalcLogic();
+            var acc = calc.racunStebrov(radioButton1, radioButton2, radioButton3, radioButton4);
+            razmaki = acc.Item1;
+            cenaStebrovZMontazo = acc.Item2;
+            cenaStebrovBrezMontaze = acc.Item3;
             (List<Item>, List<string>) result = (_items, _stringToWriteOnSecondTab);
             result = calc.Izracun(vodoravniProfili ,profilCb.SelectedItem.ToString(), float.Parse(dolzinaTb.Text), 
                 float.Parse(visinaTb.Text),
@@ -119,6 +139,10 @@ namespace GivosCalc
             radioButton2.Visible = false;
             radioButton3.Visible = false;
             radioButton4.Visible = false;
+            radioButton1.Checked = false;
+            radioButton2.Checked = false;
+            radioButton3.Checked = false;
+            radioButton4.Checked = false;
 
             razmaki = 0;
             cenaStebrovZMontazo = 0;
@@ -313,7 +337,7 @@ namespace GivosCalc
 
             Dictionary<dynamic, Label> dict = new Dictionary<dynamic, Label> { { cenaLetvicLb, label11}, { CenaLetvic2Lb, label27 }, { vijakiBrezLb, label13 }, { VijakiZLb, label25 },
                                                                            { stebriBrezLb, label18}, { StebriZLb, label28 }, { PrevozZLb, label16 }, { SkupnaBrezLb, label20 }, { SkupnaZLb, label14 },
-                                                                           { razrezLb, label24 }, { montazaLb, label26}};
+                                                                           { razrezLb, label24 }, { montazaLb, label26}, { rocajBrezLb, label35},{ rocajLb, label34} };
 
             JArray jsonCeneZaSteber = JArray.Parse(File.ReadAllText("CeneStebri.json"));
             List<float> temp = new List<float>();
@@ -328,6 +352,7 @@ namespace GivosCalc
             }
 
             Cene cene1 = new Cene(temp[6], temp[7], temp[9]);
+            Cene cene2 = new Cene(temp[10], temp[11]);
             float cenaMontaze = cene1._montaza;
             float cenaRazreza = cene1._razrez;
 
@@ -340,8 +365,10 @@ namespace GivosCalc
             float skupnaZ = 0;
             float montaza = 0;
             float razrez = 0;
+            float rocaj = 0;
             int i = 0;
-          
+            TabControl tab = Application.OpenForms["Form1"].Controls["tabControl1"] as TabControl;
+            string vrtna = tab.TabPages[0].Controls["groupBox3"].Controls["vrtnaRb"].Text;
 
             foreach (var item in dict)
             {
@@ -361,10 +388,14 @@ namespace GivosCalc
                     skupnaZ += item._cenaSkupajZMontazo;
                     montaza += item._dolzinaProfilov * cenaMontaze;
                     razrez += item._kolikoProfilovVVisino * item._stStebrov * cenaRazreza;
+                    if(item._vrstaOgraje != vrtna)
+                    {
+                        rocaj = item._stRocajPokrovov * cene2._pokrovZaRocaj + item._dolzinaProfilov * cene2._rocaj;
+                    }
 
                 }
-                List<float> cene = new List<float> { cenaLetvic, cenaLetvic, cenaVijakov / 2, cenaVijakov, stebriBrez, StebriZ ,
-                                                     prevoz, skupnaBrez, skupnaZ, razrez, montaza};
+                List<float> cene = new List<float> { cenaLetvic, cenaLetvic, cenaVijakov / 2, cenaVijakov, stebriBrez, StebriZ,
+                                                     prevoz, skupnaBrez, skupnaZ, razrez, montaza, rocaj, rocaj,};
 
                 foreach(var item in dict)
                 {
@@ -472,6 +503,51 @@ namespace GivosCalc
                 path = Path.GetFullPath(saveFileDialog1.FileName);
                 WordHandler handler = new WordHandler();
                 handler.SaveAndOpenWord("wordTemplate.doc", path, _itemsOnSecondTab, vodoravniProfili);
+            }
+        }
+
+        private void vrtnaRb_CheckedChanged(object sender, EventArgs e)
+        {
+            if(naBokRb.Checked || naVrhRb.Checked)
+            {
+                pokrovLb.Visible = false;
+                pokrovUpDown.Value = 0;
+                pokrovUpDown.Enabled = false;
+                pokrovUpDown.Visible = false;
+            }
+        }
+
+        private void naVrhRb_CheckedChanged(object sender, EventArgs e)
+        {
+            if (naBokRb.Checked || naVrhRb.Checked)
+            {
+                pokrovLb.Visible = true;
+                pokrovUpDown.Enabled = true;
+                pokrovUpDown.Visible = true;
+            }
+            else
+            {
+                pokrovLb.Visible = false;
+                pokrovUpDown.Value = 0;
+                pokrovUpDown.Enabled = false;
+                pokrovUpDown.Visible = false;
+            }
+        }
+
+        private void naBokRb_CheckedChanged(object sender, EventArgs e)
+        {
+            if (naBokRb.Checked || naVrhRb.Checked)
+            {
+                pokrovLb.Visible = true;
+                pokrovUpDown.Enabled = true;
+                pokrovUpDown.Visible = true;
+            }
+            else
+            {
+                pokrovLb.Visible = false;
+                pokrovUpDown.Value = 0;
+                pokrovUpDown.Enabled = false;
+                pokrovUpDown.Visible = false;
             }
         }
     }

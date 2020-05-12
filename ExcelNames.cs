@@ -27,6 +27,10 @@ namespace GivosCalc
         public float popustZMontazo;
         public float popustBrezMontaze;
         public float razrez;
+        public float pokrovckiNaStebru;
+        public float pokrovRocaj;
+        public float rocaj;
+        public float rozeta;
 
 
         public ExcelNames(List<Item> _itemsOnSecondTab)
@@ -35,6 +39,9 @@ namespace GivosCalc
             TabControl tab = Application.OpenForms["Form1"].Controls["tabControl1"] as TabControl;
             var popustBrezMontaze2 = tab.SelectedTab.Controls["numericUpDown1"];
             var popustZMontazo2 = tab.SelectedTab.Controls["numericUpDown2"];
+            string naVrh = tab.TabPages[0].Controls["groupBox3"].Controls["naVrhRb"].Text;
+            string naBok = tab.TabPages[0].Controls["groupBox3"].Controls["naBokRb"].Text;
+
 
             foreach (var item in _itemsOnSecondTab)
             {
@@ -55,7 +62,11 @@ namespace GivosCalc
                 }
 
                 this.cenaStebrovNaMeter += item._stStebrov * item._visina;
+                this.pokrovckiNaStebru += item._stStebrov;
                 this.stStebrov += item._stStebrov;
+                this.rozeta += item._stStebrov;
+
+
                 this.stStebrovBolcni = item._stStebrov;
                 var k = (item._visina >= 1.5f) ? this.stVelikiNosilec += stStebrovBolcni : this.stMaliNosilec += stStebrovBolcni;
 
@@ -69,6 +80,20 @@ namespace GivosCalc
                 this.prevoz += item._cenaPrevoza;
 
                 this.letvica += item._profilName + " št. v višino: " + item._kolikoProfilovVVisino + "  /  ";
+
+                if(item._vrstaOgraje == naVrh)
+                {
+                    this.pokrovckiNaStebru -= item._stStebrov;
+                    this.pokrovRocaj += item._stRocajPokrovov;
+                    this.rocaj += item._dolzinaProfilov;
+                }
+
+                if (item._vrstaOgraje == naBok)
+                {
+                    this.rozeta -= item._stStebrov;
+                    this.pokrovRocaj += item._stRocajPokrovov;
+                    this.rocaj += item._dolzinaProfilov;
+                }
 
             }
 
@@ -110,8 +135,8 @@ namespace GivosCalc
                 {"SD-8006 B", sdB },
                 {"SD-7006",  sd7006},
                 {"SD-8005A", cenaStebrovNaMeter},
-                { "SD-8002 N", stStebrov },
-                { "SD8013 N", stStebrov },
+                { "SD-8002 N", rozeta },
+                { "SD8013 N", pokrovckiNaStebru },
                 { "SD-5003M", stMaliNosilec },
                 { "SD-5003V", stVelikiNosilec },
                 {"MONTAZA", montaza },
@@ -122,7 +147,9 @@ namespace GivosCalc
                 {"DATUM :",date },
                 {"STRANKA :", strankaInfo },
                 {"LETVICA :", letvica},
-                {"POPUST", popustZMontazo }
+                {"POPUST", popustZMontazo },
+                {"P802", rocaj },
+                {"POKROV", pokrovRocaj }
             };
             return dict;
         }
@@ -136,8 +163,8 @@ namespace GivosCalc
                 {"SD-8006 B", sdB },
                 {"SD-7006",  sd7006},
                 {"SD-8005A", cenaStebrovNaMeter},
-                { "SD-8002 N", stStebrov },
-                { "SD8013 N", stStebrov },
+                { "SD-8002 N", rozeta },
+                { "SD8013 N", pokrovckiNaStebru },
                 { "SD-5003M", stMaliNosilec },
                 { "SD-5003V", stVelikiNosilec },
                 {"MONTAZA", 0 },
@@ -149,7 +176,9 @@ namespace GivosCalc
                 {"STRANKA :", strankaInfo },
                 {"LETVICA :", letvica},
                 {"POPUST", popustBrezMontaze },
-                {"RAZREZ", razrez }
+                {"RAZREZ", razrez },
+                {"P802", rocaj },
+                {"POKROV", pokrovRocaj }
             };
             return dict;
         }

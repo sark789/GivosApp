@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -78,7 +79,7 @@ namespace GivosCalc
                 string predInfo = File.ReadAllText(System.AppDomain.CurrentDomain.BaseDirectory + "predInfo.txt");
                 predInfo = predInfo.Replace("<model_ograje>", item);
                 predInfo = predInfo.Replace("<dim>", (dim * 1000).ToString());
-                mainBody.Add(item, predInfo + "\n\n");
+                mainBody.Add(item, predInfo + "\n\n\n");
             }
 
 
@@ -87,6 +88,7 @@ namespace GivosCalc
                 dolzina += item._dolzinaProfilov;
                 cena_z += item._cenaSkupajZMontazo;
                 cena_brez += item._cenaSkupajBrezMontaze;
+                st_stebrov += item._stStebrov;
                 stebri += item._stStebrov + " kos  x  V = " + (item._visina * 100).ToString("0.00") + "cm" + "  +  ";
                 visina += item._stStebrov * item._visina;
                 
@@ -175,7 +177,7 @@ namespace GivosCalc
             }
             else
             {
-                kolPopustString = "Glede na količino  ( L = " + dolzina + "m ), vam na omenjeni znesek nudimo dodatno še " + kol_popust + "% popusta  ( količisnki popust ).";
+                kolPopustString = "Glede na količino  ( L = " + dolzina + "m ), vam na omenjeni znesek nudimo dodatno še " + kol_popust + "% popusta  ( količinski popust ).";
             }
             
 
@@ -188,10 +190,10 @@ namespace GivosCalc
                                                                                 {"<datum>", date },
                                                                                 {"<dolzina>",  dolzina.ToString(".00")},
                                                                                 {"<visina>", (visina * 100).ToString(".00") },
-                                                                                {"<cena_z>", cena_z.ToString(".00") },
-                                                                                {"<cena_brez>", cena_brez.ToString(".00") },
+                                                                                {"<cena_z>", cena_z.ToString("N",new CultureInfo("is-IS")) },
+                                                                                {"<cena_brez>", cena_brez.ToString("N",new CultureInfo("is-IS")) },
                                                                                 {"<popust_brez>", numericUpDown1.Text},
-                                                                                {"<cena_brez_in_popust>",  cena_brez_in_popust.ToString(".00")},
+                                                                                {"<cena_brez_in_popust>",  cena_brez_in_popust.ToString("N",new CultureInfo("is-IS"))},
                                                                                 {"<stebri>", stebri},
                                                                                 {"<ref_slik>", ref_slik },
                                                                                 {"<mozni_modeli>", modeli_ograj } };
