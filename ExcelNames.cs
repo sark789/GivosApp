@@ -31,6 +31,7 @@ namespace GivosCalc
         public float pokrovRocaj;
         public float rocaj;
         public float rozeta;
+        public float lprofil;
 
 
         public ExcelNames(List<Item> _itemsOnSecondTab)
@@ -45,20 +46,47 @@ namespace GivosCalc
 
             foreach (var item in _itemsOnSecondTab)
             {
-                switch (item._profilName)
+                if (!item._isKombinirana)
                 {
-                    case "SD-8006P":
-                        this.sdP += item._celotnaDolzinaProfilov;
-                        break;
-                    case "SD-8006A":
-                        this.sdA += item._celotnaDolzinaProfilov;
-                        break;
-                    case "SD-8006B":
-                        this.sdB += item._celotnaDolzinaProfilov;
-                        break;
-                    case "SD-7006":
-                        this.sd7006 += item._celotnaDolzinaProfilov;
-                        break;
+                    switch (item._profilName)
+                    {
+                        case "SD-8006P":
+                            this.sdP += item._celotnaDolzinaProfilov;
+                            break;
+                        case "SD-8006A":
+                            this.sdA += item._celotnaDolzinaProfilov;
+                            break;
+                        case "SD-8006B":
+                            this.sdB += item._celotnaDolzinaProfilov;
+                            break;
+                        case "SD-7006":
+                            this.sd7006 += item._celotnaDolzinaProfilov;
+                            break;
+                    }
+                }
+                else
+                {
+                    this.letvica += "Komb.:";
+                    foreach(var komb in item._dict)
+                    {
+                        switch (komb.Key._name)
+                        {
+                            case "SD-8006P":
+                                this.sdP += komb.Value * item._dolzinaProfilov;
+                                break;
+                            case "SD-8006A":
+                                this.sdA += komb.Value * item._dolzinaProfilov;
+                                break;
+                            case "SD-8006B":
+                                this.sdB += komb.Value * item._dolzinaProfilov;
+                                break;
+                            case "SD-7006":
+                                this.sd7006 += komb.Value * item._dolzinaProfilov;
+                                break;
+                        }
+                        this.letvica += " " +komb.Key._name + " x" + komb.Value + ",";
+                    }
+                    this.letvica += " /  ";
                 }
 
                 this.cenaStebrovNaMeter += item._stStebrov * item._visina;
@@ -78,8 +106,10 @@ namespace GivosCalc
                 this.vijaki += item._stVijakovPriMontazi;
 
                 this.prevoz += item._cenaPrevoza;
-
-                this.letvica += item._profilName + " št. v višino: " + item._kolikoProfilovVVisino + "  /  ";
+                if (!item._isKombinirana)
+                {
+                    this.letvica += item._profilName + " x" + item._kolikoProfilovVVisino + "  /  ";
+                }
 
                 if(item._vrstaOgraje == naVrh)
                 {
@@ -93,6 +123,7 @@ namespace GivosCalc
                     this.rozeta -= item._stStebrov;
                     this.pokrovRocaj += item._stRocajPokrovov;
                     this.rocaj += item._dolzinaProfilov;
+                    this.lprofil += 4 * item._visina;
                 }
 
             }
@@ -149,7 +180,8 @@ namespace GivosCalc
                 {"LETVICA :", letvica},
                 {"POPUST", popustZMontazo },
                 {"P802", rocaj },
-                {"POKROV", pokrovRocaj }
+                {"POKROV", pokrovRocaj },
+                {"LPROFIL",lprofil }
             };
             return dict;
         }
@@ -178,7 +210,8 @@ namespace GivosCalc
                 {"POPUST", popustBrezMontaze },
                 {"RAZREZ", razrez },
                 {"P802", rocaj },
-                {"POKROV", pokrovRocaj }
+                {"POKROV", pokrovRocaj },
+                {"LPROFIL",lprofil }
             };
             return dict;
         }

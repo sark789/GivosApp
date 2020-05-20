@@ -21,6 +21,7 @@ namespace GivosCalc
         float cenaStebrovZMontazo;
         float cenaStebrovBrezMontaze;
         bool isDolgiNosilec;
+        bool isKombinirana = false;
         float _skupnaBrez;
         float _skupnaZ;
         List<Item> _items = new List<Item>();
@@ -50,6 +51,9 @@ namespace GivosCalc
             float capPrice, price, width;
 
             this.profilCb.DropDownStyle = ComboBoxStyle.DropDownList; //disabling writing in cb
+            this.profilCb2.DropDownStyle = ComboBoxStyle.DropDownList;
+            this.profilCb3.DropDownStyle = ComboBoxStyle.DropDownList;
+            this.profilCb4.DropDownStyle = ComboBoxStyle.DropDownList;
             //this.dolzinaTb.
 
             foreach (JObject obj in jsonProfili.Children<JObject>())
@@ -115,6 +119,7 @@ namespace GivosCalc
 
         private void izracunajBtn_Click(object sender, EventArgs e)
         {
+
             CalcLogic calc = new CalcLogic();
             var acc = calc.racunStebrov(radioButton1, radioButton2, radioButton3, radioButton4);
             razmaki = acc.Item1;
@@ -125,7 +130,7 @@ namespace GivosCalc
                 float.Parse(visinaTb.Text),
                 float.Parse(razmakSpodnjiTb.Text), 
                 float.Parse(razmakZgornjiTb.Text),
-                listBox1, (razmaki,cenaStebrovZMontazo, cenaStebrovBrezMontaze));
+                listBox1, (razmaki,cenaStebrovZMontazo, cenaStebrovBrezMontaze), isKombinirana);
                 dodajVKosaricoBtn.Enabled = true;
             _items = result.Item1;
             _stringToWriteOnSecondTab = result.Item2;           
@@ -352,7 +357,7 @@ namespace GivosCalc
             }
 
             Cene cene1 = new Cene(temp[6], temp[7], temp[9]);
-            Cene cene2 = new Cene(temp[10], temp[11]);
+            Cene cene2 = new Cene(temp[10], temp[11], temp[12],temp[13]);
             float cenaMontaze = cene1._montaza;
             float cenaRazreza = cene1._razrez;
 
@@ -367,8 +372,9 @@ namespace GivosCalc
             float razrez = 0;
             float rocaj = 0;
             int i = 0;
-            TabControl tab = Application.OpenForms["Form1"].Controls["tabControl1"] as TabControl;
-            string vrtna = tab.TabPages[0].Controls["groupBox3"].Controls["vrtnaRb"].Text;
+            TabControl tab = Application.OpenForms["Form1"].Controls["tabControl1"] as TabControl;           
+            string naVrh = tab.TabPages[0].Controls["groupBox3"].Controls["naVrhRb"].Text;
+            string naBok = tab.TabPages[0].Controls["groupBox3"].Controls["naBokRb"].Text;
 
             foreach (var item in dict)
             {
@@ -388,12 +394,16 @@ namespace GivosCalc
                     skupnaZ += item._cenaSkupajZMontazo;
                     montaza += item._dolzinaProfilov * cenaMontaze;
                     razrez += item._kolikoProfilovVVisino * item._stStebrov * cenaRazreza;
-                    if(item._vrstaOgraje != vrtna)
+                    if(item._vrstaOgraje == naVrh)
                     {
                         rocaj = item._stRocajPokrovov * cene2._pokrovZaRocaj + item._dolzinaProfilov * cene2._rocaj;
                     }
+                    if (item._vrstaOgraje == naBok)
+                    {
+                        rocaj = item._stRocajPokrovov * cene2._pokrovZaRocaj + item._dolzinaProfilov * cene2._rocaj + 4*item._visina*cene2._lprofil;
+                    }
 
-                }
+            }
                 List<float> cene = new List<float> { cenaLetvic, cenaLetvic, cenaVijakov / 2, cenaVijakov, stebriBrez, StebriZ,
                                                      prevoz, skupnaBrez, skupnaZ, razrez, montaza, rocaj, rocaj,};
 
@@ -549,6 +559,83 @@ namespace GivosCalc
                 pokrovUpDown.Enabled = false;
                 pokrovUpDown.Visible = false;
             }
+        }
+
+        private void enostavnaRb_CheckedChanged(object sender, EventArgs e)
+        {
+            profilCb2.Visible = false;
+            label36.Visible = false;
+            profilCb3.Visible = false;
+            label37.Visible = false;
+            profilCb4.Visible = false;
+            label38.Visible = false;
+
+            label39.Visible = false;
+            label40.Visible = false;
+            label41.Visible = false;
+            label42.Visible = false;
+
+            numericUpDown3.Value = 0;
+            numericUpDown3.Enabled = false;
+            numericUpDown3.Visible = false;
+            numericUpDown4.Value = 0;
+            numericUpDown4.Enabled = false;
+            numericUpDown4.Visible = false;
+            numericUpDown5.Value = 0;
+            numericUpDown5.Enabled = false;
+            numericUpDown5.Visible = false;
+            numericUpDown6.Value = 0;
+            numericUpDown6.Enabled = false;
+            numericUpDown6.Visible = false;
+
+            profilCb.Items.Clear();
+            AddProfilsToComboBox(profilCb, vodoravniProfili._profili);
+
+            isKombinirana = false;
+        }
+
+        private void kombiniranaRb_CheckedChanged(object sender, EventArgs e)
+        {
+            profilCb.Visible = true;
+            label1.Visible = true;
+            profilCb.Items.Clear();
+            profilCb.Items.Add(vodoravniProfili._profili.ElementAt(0)._name);
+            profilCb.SelectedIndex = 0;
+
+            profilCb2.Visible = true;
+            label36.Visible = true;
+            profilCb2.Items.Clear();
+            profilCb2.Items.Add(vodoravniProfili._profili.ElementAt(1)._name);
+            profilCb2.SelectedIndex = 0;
+
+            profilCb3.Visible = true;
+            label37.Visible = true;
+            profilCb3.Items.Clear();
+            profilCb3.Items.Add(vodoravniProfili._profili.ElementAt(2)._name);
+            profilCb3.SelectedIndex = 0;
+
+            profilCb4.Visible = true;
+            label38.Visible = true;
+            profilCb4.Items.Clear();
+            profilCb4.Items.Add(vodoravniProfili._profili.ElementAt(3)._name);
+            profilCb4.SelectedIndex = 0;
+
+            //
+            label39.Visible = true;
+            label40.Visible = true;
+            label41.Visible = true;
+            label42.Visible = true;
+
+            numericUpDown3.Enabled = true;
+            numericUpDown3.Visible = true;
+            numericUpDown4.Enabled = true;
+            numericUpDown4.Visible = true;
+            numericUpDown5.Enabled = true;
+            numericUpDown5.Visible = true;
+            numericUpDown6.Enabled = true;
+            numericUpDown6.Visible = true;
+
+            isKombinirana = true;
         }
     }
 }

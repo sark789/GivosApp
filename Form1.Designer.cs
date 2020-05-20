@@ -59,6 +59,8 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.pokrovUpDown = new System.Windows.Forms.NumericUpDown();
+            this.pokrovLb = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.naBokRb = new System.Windows.Forms.RadioButton();
             this.naVrhRb = new System.Windows.Forms.RadioButton();
@@ -66,6 +68,10 @@
             this.label33 = new System.Windows.Forms.Label();
             this.dodanoLb = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.label35 = new System.Windows.Forms.Label();
+            this.rocajBrezLb = new System.Windows.Forms.Label();
+            this.label34 = new System.Windows.Forms.Label();
+            this.rocajLb = new System.Windows.Forms.Label();
             this.stPonudbeTb = new System.Windows.Forms.TextBox();
             this.label32 = new System.Windows.Forms.Label();
             this.shraniWordBtn = new System.Windows.Forms.Button();
@@ -111,22 +117,38 @@
             this.zbrisiVseVnoseBtn = new System.Windows.Forms.Button();
             this.zbrisiVnosBtn = new System.Windows.Forms.Button();
             this.listBox2 = new System.Windows.Forms.ListBox();
-            this.pokrovLb = new System.Windows.Forms.Label();
-            this.pokrovUpDown = new System.Windows.Forms.NumericUpDown();
-            this.label34 = new System.Windows.Forms.Label();
-            this.rocajLb = new System.Windows.Forms.Label();
-            this.label35 = new System.Windows.Forms.Label();
-            this.rocajBrezLb = new System.Windows.Forms.Label();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.kombiniranaRb = new System.Windows.Forms.RadioButton();
+            this.enostavnaRb = new System.Windows.Forms.RadioButton();
+            this.profilCb2 = new System.Windows.Forms.ComboBox();
+            this.label36 = new System.Windows.Forms.Label();
+            this.profilCb3 = new System.Windows.Forms.ComboBox();
+            this.label37 = new System.Windows.Forms.Label();
+            this.profilCb4 = new System.Windows.Forms.ComboBox();
+            this.label38 = new System.Windows.Forms.Label();
+            this.label39 = new System.Windows.Forms.Label();
+            this.numericUpDown3 = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDown4 = new System.Windows.Forms.NumericUpDown();
+            this.label40 = new System.Windows.Forms.Label();
+            this.numericUpDown5 = new System.Windows.Forms.NumericUpDown();
+            this.label41 = new System.Windows.Forms.Label();
+            this.numericUpDown6 = new System.Windows.Forms.NumericUpDown();
+            this.label42 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pokrovUpDown)).BeginInit();
             this.groupBox3.SuspendLayout();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pokrovUpDown)).BeginInit();
+            this.groupBox4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown6)).BeginInit();
             this.SuspendLayout();
             // 
             // listBox1
@@ -135,7 +157,7 @@
             this.listBox1.FormattingEnabled = true;
             this.listBox1.HorizontalScrollbar = true;
             this.listBox1.ItemHeight = 19;
-            this.listBox1.Location = new System.Drawing.Point(20, 427);
+            this.listBox1.Location = new System.Drawing.Point(22, 484);
             this.listBox1.Name = "listBox1";
             this.listBox1.Size = new System.Drawing.Size(1452, 213);
             this.listBox1.TabIndex = 14;
@@ -143,7 +165,7 @@
             // dodajVKosaricoBtn
             // 
             this.dodajVKosaricoBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
-            this.dodajVKosaricoBtn.Location = new System.Drawing.Point(681, 695);
+            this.dodajVKosaricoBtn.Location = new System.Drawing.Point(683, 752);
             this.dodajVKosaricoBtn.Name = "dodajVKosaricoBtn";
             this.dodajVKosaricoBtn.Size = new System.Drawing.Size(186, 39);
             this.dodajVKosaricoBtn.TabIndex = 28;
@@ -154,7 +176,7 @@
             // razmakSpodnjiTb
             // 
             this.razmakSpodnjiTb.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
-            this.razmakSpodnjiTb.Location = new System.Drawing.Point(265, 139);
+            this.razmakSpodnjiTb.Location = new System.Drawing.Point(265, 193);
             this.razmakSpodnjiTb.Name = "razmakSpodnjiTb";
             this.razmakSpodnjiTb.Size = new System.Drawing.Size(64, 32);
             this.razmakSpodnjiTb.TabIndex = 9;
@@ -165,16 +187,16 @@
             // 
             this.profilCb.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
             this.profilCb.FormattingEnabled = true;
-            this.profilCb.Location = new System.Drawing.Point(96, 86);
+            this.profilCb.Location = new System.Drawing.Point(813, 95);
             this.profilCb.Name = "profilCb";
-            this.profilCb.Size = new System.Drawing.Size(142, 34);
+            this.profilCb.Size = new System.Drawing.Size(144, 34);
             this.profilCb.TabIndex = 0;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
-            this.label2.Location = new System.Drawing.Point(382, 89);
+            this.label2.Location = new System.Drawing.Point(22, 145);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(128, 26);
             this.label2.TabIndex = 3;
@@ -183,7 +205,7 @@
             // dolzinaTb
             // 
             this.dolzinaTb.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
-            this.dolzinaTb.Location = new System.Drawing.Point(516, 86);
+            this.dolzinaTb.Location = new System.Drawing.Point(156, 142);
             this.dolzinaTb.Name = "dolzinaTb";
             this.dolzinaTb.Size = new System.Drawing.Size(100, 32);
             this.dolzinaTb.TabIndex = 4;
@@ -195,7 +217,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
-            this.label5.Location = new System.Drawing.Point(156, 142);
+            this.label5.Location = new System.Drawing.Point(156, 196);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(55, 26);
             this.label5.TabIndex = 8;
@@ -205,7 +227,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
-            this.label1.Location = new System.Drawing.Point(22, 89);
+            this.label1.Location = new System.Drawing.Point(739, 98);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(68, 26);
             this.label1.TabIndex = 1;
@@ -214,7 +236,7 @@
             // izracunajBtn
             // 
             this.izracunajBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
-            this.izracunajBtn.Location = new System.Drawing.Point(681, 366);
+            this.izracunajBtn.Location = new System.Drawing.Point(683, 423);
             this.izracunajBtn.Name = "izracunajBtn";
             this.izracunajBtn.Size = new System.Drawing.Size(186, 39);
             this.izracunajBtn.TabIndex = 2;
@@ -226,7 +248,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
-            this.label3.Location = new System.Drawing.Point(739, 94);
+            this.label3.Location = new System.Drawing.Point(329, 145);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(115, 26);
             this.label3.TabIndex = 5;
@@ -236,7 +258,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
-            this.label4.Location = new System.Drawing.Point(22, 142);
+            this.label4.Location = new System.Drawing.Point(22, 196);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(99, 26);
             this.label4.TabIndex = 7;
@@ -246,7 +268,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
-            this.label6.Location = new System.Drawing.Point(383, 142);
+            this.label6.Location = new System.Drawing.Point(383, 196);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(29, 26);
             this.label6.TabIndex = 10;
@@ -255,7 +277,7 @@
             // visinaTb
             // 
             this.visinaTb.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
-            this.visinaTb.Location = new System.Drawing.Point(857, 91);
+            this.visinaTb.Location = new System.Drawing.Point(447, 142);
             this.visinaTb.Name = "visinaTb";
             this.visinaTb.Size = new System.Drawing.Size(100, 32);
             this.visinaTb.TabIndex = 6;
@@ -266,7 +288,7 @@
             // razmakZgornjiTb
             // 
             this.razmakZgornjiTb.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
-            this.razmakZgornjiTb.Location = new System.Drawing.Point(435, 139);
+            this.razmakZgornjiTb.Location = new System.Drawing.Point(435, 193);
             this.razmakZgornjiTb.Name = "razmakZgornjiTb";
             this.razmakZgornjiTb.Size = new System.Drawing.Size(64, 32);
             this.razmakZgornjiTb.TabIndex = 11;
@@ -277,7 +299,7 @@
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
-            this.label10.Location = new System.Drawing.Point(19, 297);
+            this.label10.Location = new System.Drawing.Point(19, 377);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(202, 26);
             this.label10.TabIndex = 25;
@@ -287,7 +309,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
-            this.label7.Location = new System.Drawing.Point(335, 142);
+            this.label7.Location = new System.Drawing.Point(335, 196);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(42, 26);
             this.label7.TabIndex = 12;
@@ -297,7 +319,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
-            this.label8.Location = new System.Drawing.Point(505, 142);
+            this.label8.Location = new System.Drawing.Point(505, 196);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(42, 26);
             this.label8.TabIndex = 13;
@@ -307,7 +329,7 @@
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
-            this.label9.Location = new System.Drawing.Point(22, 227);
+            this.label9.Location = new System.Drawing.Point(22, 307);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(206, 26);
             this.label9.TabIndex = 15;
@@ -316,7 +338,7 @@
             // razmakStebriTb
             // 
             this.razmakStebriTb.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
-            this.razmakStebriTb.Location = new System.Drawing.Point(262, 227);
+            this.razmakStebriTb.Location = new System.Drawing.Point(262, 307);
             this.razmakStebriTb.Name = "razmakStebriTb";
             this.razmakStebriTb.Size = new System.Drawing.Size(100, 32);
             this.razmakStebriTb.TabIndex = 16;
@@ -354,7 +376,7 @@
             // 
             this.groupBox1.Controls.Add(this.radioButton5);
             this.groupBox1.Controls.Add(this.radioButton6);
-            this.groupBox1.Location = new System.Drawing.Point(27, 177);
+            this.groupBox1.Location = new System.Drawing.Point(27, 244);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(247, 37);
             this.groupBox1.TabIndex = 23;
@@ -405,7 +427,7 @@
             this.groupBox2.Controls.Add(this.radioButton1);
             this.groupBox2.Controls.Add(this.radioButton4);
             this.groupBox2.Controls.Add(this.radioButton2);
-            this.groupBox2.Location = new System.Drawing.Point(371, 197);
+            this.groupBox2.Location = new System.Drawing.Point(371, 277);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(586, 140);
             this.groupBox2.TabIndex = 24;
@@ -427,7 +449,7 @@
             // cenaPrevozaTb
             // 
             this.cenaPrevozaTb.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
-            this.cenaPrevozaTb.Location = new System.Drawing.Point(262, 294);
+            this.cenaPrevozaTb.Location = new System.Drawing.Point(262, 374);
             this.cenaPrevozaTb.Name = "cenaPrevozaTb";
             this.cenaPrevozaTb.Size = new System.Drawing.Size(100, 32);
             this.cenaPrevozaTb.TabIndex = 26;
@@ -456,6 +478,21 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.numericUpDown6);
+            this.tabPage1.Controls.Add(this.label42);
+            this.tabPage1.Controls.Add(this.numericUpDown5);
+            this.tabPage1.Controls.Add(this.label41);
+            this.tabPage1.Controls.Add(this.numericUpDown4);
+            this.tabPage1.Controls.Add(this.label40);
+            this.tabPage1.Controls.Add(this.numericUpDown3);
+            this.tabPage1.Controls.Add(this.label39);
+            this.tabPage1.Controls.Add(this.profilCb4);
+            this.tabPage1.Controls.Add(this.label38);
+            this.tabPage1.Controls.Add(this.profilCb3);
+            this.tabPage1.Controls.Add(this.label37);
+            this.tabPage1.Controls.Add(this.profilCb2);
+            this.tabPage1.Controls.Add(this.label36);
+            this.tabPage1.Controls.Add(this.groupBox4);
             this.tabPage1.Controls.Add(this.pokrovUpDown);
             this.tabPage1.Controls.Add(this.pokrovLb);
             this.tabPage1.Controls.Add(this.groupBox3);
@@ -491,6 +528,26 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Ograje";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // pokrovUpDown
+            // 
+            this.pokrovUpDown.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
+            this.pokrovUpDown.Location = new System.Drawing.Point(898, 35);
+            this.pokrovUpDown.Name = "pokrovUpDown";
+            this.pokrovUpDown.Size = new System.Drawing.Size(59, 32);
+            this.pokrovUpDown.TabIndex = 33;
+            this.pokrovUpDown.Visible = false;
+            // 
+            // pokrovLb
+            // 
+            this.pokrovLb.AutoSize = true;
+            this.pokrovLb.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
+            this.pokrovLb.Location = new System.Drawing.Point(739, 35);
+            this.pokrovLb.Name = "pokrovLb";
+            this.pokrovLb.Size = new System.Drawing.Size(151, 26);
+            this.pokrovLb.TabIndex = 32;
+            this.pokrovLb.Text = "Pokrov ročaja:";
+            this.pokrovLb.Visible = false;
             // 
             // groupBox3
             // 
@@ -553,7 +610,7 @@
             this.dodanoLb.AutoSize = true;
             this.dodanoLb.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
             this.dodanoLb.ForeColor = System.Drawing.Color.Lime;
-            this.dodanoLb.Location = new System.Drawing.Point(677, 663);
+            this.dodanoLb.Location = new System.Drawing.Point(679, 720);
             this.dodanoLb.Name = "dodanoLb";
             this.dodanoLb.Size = new System.Drawing.Size(198, 26);
             this.dodanoLb.TabIndex = 29;
@@ -617,6 +674,50 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Košarica";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // label35
+            // 
+            this.label35.AutoSize = true;
+            this.label35.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
+            this.label35.ForeColor = System.Drawing.SystemColors.ControlDark;
+            this.label35.Location = new System.Drawing.Point(1044, 402);
+            this.label35.Name = "label35";
+            this.label35.Size = new System.Drawing.Size(225, 26);
+            this.label35.TabIndex = 73;
+            this.label35.Text = "Cena ročaja + pokrov:";
+            // 
+            // rocajBrezLb
+            // 
+            this.rocajBrezLb.AutoSize = true;
+            this.rocajBrezLb.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
+            this.rocajBrezLb.ForeColor = System.Drawing.SystemColors.ControlDark;
+            this.rocajBrezLb.Location = new System.Drawing.Point(1339, 402);
+            this.rocajBrezLb.Name = "rocajBrezLb";
+            this.rocajBrezLb.Size = new System.Drawing.Size(42, 26);
+            this.rocajBrezLb.TabIndex = 72;
+            this.rocajBrezLb.Text = "0 €";
+            // 
+            // label34
+            // 
+            this.label34.AutoSize = true;
+            this.label34.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
+            this.label34.ForeColor = System.Drawing.SystemColors.ControlDark;
+            this.label34.Location = new System.Drawing.Point(159, 402);
+            this.label34.Name = "label34";
+            this.label34.Size = new System.Drawing.Size(225, 26);
+            this.label34.TabIndex = 71;
+            this.label34.Text = "Cena ročaja + pokrov:";
+            // 
+            // rocajLb
+            // 
+            this.rocajLb.AutoSize = true;
+            this.rocajLb.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
+            this.rocajLb.ForeColor = System.Drawing.SystemColors.ControlDark;
+            this.rocajLb.Location = new System.Drawing.Point(419, 402);
+            this.rocajLb.Name = "rocajLb";
+            this.rocajLb.Size = new System.Drawing.Size(42, 26);
+            this.rocajLb.TabIndex = 70;
+            this.rocajLb.Text = "0 €";
             // 
             // stPonudbeTb
             // 
@@ -1099,69 +1200,182 @@
             this.listBox2.TabIndex = 15;
             this.listBox2.SelectedIndexChanged += new System.EventHandler(this.listBox2_SelectedIndexChanged);
             // 
-            // pokrovLb
+            // groupBox4
             // 
-            this.pokrovLb.AutoSize = true;
-            this.pokrovLb.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
-            this.pokrovLb.Location = new System.Drawing.Point(739, 35);
-            this.pokrovLb.Name = "pokrovLb";
-            this.pokrovLb.Size = new System.Drawing.Size(86, 26);
-            this.pokrovLb.TabIndex = 32;
-            this.pokrovLb.Text = "Pokrov:";
-            this.pokrovLb.Visible = false;
+            this.groupBox4.Controls.Add(this.kombiniranaRb);
+            this.groupBox4.Controls.Add(this.enostavnaRb);
+            this.groupBox4.Location = new System.Drawing.Point(177, 84);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(517, 52);
+            this.groupBox4.TabIndex = 32;
+            this.groupBox4.TabStop = false;
             // 
-            // pokrovUpDown
+            // kombiniranaRb
             // 
-            this.pokrovUpDown.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
-            this.pokrovUpDown.Location = new System.Drawing.Point(857, 35);
-            this.pokrovUpDown.Name = "pokrovUpDown";
-            this.pokrovUpDown.Size = new System.Drawing.Size(59, 32);
-            this.pokrovUpDown.TabIndex = 33;
-            this.pokrovUpDown.Visible = false;
+            this.kombiniranaRb.AutoSize = true;
+            this.kombiniranaRb.Location = new System.Drawing.Point(339, 17);
+            this.kombiniranaRb.Name = "kombiniranaRb";
+            this.kombiniranaRb.Size = new System.Drawing.Size(120, 24);
+            this.kombiniranaRb.TabIndex = 1;
+            this.kombiniranaRb.Text = "Kombinirana";
+            this.kombiniranaRb.UseVisualStyleBackColor = true;
+            this.kombiniranaRb.CheckedChanged += new System.EventHandler(this.kombiniranaRb_CheckedChanged);
             // 
-            // label34
+            // enostavnaRb
             // 
-            this.label34.AutoSize = true;
-            this.label34.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
-            this.label34.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.label34.Location = new System.Drawing.Point(159, 402);
-            this.label34.Name = "label34";
-            this.label34.Size = new System.Drawing.Size(225, 26);
-            this.label34.TabIndex = 71;
-            this.label34.Text = "Cena ročaja + pokrov:";
+            this.enostavnaRb.AutoSize = true;
+            this.enostavnaRb.Checked = true;
+            this.enostavnaRb.Location = new System.Drawing.Point(6, 17);
+            this.enostavnaRb.Name = "enostavnaRb";
+            this.enostavnaRb.Size = new System.Drawing.Size(105, 24);
+            this.enostavnaRb.TabIndex = 0;
+            this.enostavnaRb.TabStop = true;
+            this.enostavnaRb.Text = "Enostavna";
+            this.enostavnaRb.UseVisualStyleBackColor = true;
+            this.enostavnaRb.CheckedChanged += new System.EventHandler(this.enostavnaRb_CheckedChanged);
             // 
-            // rocajLb
+            // profilCb2
             // 
-            this.rocajLb.AutoSize = true;
-            this.rocajLb.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
-            this.rocajLb.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.rocajLb.Location = new System.Drawing.Point(419, 402);
-            this.rocajLb.Name = "rocajLb";
-            this.rocajLb.Size = new System.Drawing.Size(42, 26);
-            this.rocajLb.TabIndex = 70;
-            this.rocajLb.Text = "0 €";
+            this.profilCb2.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
+            this.profilCb2.FormattingEnabled = true;
+            this.profilCb2.Location = new System.Drawing.Point(813, 139);
+            this.profilCb2.Name = "profilCb2";
+            this.profilCb2.Size = new System.Drawing.Size(144, 34);
+            this.profilCb2.TabIndex = 34;
+            this.profilCb2.Visible = false;
             // 
-            // label35
+            // label36
             // 
-            this.label35.AutoSize = true;
-            this.label35.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
-            this.label35.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.label35.Location = new System.Drawing.Point(1044, 402);
-            this.label35.Name = "label35";
-            this.label35.Size = new System.Drawing.Size(225, 26);
-            this.label35.TabIndex = 73;
-            this.label35.Text = "Cena ročaja + pokrov:";
+            this.label36.AutoSize = true;
+            this.label36.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
+            this.label36.Location = new System.Drawing.Point(739, 142);
+            this.label36.Name = "label36";
+            this.label36.Size = new System.Drawing.Size(68, 26);
+            this.label36.TabIndex = 35;
+            this.label36.Text = "Profil:";
+            this.label36.Visible = false;
             // 
-            // rocajBrezLb
+            // profilCb3
             // 
-            this.rocajBrezLb.AutoSize = true;
-            this.rocajBrezLb.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
-            this.rocajBrezLb.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.rocajBrezLb.Location = new System.Drawing.Point(1339, 402);
-            this.rocajBrezLb.Name = "rocajBrezLb";
-            this.rocajBrezLb.Size = new System.Drawing.Size(42, 26);
-            this.rocajBrezLb.TabIndex = 72;
-            this.rocajBrezLb.Text = "0 €";
+            this.profilCb3.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
+            this.profilCb3.FormattingEnabled = true;
+            this.profilCb3.Location = new System.Drawing.Point(813, 183);
+            this.profilCb3.Name = "profilCb3";
+            this.profilCb3.Size = new System.Drawing.Size(144, 34);
+            this.profilCb3.TabIndex = 36;
+            this.profilCb3.Visible = false;
+            // 
+            // label37
+            // 
+            this.label37.AutoSize = true;
+            this.label37.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
+            this.label37.Location = new System.Drawing.Point(739, 186);
+            this.label37.Name = "label37";
+            this.label37.Size = new System.Drawing.Size(68, 26);
+            this.label37.TabIndex = 37;
+            this.label37.Text = "Profil:";
+            this.label37.Visible = false;
+            // 
+            // profilCb4
+            // 
+            this.profilCb4.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
+            this.profilCb4.FormattingEnabled = true;
+            this.profilCb4.Location = new System.Drawing.Point(813, 228);
+            this.profilCb4.Name = "profilCb4";
+            this.profilCb4.Size = new System.Drawing.Size(144, 34);
+            this.profilCb4.TabIndex = 38;
+            this.profilCb4.Visible = false;
+            // 
+            // label38
+            // 
+            this.label38.AutoSize = true;
+            this.label38.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
+            this.label38.Location = new System.Drawing.Point(739, 231);
+            this.label38.Name = "label38";
+            this.label38.Size = new System.Drawing.Size(68, 26);
+            this.label38.TabIndex = 39;
+            this.label38.Text = "Profil:";
+            this.label38.Visible = false;
+            // 
+            // label39
+            // 
+            this.label39.AutoSize = true;
+            this.label39.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
+            this.label39.Location = new System.Drawing.Point(963, 99);
+            this.label39.Name = "label39";
+            this.label39.Size = new System.Drawing.Size(66, 26);
+            this.label39.TabIndex = 40;
+            this.label39.Text = "kom.:";
+            this.label39.Visible = false;
+            // 
+            // numericUpDown3
+            // 
+            this.numericUpDown3.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
+            this.numericUpDown3.Location = new System.Drawing.Point(1034, 96);
+            this.numericUpDown3.Name = "numericUpDown3";
+            this.numericUpDown3.Size = new System.Drawing.Size(59, 32);
+            this.numericUpDown3.TabIndex = 41;
+            this.numericUpDown3.Visible = false;
+            // 
+            // numericUpDown4
+            // 
+            this.numericUpDown4.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
+            this.numericUpDown4.Location = new System.Drawing.Point(1034, 140);
+            this.numericUpDown4.Name = "numericUpDown4";
+            this.numericUpDown4.Size = new System.Drawing.Size(59, 32);
+            this.numericUpDown4.TabIndex = 43;
+            this.numericUpDown4.Visible = false;
+            // 
+            // label40
+            // 
+            this.label40.AutoSize = true;
+            this.label40.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
+            this.label40.Location = new System.Drawing.Point(963, 143);
+            this.label40.Name = "label40";
+            this.label40.Size = new System.Drawing.Size(66, 26);
+            this.label40.TabIndex = 42;
+            this.label40.Text = "kom.:";
+            this.label40.Visible = false;
+            // 
+            // numericUpDown5
+            // 
+            this.numericUpDown5.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
+            this.numericUpDown5.Location = new System.Drawing.Point(1034, 183);
+            this.numericUpDown5.Name = "numericUpDown5";
+            this.numericUpDown5.Size = new System.Drawing.Size(59, 32);
+            this.numericUpDown5.TabIndex = 45;
+            this.numericUpDown5.Visible = false;
+            // 
+            // label41
+            // 
+            this.label41.AutoSize = true;
+            this.label41.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
+            this.label41.Location = new System.Drawing.Point(963, 186);
+            this.label41.Name = "label41";
+            this.label41.Size = new System.Drawing.Size(66, 26);
+            this.label41.TabIndex = 44;
+            this.label41.Text = "kom.:";
+            this.label41.Visible = false;
+            // 
+            // numericUpDown6
+            // 
+            this.numericUpDown6.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
+            this.numericUpDown6.Location = new System.Drawing.Point(1034, 228);
+            this.numericUpDown6.Name = "numericUpDown6";
+            this.numericUpDown6.Size = new System.Drawing.Size(59, 32);
+            this.numericUpDown6.TabIndex = 47;
+            this.numericUpDown6.Visible = false;
+            // 
+            // label42
+            // 
+            this.label42.AutoSize = true;
+            this.label42.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
+            this.label42.Location = new System.Drawing.Point(963, 231);
+            this.label42.Name = "label42";
+            this.label42.Size = new System.Drawing.Size(66, 26);
+            this.label42.TabIndex = 46;
+            this.label42.Text = "kom.:";
+            this.label42.Visible = false;
             // 
             // Form1
             // 
@@ -1182,13 +1396,19 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pokrovUpDown)).EndInit();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pokrovUpDown)).EndInit();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown6)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1283,6 +1503,23 @@
         private System.Windows.Forms.Label rocajLb;
         private System.Windows.Forms.Label label35;
         private System.Windows.Forms.Label rocajBrezLb;
+        private System.Windows.Forms.ComboBox profilCb4;
+        private System.Windows.Forms.Label label38;
+        private System.Windows.Forms.ComboBox profilCb3;
+        private System.Windows.Forms.Label label37;
+        private System.Windows.Forms.ComboBox profilCb2;
+        private System.Windows.Forms.Label label36;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.RadioButton kombiniranaRb;
+        private System.Windows.Forms.RadioButton enostavnaRb;
+        private System.Windows.Forms.NumericUpDown numericUpDown6;
+        private System.Windows.Forms.Label label42;
+        private System.Windows.Forms.NumericUpDown numericUpDown5;
+        private System.Windows.Forms.Label label41;
+        private System.Windows.Forms.NumericUpDown numericUpDown4;
+        private System.Windows.Forms.Label label40;
+        private System.Windows.Forms.NumericUpDown numericUpDown3;
+        private System.Windows.Forms.Label label39;
     }
 }
 

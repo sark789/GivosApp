@@ -1,0 +1,4 @@
+       •     <st_prof> – ih vodoravnih pozicijah L = <posamezna_dolzina>m in tvorijo zaprto ograjno polje 
+             ( se ne vidi skozi - ALU profili se med seboj prekrivajo in nudijo zasebnost ). 
+             Višina ograje ( merjeno od talne keramike in do vrha ALU ograjnega ročaja - naslonjala)
+             je V = cca  <visina>cm.

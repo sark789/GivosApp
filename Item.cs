@@ -26,12 +26,14 @@ namespace GivosCalc
         public int  _kolikoProfilovVVisino;
         public string _vrstaOgraje;
         public float _stRocajPokrovov;
+        public Dictionary<Profil, int> _dict;
+        public bool _isKombinirana;
 
 
       public Item(string profilName, float dolzinaProfilov, double razmakMedProfili, string itemNapis, float cenaLetvic, float cenaVijakov,
           float cenaPrevoza, float cenaStebrovBrezMontaze, float cenaSkupajBrezMontaze, float cenaStebrovZMontazo, float cenaSkupajZMontazo, 
           float stStebrov, float celotnaDolzinaProfilov, float stVijakovPriMontazi, float visina, int kolikoProfilovVVisino,
-          string vrstaOgraje, float stRocajPokrovov)
+          string vrstaOgraje, float stRocajPokrovov, bool isKombinirana, Dictionary<Profil, int> dict)
         {
             this._profilName = profilName;
             this._dolzinaProfilov = dolzinaProfilov;
@@ -51,6 +53,8 @@ namespace GivosCalc
             this._kolikoProfilovVVisino = kolikoProfilovVVisino;
             this._vrstaOgraje = vrstaOgraje;
             this._stRocajPokrovov = stRocajPokrovov;
+            this._dict = dict;
+            this._isKombinirana = isKombinirana;
         }
     }
 }

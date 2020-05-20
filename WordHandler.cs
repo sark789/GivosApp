@@ -29,6 +29,8 @@ namespace GivosCalc
         public void WriteValuesInWord(List<Item> _itemsOnSecondTab, Microsoft.Office.Interop.Word.Application word, ProfiliCollection vodoravniProfili, Document workDocument) 
         {
             TabControl tab = System.Windows.Forms.Application.OpenForms["Form1"].Controls["tabControl1"] as TabControl;
+            string vrtna = tab.TabPages[0].Controls["groupBox3"].Controls["vrtnaRb"].Text;
+            string naVrh = tab.TabPages[0].Controls["groupBox3"].Controls["naVrhRb"].Text;
             var imeInPriimekTb = tab.SelectedTab.Controls["imeInPriimekTb"];
             string naslovTb = tab.SelectedTab.Controls["naslovTb"].Text;
             string naslov = "";
@@ -52,7 +54,11 @@ namespace GivosCalc
             var str = "";
             var info = "";
             string stebri = "";
+            string kam = "";
+            bool containsBalkonskaOgraja = false;
+            bool containsVrtnaOgraja = false;
             List<string> temp_list = new List<string>();
+            List<string> vrste = new List<string>();
             List<string> model_ograj = new List<string>();
             List<string> allInfoText = new List<string>();
             Dictionary<string, string> mainBody = new Dictionary<string, string>();
@@ -60,7 +66,20 @@ namespace GivosCalc
 
             foreach (var item in _itemsOnSecondTab)
             {
-                temp_list.Add(item._profilName);
+                if (!item._isKombinirana)
+                {
+                    temp_list.Add(item._profilName);
+                }
+                else
+                {
+                    string komb = "kombinacija (";
+                    foreach(var val in item._dict)
+                    {
+                        komb += val.Key._name + " + ";
+                    }
+                    komb = komb.Substring(0, komb.Length - 3) + ")";
+                    temp_list.Add(komb);
+                }
             }
             model_ograj = temp_list.Distinct().ToList();
             string modeli_ograj = string.Join(" + ", model_ograj.ToArray());
@@ -68,18 +87,33 @@ namespace GivosCalc
             
             foreach (var item in model_ograj)
             {
+                bool komb = false;
                 foreach (var i in vodoravniProfili._profili)
                 {
                     if (item == i._name)
                     {
                         dim = i._width;
+                        komb = false;
+                        break;
+                    }
+                    else
+                    {
+                        komb = true;
                     }
                 }
-
-                string predInfo = File.ReadAllText(System.AppDomain.CurrentDomain.BaseDirectory + "predInfo.txt");
-                predInfo = predInfo.Replace("<model_ograje>", item);
-                predInfo = predInfo.Replace("<dim>", (dim * 1000).ToString());
-                mainBody.Add(item, predInfo + "\n\n\n");
+                if (!komb)
+                {
+                    string predInfo = File.ReadAllText(System.AppDomain.CurrentDomain.BaseDirectory + "predInfo.txt");
+                    predInfo = predInfo.Replace("<model_ograje>", item);
+                    predInfo = predInfo.Replace("<dim>", (dim * 1000).ToString());
+                    mainBody.Add(item, predInfo + "\n\n\n");
+                }
+                else
+                {
+                    string s = "Kombinirani ALU ograjni profili, ki se med ALU stebre ( v utore stebrov ) vstavljajo v :";
+                    mainBody.Add(item, s + "\n\n\n");
+                }
+                komb = false;
             }
 
 
@@ -91,10 +125,60 @@ namespace GivosCalc
                 st_stebrov += item._stStebrov;
                 stebri += item._stStebrov + " kos  x  V = " + (item._visina * 100).ToString("0.00") + "cm" + "  +  ";
                 visina += item._stStebrov * item._visina;
-                
-                info = (item._razmakMedProfili < 0) ? File.ReadAllText(System.AppDomain.CurrentDomain.BaseDirectory + "infoProfiliSePrekrivajo.txt") :
-                File.ReadAllText(System.AppDomain.CurrentDomain.BaseDirectory + "infoProfiliSeNePrekrivajo.txt");
-                if (mainBody.ContainsKey(item._profilName))
+
+                if (item._vrstaOgraje == vrtna)
+                {
+                    containsVrtnaOgraja = true;
+                    info = (item._razmakMedProfili <= 0) ? File.ReadAllText(System.AppDomain.CurrentDomain.BaseDirectory + "infoProfiliSePrekrivajo.txt") :
+                    File.ReadAllText(System.AppDomain.CurrentDomain.BaseDirectory + "infoProfiliSeNePrekrivajo.txt");
+                    if (item._isKombinirana)
+                    {                        
+                        string komb1 = " \n             Na omenjeni dolžini je kombinacija ograjnih profilov sledeča :";
+                        foreach (var val in item._dict)
+                        {
+                            komb1 +=  "\n             "+ val.Value + " kos  x  vodoravno ALU profili z oznako " + val.Key._name + " ( dim.: " + val.Key._width * 1000+ "x14mm )" + ", ";
+                            
+                        }
+                        komb1 = komb1.Substring(0, komb1.Length - 2);
+
+                        info += komb1;
+                    }
+
+                }
+                else
+                {
+                    containsBalkonskaOgraja = true;
+                    modeli_ograj = modeli_ograj + " + P802-ročaj";
+                    info = (item._razmakMedProfili <= 0) ? File.ReadAllText(System.AppDomain.CurrentDomain.BaseDirectory + "infoProfiliBalkonSePrekrivajo.txt") :
+                    File.ReadAllText(System.AppDomain.CurrentDomain.BaseDirectory + "infoProfiliBalkonSeNePrekrivajo.txt");
+
+                    if(item._vrstaOgraje == naVrh)
+                    {
+                        kam = "vrh";
+                    }
+                    else { kam = "bok"; }
+                    if (item._isKombinirana)
+                    {
+                        string komb1 = " \n             Na omenjeni dolžini je kombinacija ograjnih profilov sledeča :";
+                        foreach (var val in item._dict)
+                        {
+                            komb1 += "\n             " + val.Value + " kos  x  vodoravno ALU profili z oznako " + val.Key._name + " ( dim.: " + val.Key._width * 1000 + "x14mm )" + ", ";
+
+                        }
+                        komb1 = komb1.Substring(0, komb1.Length - 2);
+
+                        info += komb1;
+                    }
+                }
+
+                string komb = "kombinacija (";
+                foreach (var val in item._dict)
+                {
+                    komb += val.Key._name + " + ";
+                }
+                komb = komb.Substring(0, komb.Length - 3) + ")";
+
+                if (mainBody.ContainsKey(item._profilName) ||mainBody.ContainsKey(komb))
                 {
                     try
                     {
@@ -104,10 +188,21 @@ namespace GivosCalc
                         info = info.Replace("<razmak>", item._razmakMedProfili.ToString("0.00"));
                     }
                     catch (Exception e) { }
-                    //allInfoText.Add(info);
-                    mainBody[item._profilName] += info + "\n\n";
 
+                    if (item._isKombinirana)
+                    {
+                        
+                        mainBody[komb] += info + "\n\n";
+                    }
+                    else
+                    {
+                        mainBody[item._profilName] += info + "\n\n";
+                    }
+                   
                 }
+
+
+                
             }
 
             stebri = stebri.Remove(stebri.Length - 5);
@@ -146,8 +241,15 @@ namespace GivosCalc
             }
 
             //open text file and read it
-            str = (model_ograj.Contains("SD-8006P")) ? File.ReadAllText(System.AppDomain.CurrentDomain.BaseDirectory + "SD-8006PinfoTemplate.txt") :
+            if (!containsBalkonskaOgraja)
+            {
+                str = (model_ograj.Contains("SD-8006P")) ? File.ReadAllText(System.AppDomain.CurrentDomain.BaseDirectory + "SD-8006PinfoTemplate.txt") :
                 File.ReadAllText(System.AppDomain.CurrentDomain.BaseDirectory + "OtherProfilesinfoTemplate.txt");
+            }
+            else
+            {
+                str = File.ReadAllText(System.AppDomain.CurrentDomain.BaseDirectory + "balkonskaInfoTemplate.txt");
+            }
 
             float cena_brez_in_popust = cena_brez * ((100 - int.Parse(numericUpDown1.Text)) * 0.01f);
             string kolPopustString = "";
@@ -179,6 +281,11 @@ namespace GivosCalc
             {
                 kolPopustString = "Glede na količino  ( L = " + dolzina + "m ), vam na omenjeni znesek nudimo dodatno še " + kol_popust + "% popusta  ( količinski popust ).";
             }
+
+            string vrstaOgraje = "";
+            if (containsBalkonskaOgraja) { vrstaOgraje = "BALKONSKE"; }
+            if (containsVrtnaOgraja) { vrstaOgraje = "VRTNE"; }
+            if (containsVrtnaOgraja && containsBalkonskaOgraja) { vrstaOgraje = "BALKONSKE IN VRTNE"; }
             
 
             Dictionary<string, string> dict = new Dictionary<string, string> {  {"<opis>", str },
@@ -196,11 +303,25 @@ namespace GivosCalc
                                                                                 {"<cena_brez_in_popust>",  cena_brez_in_popust.ToString("N",new CultureInfo("is-IS"))},
                                                                                 {"<stebri>", stebri},
                                                                                 {"<ref_slik>", ref_slik },
-                                                                                {"<mozni_modeli>", modeli_ograj } };
+                                                                                {"<mozni_modeli>", modeli_ograj },
+                                                                                {"<vrsta_ograje>", vrstaOgraje },
+                                                                                {"<kam>", kam } };
 
             foreach (var item in dict)
             {
                 FindAndReplace(word, item.Key,item.Value, workDocument);
+            }
+            foreach (Shape shape in workDocument.Shapes)
+            {
+                if (shape.Name == "Text Box 2")
+                {
+                    if (shape.AlternativeText.Contains("<mozni_modeli>"))
+                    {
+                        modeli_ograj = "OKVIRNA PONUDBA " + vrstaOgraje + " ALU OGRAJE\n\n" + "MODEL :  " + modeli_ograj + " + ALU stebri SD-8005A \n\nBARVA  :    ANTRACIT  ( tovarniška barva )";
+                        shape.TextFrame.TextRange.Text = modeli_ograj;
+                    }
+
+                }
             }
 
         }

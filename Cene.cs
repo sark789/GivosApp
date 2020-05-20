@@ -20,6 +20,8 @@ namespace GivosCalc
         public float _razrez;
         public float _pokrovZaRocaj;
         public float _rocaj;
+        public float _lprofil;
+        public float _vodilo;
         public Cene(float cenaStebraNaMeter, float kratekNosilec, float dolgNosilec, float rozeta, float pokrov, float lepilo, float montazaStebra)
         {
             this._cenaStebraNaMeter = cenaStebraNaMeter;
@@ -42,10 +44,12 @@ namespace GivosCalc
             this._lepilo = lepilo;
         }
 
-        public Cene(float pokrovZaRocaj, float rocaj)
+        public Cene(float pokrovZaRocaj, float rocaj, float lprofil, float vodilo)
         {
             this._pokrovZaRocaj = pokrovZaRocaj;
             this._rocaj = rocaj;
+            this._lprofil = lprofil;
+            this._vodilo = vodilo;
         }
     }
 }

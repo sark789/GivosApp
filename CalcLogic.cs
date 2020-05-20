@@ -14,11 +14,13 @@ namespace GivosCalc
         public float price;
         public float capPrice;
         public float width;
+        int num1, num2, num3, num4;
 
 
 
 
-        public (List<Item>, List<string>) Izracun(ProfiliCollection profili, string selectedProfil, float dolzina, float visina, float rspodnji, float rzgornji, ListBox listbox, (int,float, float) stebri)
+        public (List<Item>, List<string>) Izracun(ProfiliCollection profili, string selectedProfil, float dolzina, float visina, 
+            float rspodnji, float rzgornji, ListBox listbox, (int,float, float) stebri, bool isKombinirana)
         {
             float razmak, razmakGor, razmakDol;
             int pribGor, pribDol;
@@ -27,6 +29,11 @@ namespace GivosCalc
             string res;
 
             TabControl tab = Application.OpenForms["Form1"].Controls["tabControl1"] as TabControl;
+            num1 = int.Parse(tab.TabPages[0].Controls["numericUpDown3"].Text);
+            num2 = int.Parse(tab.TabPages[0].Controls["numericUpDown4"].Text);
+            num3 = int.Parse(tab.TabPages[0].Controls["numericUpDown5"].Text);
+            num4 = int.Parse(tab.TabPages[0].Controls["numericUpDown6"].Text);
+
             var cenaPrevozaTb = tab.SelectedTab.Controls["cenaPrevozaTb"];
 
             float cenaPrevoza = float.Parse(cenaPrevozaTb.Text);
@@ -60,30 +67,37 @@ namespace GivosCalc
                     width = obj._width;
 
                     int prib = (int)(visina / (width + ((rspodnji + rzgornji) / 2) * 0.01f));
+                    int pribKomb = num1 + num2 + num3 + num4;
 
                     //racunanje letvic za razmak, dolzino, visino in končni izpis
                     pribDol = prib;
                     pribGor = prib;
-
-                    do
+                    if (!isKombinirana)
                     {
-                        pribDol -= 1;
+                        do
+                        {
+                            pribDol -= 1;
 
-                        razmakDol =  Izpis(obj, selectedProfil, visina, dolzina, pribDol, stebri, list, items, cenaSrauba, cenaRazreza, montaza, cenaPrevoza);
+                            razmakDol = Izpis(obj, selectedProfil, visina, dolzina, pribDol, stebri, list, items, cenaSrauba, cenaRazreza, montaza, cenaPrevoza, isKombinirana,  profili);
+                        }
+                        while ((rspodnji <= razmakDol * 100 && razmakDol * 100 <= rzgornji));
+                        list.Reverse();
+                        items.Reverse();
+
+                        razmak = razmakDol = Izpis(obj, selectedProfil, visina, dolzina, prib, stebri, list, items, cenaSrauba, cenaRazreza, montaza, cenaPrevoza, isKombinirana,  profili);
+                        do
+                        {
+                            pribGor += 1;
+
+                            razmakGor = Izpis(obj, selectedProfil, visina, dolzina, pribGor, stebri, list, items, cenaSrauba, cenaRazreza, montaza, cenaPrevoza, isKombinirana,  profili);
+
+                        }
+                        while ((rspodnji <= razmakGor * 100 && razmakGor * 100 <= rzgornji));
                     }
-                    while ((rspodnji <= razmakDol * 100 && razmakDol * 100 <= rzgornji));
-                    list.Reverse();
-                    items.Reverse();
-
-                    razmak = razmakDol = Izpis(obj, selectedProfil, visina, dolzina, prib, stebri, list, items, cenaSrauba, cenaRazreza, montaza, cenaPrevoza);
-                    do
+                    else
                     {
-                        pribGor += 1;
-
-                        razmakGor = Izpis(obj, selectedProfil, visina, dolzina, pribGor, stebri, list, items, cenaSrauba, cenaRazreza, montaza, cenaPrevoza);
-
+                        razmak = razmakDol = Izpis(obj, selectedProfil, visina, dolzina, pribKomb, stebri, list, items, cenaSrauba, cenaRazreza, montaza, cenaPrevoza, isKombinirana, profili);
                     }
-                    while ((rspodnji <= razmakGor * 100 && razmakGor * 100 <= rzgornji));
                     list.Reverse();
                     items.Reverse();                    
                     resList = FancierString(list);
@@ -96,22 +110,32 @@ namespace GivosCalc
         }
 
         private float Izpis(Profil obj, string selectedProfil, float visina, float dolzina, int prib, (int, float, float) stebri,
-            List<string> list, List<Item> items, float cenaSrauba, float cenaRazreza, float montaza, float cenaPrevoza)
+            List<string> list, List<Item> items, float cenaSrauba, float cenaRazreza, float montaza, float cenaPrevoza, bool isKombinirana, ProfiliCollection profiliCollection)
         {
 
             price = obj._price;
             capPrice = obj._capPrice;
             width = obj._width;
-            
-            float razmak = (visina - 0.04f - prib * width) / prib;
 
-            float cenaVijakov;
-            double cenaBrezMontaze, cenaZMontazo;
-            float razrez;
+            float razmak = (visina - 0.04f - prib * width) / prib;
             float cenaLetvic;
-            double pisiRazmak;
+            double cenaBrezMontaze, cenaZMontazo;
             float stVijakov;
+            float cenaVijakov;
+            float razrez;
+            double pisiRazmak;
             int stStebrov = stebri.Item1 + 1;
+
+            //vrsta ograje
+            TabControl tab = Application.OpenForms["Form1"].Controls["tabControl1"] as TabControl;
+            var naBok = tab.SelectedTab.Controls["groupBox3"];
+            RadioButton isNaVrh = (RadioButton)naBok.Controls["naVrhRb"];
+            RadioButton isNaBok = (RadioButton)naBok.Controls["naBokRb"];
+            RadioButton isVrtna = (RadioButton)naBok.Controls["vrtnaRb"];
+            string vrstaOgraje = "";
+            if (isVrtna.Checked) { vrstaOgraje = isVrtna.Text; }
+            if (isNaBok.Checked) { vrstaOgraje = isNaBok.Text; }
+            if (isNaVrh.Checked) { vrstaOgraje = isNaVrh.Text; }
 
 
             JArray jsonCeneZaSteber = JArray.Parse(File.ReadAllText("CeneStebri.json"));
@@ -125,21 +149,10 @@ namespace GivosCalc
                 }
             }
 
-            Cene cene = new Cene(temp[10], temp[11]);
+            Cene cene = new Cene(temp[10], temp[11], temp[12], temp[13]);
             float cenaPokrovaZaRocaj = cene._pokrovZaRocaj;
             float rocaj = cene._rocaj;
-
-
-            //vrsta ograje
-            TabControl tab = Application.OpenForms["Form1"].Controls["tabControl1"] as TabControl;
-            var naBok = tab.SelectedTab.Controls["groupBox3"];
-            RadioButton isNaVrh = (RadioButton)naBok.Controls["naVrhRb"];
-            RadioButton isNaBok = (RadioButton)naBok.Controls["naBokRb"];
-            RadioButton isVrtna = (RadioButton)naBok.Controls["vrtnaRb"];
-            string vrstaOgraje = "";
-            if (isVrtna.Checked) { vrstaOgraje = isVrtna.Text; }
-            if (isNaBok.Checked) { vrstaOgraje = isNaBok.Text; }
-            if (isNaVrh.Checked) { vrstaOgraje = isNaVrh.Text; }
+            float lprofil = cene._lprofil;
 
             //st pokrovov pri rocaju
             NumericUpDown pokrovi = (NumericUpDown)tab.SelectedTab.Controls["pokrovUpDown"];
@@ -147,11 +160,15 @@ namespace GivosCalc
             float cenaRocaja;
             if (isNaBok.Checked || isNaVrh.Checked)
             {
-                 cenaRocaja = cenaPokrovaZaRocaj * stRocajPokrovov + dolzina * rocaj;
+                cenaRocaja = cenaPokrovaZaRocaj * stRocajPokrovov + dolzina * rocaj;
+                if (isNaBok.Checked)
+                {
+                    cenaRocaja = cenaPokrovaZaRocaj * stRocajPokrovov + dolzina * rocaj + 4 * visina * lprofil;
+                }
             }
-            else { cenaRocaja = 0; }         
+            else { cenaRocaja = 0; }
 
-            razmak = (visina - 0.04f - prib * width) / prib;
+
             stVijakov = prib * stebri.Item1 * 4;
             cenaVijakov = stVijakov * cenaSrauba;
             if (cenaVijakov < 0)
@@ -159,14 +176,13 @@ namespace GivosCalc
                 cenaVijakov = 0;
                 stVijakov = 0;
             }
-            cenaLetvic = (prib * obj._price * dolzina);
+
             razrez = cenaRazreza * ((stStebrov) + (stebri.Item1 * prib));
             if (stStebrov <= 1)
             {
                 razrez = 0;
             }
-            cenaBrezMontaze = Math.Round((prib * obj._price * dolzina + cenaVijakov / 2 + stebri.Item3 + razrez + cenaRocaja), 2);
-            cenaZMontazo = Math.Round((prib * obj._price * dolzina + cenaVijakov + stebri.Item2 + cenaPrevoza + dolzina * montaza + cenaRocaja), 2);
+
             pisiRazmak = (Math.Round(razmak * 100, 3));
             string predznak = "";
             if (pisiRazmak >= 0)
@@ -178,14 +194,96 @@ namespace GivosCalc
                 pisiRazmak *= -1;
                 predznak = "‒";
             }
-            string res = "razmak: " + predznak + pisiRazmak.ToString("0.000") + "cm   stevilo letvic: " + prib.ToString("0") + "   cena letvic: " + cenaLetvic.ToString("0.00") + " eur" +
-               "   cena stebrov brez montaže: " + stebri.Item3.ToString("0.00") + " eur   cena stebrov z montažo: " + stebri.Item2.ToString("0.00") +
-            " eur   skupna cena brez montaže: " + cenaBrezMontaze.ToString("0.00") + " eur" + "   skupna cena z montažo: " + cenaZMontazo.ToString("0.00") + " eur";
+
+            //katera vrsta ograje - enostavna, kombinirana
+
+            Dictionary<Profil, int> dictProfilov = new Dictionary<Profil, int>();
+            num1 = int.Parse(tab.TabPages[0].Controls["numericUpDown3"].Text);
+            num2 = int.Parse(tab.TabPages[0].Controls["numericUpDown4"].Text);
+            num3 = int.Parse(tab.TabPages[0].Controls["numericUpDown5"].Text);
+            num4 = int.Parse(tab.TabPages[0].Controls["numericUpDown6"].Text);
+           
+            string vrsta = "";
+            string letvice = "";
+            if (isKombinirana)
+            {
+                ComboBox profilCb = (ComboBox)tab.TabPages[0].Controls["profilCb"];
+                string cb = profilCb.SelectedItem.ToString();
+                ComboBox profilCb2 = (ComboBox)tab.TabPages[0].Controls["profilCb2"];
+                string cb2 = profilCb2.SelectedItem.ToString();
+                ComboBox profilCb3 = (ComboBox)tab.TabPages[0].Controls["profilCb3"];
+                string cb3 = profilCb3.SelectedItem.ToString();
+                ComboBox profilCb4 = (ComboBox)tab.TabPages[0].Controls["profilCb4"];
+                string cb4 = profilCb4.SelectedItem.ToString();
+
+                float wid1 = 0;
+                float wid2 = 0;
+                float wid3 = 0;
+                float wid4 = 0;
+                float price1 = 0;
+                float price2 = 0;
+                float price3 = 0;
+                float price4 = 0;
+                if (num1 != 0)
+                {
+                    letvice += cb + " x" + num1 + ", ";
+                    dictProfilov.Add(profiliCollection._profili[0], num1);
+                    wid1 = profiliCollection._profili[0]._width;
+                    price1 = profiliCollection._profili[0]._price;
+                }
+                if (num2 != 0)
+                {
+                    letvice += cb2 + " x" + num2 + ", ";
+                    dictProfilov.Add(profiliCollection._profili[1], num2);
+                    wid2 = profiliCollection._profili[1]._width;
+                    price2 = profiliCollection._profili[1]._price;
+                }
+                if (num3 != 0)
+                {
+                    letvice += cb3 + " x" + num3 + ", ";
+                    dictProfilov.Add(profiliCollection._profili[2], num3);
+                    wid3 = profiliCollection._profili[2]._width;
+                    price3 = profiliCollection._profili[2]._price;
+                }
+                if (num4 != 0)
+                {
+                    letvice += cb4 + " x" + num4 + ", ";
+                    dictProfilov.Add(profiliCollection._profili[3], num4);
+                    wid4 = profiliCollection._profili[3]._width;
+                    price4 = profiliCollection._profili[3]._price;
+                }
+                try
+                {
+                    letvice = letvice.Substring(0, letvice.Length - 2);
+                }catch(Exception e) { letvice = "Noben model"; }
+                
+                vrsta = "Kombinacija";
+
+                razmak = (visina - 0.04f - (wid1 * num1 + wid2 * num2 + wid3 * num3 + wid4 * num4)) / prib;
+                cenaLetvic = ((price1 * num1 + price2 * num2 + price3 * num3 + price4 * num4) * dolzina);
+                cenaBrezMontaze = Math.Round((cenaLetvic + cenaVijakov / 2 + stebri.Item3 + razrez + cenaRocaja), 2);
+                cenaZMontazo = Math.Round((cenaLetvic + cenaVijakov + stebri.Item2 + cenaPrevoza + dolzina * montaza + cenaRocaja), 2);
+            }
+            else
+            {
+                vrsta = "Enostavna";
+                letvice = selectedProfil;
+                cenaLetvic = (prib * obj._price * dolzina);
+                cenaBrezMontaze = Math.Round((prib * obj._price * dolzina + cenaVijakov / 2 + stebri.Item3 + razrez + cenaRocaja), 2);
+                cenaZMontazo = Math.Round((prib * obj._price * dolzina + cenaVijakov + stebri.Item2 + cenaPrevoza + dolzina * montaza + cenaRocaja), 2);
+            }
+
+          
+                               
+
+            string res = "Vrsta ograje: " + vrsta + " (" + letvice + ")   "+"Razmak: " + predznak + pisiRazmak.ToString("0.000") + "cm   Stevilo letvic: " + prib.ToString("0") + "   Cena letvic: " + cenaLetvic.ToString("0.00") + " eur" +
+               "   Cena stebrov brez montaže: " + stebri.Item3.ToString("0.00") + " eur   Cena stebrov z montažo: " + stebri.Item2.ToString("0.00") +
+            " eur   Skupna cena brez montaže: " + cenaBrezMontaze.ToString("0.00") + " eur" + "   Skupna cena z montažo: " + cenaZMontazo.ToString("0.00") + " eur";
 
             list.Add(res);
             items.Add(new Item(selectedProfil, dolzina, Math.Round(razmak * 100, 3), res, cenaLetvic, cenaVijakov, cenaPrevoza,
                     stebri.Item3, (float)cenaBrezMontaze, stebri.Item2, (float)cenaZMontazo, stStebrov, dolzina * prib,
-                    stVijakov, visina, prib, vrstaOgraje, stRocajPokrovov));
+                    stVijakov, visina, prib, vrstaOgraje, stRocajPokrovov, isKombinirana, dictProfilov));
             return razmak;
  
         }
@@ -196,7 +294,7 @@ namespace GivosCalc
             List<int[]> dolzinaNiza = new List<int[]>();
             List<string[]> besede = new List<string[]>();
             List<string> resList = new List<string>();
-            int st = 7;
+            int st = 8;
             int[] max = new int[st];
             
             int i = 0;

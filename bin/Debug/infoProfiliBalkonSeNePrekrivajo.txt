@@ -1,0 +1,3 @@
+       •     <st_prof> – ih vodoravnih pozicijah z razmaki cca <razmak>cm na skupni dolžini L = <posamezna_dolzina>m. Višina 
+             ograje ( merjeno od talne keramike in do vrha ALU ograjnega ročaja - naslonjala ) 
+             je  V = cca  <visina>cm.
