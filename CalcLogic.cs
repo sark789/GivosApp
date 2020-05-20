@@ -276,7 +276,7 @@ namespace GivosCalc
           
                                
 
-            string res = "Vrsta ograje: " + vrsta + " (" + letvice + ")   "+"Razmak: " + predznak + pisiRazmak.ToString("0.000") + "cm   Stevilo letvic: " + prib.ToString("0") + "   Cena letvic: " + cenaLetvic.ToString("0.00") + " eur" +
+            string res = "Vrsta ograje: " + vrstaOgraje + " / " + vrsta + " (" + letvice + ")   "+"Razmak: " + predznak + pisiRazmak.ToString("0.000") + "cm   Stevilo letvic: " + prib.ToString("0") + "   Cena letvic: " + cenaLetvic.ToString("0.00") + " eur" +
                "   Cena stebrov brez montaže: " + stebri.Item3.ToString("0.00") + " eur   Cena stebrov z montažo: " + stebri.Item2.ToString("0.00") +
             " eur   Skupna cena brez montaže: " + cenaBrezMontaze.ToString("0.00") + " eur" + "   Skupna cena z montažo: " + cenaZMontazo.ToString("0.00") + " eur";
 

@@ -225,20 +225,31 @@ namespace GivosCalc
             //reference za ostale = temp[1];
 
             string ref_slik = "";
-            if (model_ograj.Contains("SD-8006P")) {
-                if(model_ograj.Contains("SD-8006A") || model_ograj.Contains("SD-8006B") || model_ograj.Contains("SD-7006"))
-                {
-                    ref_slik = temp[0] + "  ter  " + temp[1];
-                }
-                else
-                {
-                    ref_slik = temp[0];
-                }             
-            }
-            else
+            if (model_ograj.Contains("SD-8006P"))
             {
-                ref_slik = temp[1];
+                ref_slik += temp[0] + "  in  ";
             }
+            if(model_ograj.Contains("SD-8006A") || model_ograj.Contains("SD-8006B") || model_ograj.Contains("SD-7006"))
+            {
+                ref_slik += temp[1]+ "  in  ";
+            }
+            foreach(var item in _itemsOnSecondTab)
+            {
+                if(item._isKombinirana && item._vrstaOgraje == vrtna)
+                {
+                    ref_slik += temp[2] + "  in  ";
+                }
+            }
+            foreach (var item in _itemsOnSecondTab)
+            {
+                if (item._isKombinirana && item._vrstaOgraje != vrtna)
+                {
+                    ref_slik += temp[3] + "  in  ";
+                }
+            }
+            ref_slik = ref_slik.Substring(0, ref_slik.Length - 6);
+
+
 
             //open text file and read it
             if (!containsBalkonskaOgraja)
