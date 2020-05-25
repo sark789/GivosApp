@@ -117,7 +117,7 @@ namespace GivosCalc
             capPrice = obj._capPrice;
             width = obj._width;
 
-            float razmak = (visina - 0.04f - prib * width) / prib;
+            float razmak = (visina - 0.04f - prib * width) / (prib - 1);
             float cenaLetvic;
             double cenaBrezMontaze, cenaZMontazo;
             float stVijakov;
@@ -160,9 +160,11 @@ namespace GivosCalc
             float cenaRocaja;
             if (isNaBok.Checked || isNaVrh.Checked)
             {
+                razmak = (visina - 0.09f - prib * width) / prib;
                 cenaRocaja = cenaPokrovaZaRocaj * stRocajPokrovov + dolzina * rocaj;
                 if (isNaBok.Checked)
                 {
+                    razmak = (visina - 0.05f - prib * width) / prib;
                     cenaRocaja = cenaPokrovaZaRocaj * stRocajPokrovov + dolzina * rocaj + 4 * visina * lprofil;
                 }
             }
@@ -182,18 +184,8 @@ namespace GivosCalc
             {
                 razrez = 0;
             }
-
-            pisiRazmak = (Math.Round(razmak * 100, 3));
-            string predznak = "";
-            if (pisiRazmak >= 0)
-            {
-                predznak = "+";
-            }
-            else
-            {
-                pisiRazmak *= -1;
-                predznak = "‒";
-            }
+           
+          
 
             //katera vrsta ograje - enostavna, kombinirana
 
@@ -259,7 +251,15 @@ namespace GivosCalc
                 
                 vrsta = "Kombinacija";
 
-                razmak = (visina - 0.04f - (wid1 * num1 + wid2 * num2 + wid3 * num3 + wid4 * num4)) / prib;
+                razmak = (visina - 0.04f - (wid1 * num1 + wid2 * num2 + wid3 * num3 + wid4 * num4)) / (prib - 1);
+                if (isNaBok.Checked || isNaVrh.Checked)
+                {
+                    razmak = (visina - 0.09f - (wid1 * num1 + wid2 * num2 + wid3 * num3 + wid4 * num4)) / prib;
+                    if (isNaBok.Checked)
+                    {
+                        razmak = (visina - 0.05f - (wid1 * num1 + wid2 * num2 + wid3 * num3 + wid4 * num4)) /prib;
+                    }
+                }
                 cenaLetvic = ((price1 * num1 + price2 * num2 + price3 * num3 + price4 * num4) * dolzina);
                 cenaBrezMontaze = Math.Round((cenaLetvic + cenaVijakov / 2 + stebri.Item3 + razrez + cenaRocaja), 2);
                 cenaZMontazo = Math.Round((cenaLetvic + cenaVijakov + stebri.Item2 + cenaPrevoza + dolzina * montaza + cenaRocaja), 2);
@@ -273,8 +273,18 @@ namespace GivosCalc
                 cenaZMontazo = Math.Round((prib * obj._price * dolzina + cenaVijakov + stebri.Item2 + cenaPrevoza + dolzina * montaza + cenaRocaja), 2);
             }
 
-          
-                               
+            pisiRazmak = (Math.Round(razmak * 100, 3));
+            string predznak = "";
+            if (pisiRazmak >= 0)
+            {
+                predznak = "+";
+            }
+            else
+            {
+                pisiRazmak *= -1;
+                predznak = "‒";
+            }
+
 
             string res = "Vrsta ograje: " + vrstaOgraje + " / " + vrsta + " (" + letvice + ")   "+"Razmak: " + predznak + pisiRazmak.ToString("0.000") + "cm   Stevilo letvic: " + prib.ToString("0") + "   Cena letvic: " + cenaLetvic.ToString("0.00") + " eur" +
                "   Cena stebrov brez montaže: " + stebri.Item3.ToString("0.00") + " eur   Cena stebrov z montažo: " + stebri.Item2.ToString("0.00") +

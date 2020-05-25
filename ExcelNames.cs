@@ -142,7 +142,7 @@ namespace GivosCalc
                                                    naslovTb.Text,
                                                    telefonTb.Text};
 
-            strankaInfo = "";
+            strankaInfo = " ";
             foreach(var tekst in info)
             {
                 strankaInfo += (tekst != "") ? tekst + ", " : "/" + ", ";  

@@ -45,8 +45,12 @@ namespace GivosCalc
                 { if (listOfCells[i].Value2 != null)
                     {
                         if (entry.Key == listOfCells[i].Value2)
-                        {
+                        {                          
                             var cell = sheet.Cells[listOfCells[i].Row, listOfCells[i].Column + 2];
+                            if (entry.Key == "STRANKA :")
+                            {
+                                cell = sheet.Cells[listOfCells[i].Row, listOfCells[i].Column + 1];
+                            }
                             cell.Value2 = entry.Value;
                         }
                     }
@@ -63,6 +67,10 @@ namespace GivosCalc
                         if (entry.Key == listOfCells2[i].Value2)
                         {
                             var cell = sheet2.Cells[listOfCells2[i].Row, listOfCells2[i].Column + 2];
+                            if (entry.Key == "STRANKA :")
+                            {
+                                cell = sheet2.Cells[listOfCells2[i].Row, listOfCells2[i].Column + 1];
+                            }
                             cell.Value2 = entry.Value;
                         }
                     }

@@ -55,6 +55,7 @@ namespace GivosCalc
             var info = "";
             string stebri = "";
             string kam = "";
+            string prevoz = "";
             bool containsBalkonskaOgraja = false;
             bool containsVrtnaOgraja = false;
             List<string> temp_list = new List<string>();
@@ -116,16 +117,17 @@ namespace GivosCalc
                 komb = false;
             }
 
-
+            List<double> vsiRazmaki = new List<double>();
             foreach (var item in _itemsOnSecondTab)
             {
                 dolzina += item._dolzinaProfilov;
                 cena_z += item._cenaSkupajZMontazo;
                 cena_brez += item._cenaSkupajBrezMontaze;
                 st_stebrov += item._stStebrov;
-                stebri += item._stStebrov + " kos  x  V = " + (item._visina * 100).ToString("0.00") + "cm" + "  +  ";
+                stebri += item._stStebrov + " kos"+"  +  ";
                 visina += item._stStebrov * item._visina;
-
+                vsiRazmaki.Add(item._razmakMedProfili);
+                if(item._cenaPrevoza != 0) { prevoz = " (velja za lokacijo  Ljubaljana – Kranj z bližnjo okolico )"; }
                 if (item._vrstaOgraje == vrtna)
                 {
                     containsVrtnaOgraja = true;
@@ -250,11 +252,11 @@ namespace GivosCalc
             ref_slik = ref_slik.Substring(0, ref_slik.Length - 6);
 
 
-
+            bool allNeg = vsiRazmaki.All(a => a <= 0);
             //open text file and read it
             if (!containsBalkonskaOgraja)
             {
-                str = (model_ograj.Contains("SD-8006P")) ? File.ReadAllText(System.AppDomain.CurrentDomain.BaseDirectory + "SD-8006PinfoTemplate.txt") :
+                str = (allNeg) ? File.ReadAllText(System.AppDomain.CurrentDomain.BaseDirectory + "SD-8006PinfoTemplate.txt") :
                 File.ReadAllText(System.AppDomain.CurrentDomain.BaseDirectory + "OtherProfilesinfoTemplate.txt");
             }
             else
@@ -296,8 +298,8 @@ namespace GivosCalc
             string vrstaOgraje = "";
             if (containsBalkonskaOgraja) { vrstaOgraje = "BALKONSKE"; }
             if (containsVrtnaOgraja) { vrstaOgraje = "VRTNE"; }
-            if (containsVrtnaOgraja && containsBalkonskaOgraja) { vrstaOgraje = "BALKONSKE IN VRTNE"; }
-            
+            if (containsVrtnaOgraja && containsBalkonskaOgraja) { vrstaOgraje = "BALKONSKE IN VRTNE"; }                        
+
 
             Dictionary<string, string> dict = new Dictionary<string, string> {  {"<opis>", str },
                                                                                 {"<kol_popust>", kolPopustString },
@@ -316,7 +318,8 @@ namespace GivosCalc
                                                                                 {"<ref_slik>", ref_slik },
                                                                                 {"<mozni_modeli>", modeli_ograj },
                                                                                 {"<vrsta_ograje>", vrstaOgraje },
-                                                                                {"<kam>", kam } };
+                                                                                {"<kam>", kam },
+                                                                                {"<prevoz>", prevoz } };
 
             foreach (var item in dict)
             {
