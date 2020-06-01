@@ -149,8 +149,7 @@ namespace GivosCalc
                 }
                 else
                 {
-                    containsBalkonskaOgraja = true;
-                    modeli_ograj = modeli_ograj + " + P802-ročaj";
+                    containsBalkonskaOgraja = true;                   
                     info = (item._razmakMedProfili <= 0) ? File.ReadAllText(System.AppDomain.CurrentDomain.BaseDirectory + "infoProfiliBalkonSePrekrivajo.txt") :
                     File.ReadAllText(System.AppDomain.CurrentDomain.BaseDirectory + "infoProfiliBalkonSeNePrekrivajo.txt");
 
@@ -171,7 +170,7 @@ namespace GivosCalc
 
                         info += komb1;
                     }
-                }
+                }               
 
                 string komb = "kombinacija (";
                 foreach (var val in item._dict)
@@ -253,15 +252,19 @@ namespace GivosCalc
 
 
             bool allNeg = vsiRazmaki.All(a => a <= 0);
+            string ps = "";
             //open text file and read it
             if (!containsBalkonskaOgraja)
             {
                 str = (allNeg) ? File.ReadAllText(System.AppDomain.CurrentDomain.BaseDirectory + "SD-8006PinfoTemplate.txt") :
                 File.ReadAllText(System.AppDomain.CurrentDomain.BaseDirectory + "OtherProfilesinfoTemplate.txt");
+                ps = File.ReadAllText(System.AppDomain.CurrentDomain.BaseDirectory + "PS.txt");
             }
             else
             {
+                modeli_ograj = modeli_ograj + " + P802-ročaj";
                 str = File.ReadAllText(System.AppDomain.CurrentDomain.BaseDirectory + "balkonskaInfoTemplate.txt");
+                ps = "";
             }
 
             float cena_brez_in_popust = cena_brez * ((100 - int.Parse(numericUpDown1.Text)) * 0.01f);
@@ -319,7 +322,8 @@ namespace GivosCalc
                                                                                 {"<mozni_modeli>", modeli_ograj },
                                                                                 {"<vrsta_ograje>", vrstaOgraje },
                                                                                 {"<kam>", kam },
-                                                                                {"<prevoz>", prevoz } };
+                                                                                {"<prevoz>", prevoz },
+                                                                                {"<PS>", ps } };
 
             foreach (var item in dict)
             {

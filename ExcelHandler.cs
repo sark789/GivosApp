@@ -71,6 +71,10 @@ namespace GivosCalc
                             {
                                 cell = sheet2.Cells[listOfCells2[i].Row, listOfCells2[i].Column + 1];
                             }
+                            if (entry.Key == "LETVICA :")
+                            {
+                                cell = sheet2.Cells[listOfCells2[i].Row, listOfCells2[i].Column + 1];
+                            }
                             cell.Value2 = entry.Value;
                         }
                     }
