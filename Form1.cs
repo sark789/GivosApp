@@ -404,7 +404,7 @@ namespace GivosCalc
                     }
 
             }
-                List<float> cene = new List<float> { cenaLetvic, cenaLetvic, cenaVijakov / 2, cenaVijakov, stebriBrez, StebriZ,
+                List<float> cene = new List<float> { cenaLetvic, cenaLetvic, cenaVijakov , cenaVijakov, stebriBrez, StebriZ,
                                                      prevoz, skupnaBrez, skupnaZ, razrez, montaza, rocaj, rocaj,};
 
                 foreach(var item in dict)

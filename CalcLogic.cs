@@ -261,7 +261,7 @@ namespace GivosCalc
                     }
                 }
                 cenaLetvic = ((price1 * num1 + price2 * num2 + price3 * num3 + price4 * num4) * dolzina);
-                cenaBrezMontaze = Math.Round((cenaLetvic + cenaVijakov / 2 + stebri.Item3 + razrez + cenaRocaja), 2);
+                cenaBrezMontaze = Math.Round((cenaLetvic + cenaVijakov + stebri.Item3 + razrez + cenaRocaja), 2);
                 cenaZMontazo = Math.Round((cenaLetvic + cenaVijakov + stebri.Item2 + cenaPrevoza + dolzina * montaza + cenaRocaja), 2);
             }
             else
@@ -269,7 +269,7 @@ namespace GivosCalc
                 vrsta = "Enostavna";
                 letvice = selectedProfil;
                 cenaLetvic = (prib * obj._price * dolzina);
-                cenaBrezMontaze = Math.Round((prib * obj._price * dolzina + cenaVijakov / 2 + stebri.Item3 + razrez + cenaRocaja), 2);
+                cenaBrezMontaze = Math.Round((prib * obj._price * dolzina + cenaVijakov + stebri.Item3 + razrez + cenaRocaja), 2);
                 cenaZMontazo = Math.Round((prib * obj._price * dolzina + cenaVijakov + stebri.Item2 + cenaPrevoza + dolzina * montaza + cenaRocaja), 2);
             }
 

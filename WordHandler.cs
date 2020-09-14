@@ -127,7 +127,11 @@ namespace GivosCalc
                 stebri += item._stStebrov + " kos"+"  +  ";
                 visina += item._stStebrov * item._visina;
                 vsiRazmaki.Add(item._razmakMedProfili);
-                if(item._cenaPrevoza != 0) { prevoz = " (velja za lokacijo  Ljubaljana – Kranj z bližnjo okolico )"; }
+                if(item._cenaPrevoza == 0) { prevoz = " (velja za lokacijo  Ljubaljana – Kranj z bližnjo okolico )"; }
+                else
+                {
+                    prevoz = string.Empty;
+                }
                 if (item._vrstaOgraje == vrtna)
                 {
                     containsVrtnaOgraja = true;
@@ -226,11 +230,11 @@ namespace GivosCalc
             //reference za ostale = temp[1];
 
             string ref_slik = "";
-            if (model_ograj.Contains("SD-8006P"))
+            if (model_ograj.Contains("SD-8006P") && containsVrtnaOgraja)
             {
                 ref_slik += temp[0] + "  in  ";
             }
-            if(model_ograj.Contains("SD-8006A") || model_ograj.Contains("SD-8006B") || model_ograj.Contains("SD-7006"))
+            if(model_ograj.Contains("SD-8006A") || model_ograj.Contains("SD-8006B") || model_ograj.Contains("SD-7006") && containsVrtnaOgraja)
             {
                 ref_slik += temp[1]+ "  in  ";
             }
@@ -239,15 +243,20 @@ namespace GivosCalc
                 if(item._isKombinirana && item._vrstaOgraje == vrtna)
                 {
                     ref_slik += temp[2] + "  in  ";
+                    break;
                 }
+                
             }
+            
             foreach (var item in _itemsOnSecondTab)
             {
-                if (item._isKombinirana && item._vrstaOgraje != vrtna)
+                if (item._vrstaOgraje != vrtna)
                 {
-                    ref_slik += temp[3] + "  in  ";
+                    ref_slik += temp[4] + "  in  ";
+                    break;
                 }
             }
+
             ref_slik = ref_slik.Substring(0, ref_slik.Length - 6);
 
 

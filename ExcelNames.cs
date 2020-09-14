@@ -200,7 +200,7 @@ namespace GivosCalc
                 { "SD-5003M", stMaliNosilec },
                 { "SD-5003V", stVelikiNosilec },
                 {"MONTAZA", 0 },
-                {"VIJAKI", vijaki / 2 },
+                {"VIJAKI", vijaki },
                 {"MONT.STEBROV", 0 },
                 {"LEPILO", 0 },
                 {"PREVOZ", 0 },
